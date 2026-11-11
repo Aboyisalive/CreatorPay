@@ -35,7 +35,8 @@ export default function ParticipantsTab() {
     setBusy(true);
     try {
       const result = await post<{ inviteUrl: string; existingAccount: boolean }>(`/api/v1/campaigns/${id}/invitations`, { email });
-      setLastInvite({ email, url: result.inviteUrl, existing: result.existingAccount });
+      // Rebuild on the origin the browser is actually on (the server may sit behind a proxy).
+      setLastInvite({ email, url: `${window.location.origin}${new URL(result.inviteUrl).pathname}`, existing: result.existingAccount });
       setEmail("");
       toast.success("Invitation created");
       void invitations.mutate();

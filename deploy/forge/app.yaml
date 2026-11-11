@@ -14,7 +14,7 @@ spec:
       # imagePullSecrets: [{ name: regcred }]
       containers:
       - name: app
-        image: hakisolos/creatorpay:v1
+        image: hakisolos/creatorpay:v3
         ports:
         - containerPort: 8080
         envFrom:

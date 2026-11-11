@@ -5,7 +5,7 @@ import { getBankDetails, saveBankDetails } from "@/lib/payments/bank-details";
 
 const bankDetailsSchema = z.object({
   bankCode: z.string().min(1, "bankCode is required."),
-  accountNo: z.string().regex(/^\d{11}$/, "accountNo must be 11 digits."),
+  accountNo: z.string().regex(/^\d{10,11}$/, "accountNo must be 10 or 11 digits."),
   accountNameConfirmed: z.string().min(1, "accountNameConfirmed is required."),
 });
 

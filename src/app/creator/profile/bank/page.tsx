@@ -36,7 +36,9 @@ export default function BankSetupPage() {
   const [busy, setBusy] = useState(false);
 
 
-  const complete = accountNo.length === ACCOUNT_DIGITS;
+  // 10 digits is accepted for the Forge sandbox (its synthetic accounts are 10 digits);
+  // the backend still enforces 11-digit NUBANs on every other rail.
+  const complete = accountNo.length >= 10;
   const ready = bankCode && complete && accountName.trim().length > 1 && confirmed;
 
   const save = async () => {

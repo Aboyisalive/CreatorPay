@@ -23,6 +23,22 @@ export async function readJson(request: Request): Promise<unknown> {
   }
 }
 
+/**
+ * The origin users reach the app on. Behind a proxy `request.url` carries the
+ * in-cluster host (http://0.0.0.0:8080), so prefer APP_URL, then forwarded
+ * headers, then the request URL.
+ */
+export function publicOrigin(request: Request): string {
+  const configured = process.env.APP_URL?.trim();
+  if (configured) return configured.replace(/\/+$/, "");
+  const host = request.headers.get("x-forwarded-host");
+  if (host) {
+    const proto = request.headers.get("x-forwarded-proto") ?? "https";
+    return `${proto}://${host}`;
+  }
+  return new URL(request.url).origin;
+}
+
 function requestPath(request: Request): string {
   try {
     return new URL(request.url).pathname;

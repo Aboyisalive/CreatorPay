@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { json, readJson, withApi } from "@/lib/api";
+import { json, publicOrigin, readJson, withApi } from "@/lib/api";
 import { requireUser, requireWorkspace } from "@/lib/auth";
 import { assertRole, CAMPAIGN_MANAGERS } from "@/lib/rbac";
 import { conflict, notFound } from "@/lib/errors";
@@ -119,7 +119,7 @@ export async function POST(
         },
         // Shown once at creation. Only the hash is stored, so it cannot be
         // re-shown later; re-inviting issues a fresh link.
-        inviteUrl: new URL(`/invite/${token}`, request.url).toString(),
+        inviteUrl: new URL(`/invite/${token}`, publicOrigin(request)).toString(),
         existingAccount: Boolean(creatorUser),
       },
       201,
