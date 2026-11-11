@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payments Operations Hub - CreatorPay Enterprise</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#f6be0a",
+            "secondary-fixed-dim": "#fabb61",
+            "on-primary-fixed": "#251a00",
+            "surface-dim": "#dbdad6",
+            "secondary": "#825500",
+            "on-secondary-fixed-variant": "#633f00",
+            "surface-container-high": "#e9e8e4",
+            "on-surface-variant": "#4f4632",
+            "outline-variant": "#d3c5ac",
+            "on-primary-container": "#6e5400",
+            "surface-container-highest": "#e3e2df",
+            "on-tertiary": "#ffffff",
+            "primary-fixed": "#ffdf98",
+            "secondary-container": "#fdbe63",
+            "inverse-primary": "#f6be0a",
+            "tertiary": "#674bb4",
+            "secondary-fixed": "#ffddb4",
+            "background": "#faf9f5",
+            "primary": "#775a00",
+            "on-tertiary-fixed": "#21005e",
+            "on-secondary-container": "#754c00",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#817660",
+            "surface-container": "#efeeea",
+            "on-primary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#ffc61a",
+            "inverse-on-surface": "#f2f1ed",
+            "error": "#ba1a1a",
+            "inverse-surface": "#2f312e",
+            "tertiary-fixed": "#e8ddff",
+            "on-tertiary-container": "#6044ad",
+            "tertiary-fixed-dim": "#cebdff",
+            "on-primary-fixed-variant": "#5a4300",
+            "surface-tint": "#775a00",
+            "surface-variant": "#e3e2df",
+            "surface": "#faf9f5",
+            "on-secondary": "#ffffff",
+            "on-background": "#1b1c1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "on-surface": "#1b1c1a",
+            "tertiary-container": "#d5c6ff",
+            "surface-container-low": "#f4f4f0",
+            "surface-bright": "#faf9f5",
+            "on-secondary-fixed": "#291800"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.25rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "display-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-numeric-md": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "label-badge": ["JetBrains Mono"],
+            "display-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-numeric-sm": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-numeric-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label-numeric-md": ["15px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "label-badge": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+            "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400"}],
+            "label-numeric-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Custom subtle spin animation */
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 8s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex min-h-screen selection:bg-primary-container selection:text-on-surface">
+<!-- LEFT SIDEBAR (SideNavBar Shared Component) -->
+<aside class="fixed top-0 left-0 h-screen w-72 flex flex-col justify-between bg-surface border-r border-outline-variant shrink-0 z-30">
+<div class="p-4 flex flex-col gap-6">
+<!-- Workspace Brand & Ecobank Seal -->
+<div class="flex items-center gap-3 px-1 py-1">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold truncate">CreatorPay Enterprise</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Ecobank Secured Corridor #4029</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-2.5 px-4 bg-primary-container text-on-surface hover:bg-[#f5bc10] font-headline-sm text-body-md rounded-lg flex items-center justify-center gap-2 border border-outline-variant font-semibold transition-colors duration-150 active:scale-[0.99]">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+<span>Fund Escrow Vault</span>
+</button>
+<!-- Main Navigation Links -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-1.5">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-headline-sm text-body-md">Campaign Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+<span class="font-headline-sm text-body-md">Deliverable Proofs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined" data-icon="sync_alt">sync_alt</span>
+<span class="font-headline-sm text-body-md">Conversion Tracking</span>
+</a>
+<!-- Active Tab: Ledger Settlements (Payment Operations) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-high text-on-surface font-semibold border-l-2 border-primary active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-headline-sm text-body-md">Ledger Settlements</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-headline-sm text-body-md">Ecobank Escrow Pool</span>
+</a>
+</nav>
+</div>
+<!-- Footer Links -->
+<div class="p-4 border-t border-outline-variant flex flex-col gap-1.5">
+<div class="px-3 py-1 flex items-center justify-between text-on-surface-variant">
+<span class="font-label-badge text-label-badge uppercase tracking-wider">Node Status</span>
+<span class="inline-flex items-center gap-1.5 text-[#146C38] font-label-badge text-label-badge">
+<span class="w-2 h-2 rounded-full bg-[#146C38]"></span> 0ms Latency
+        </span>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-headline-sm text-body-md">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="font-headline-sm text-body-md">Escrow Rail Settings</span>
+</a>
+</div>
+</aside>
+<!-- MAIN VIEWPORT CONTAINER -->
+<div class="ml-72 flex-1 flex flex-col min-w-0 pb-16">
+<!-- TOP NAVBAR (TopNavBar Shared Component) -->
+<header class="sticky top-0 right-0 w-full z-40 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center h-16 px-6 w-full">
+<!-- Left: Command Center Brand Title + Search -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="shield_with_heart" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Campaign Command Center</span>
+</div>
+<!-- Search Bar -->
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[18px]" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 bg-surface-container-low border border-outline-variant rounded text-on-surface font-body-md text-body-sm focus:outline-none focus:border-on-surface focus:ring-1 focus:ring-primary-container" placeholder="Search hash, deposit ref, creator..." type="text"/>
+</div>
+</div>
+<!-- Center: Top Nav Links -->
+<nav aria-label="Top Secondary Links" class="hidden lg:flex items-center gap-6">
+<a class="font-headline-sm text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Overview</a>
+<a class="font-headline-sm text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Submissions Queue</a>
+<a class="font-headline-sm text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Conversion Axis</a>
+<a class="font-headline-sm text-body-md text-on-surface border-b-2 border-primary font-semibold py-5" href="#">Rewards Ledger</a>
+<a class="font-headline-sm text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Omni Escrow</a>
+</nav>
+<!-- Right: Trailing Actions -->
+<div class="flex items-center gap-3">
+<button class="px-3 py-1.5 bg-surface border border-outline-variant hover:bg-surface-container font-headline-sm text-body-sm rounded flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="file_download">file_download</span>
+            Audit Export
+          </button>
+<button class="px-3 py-1.5 bg-[#146C38] text-white hover:bg-[#115b2f] font-headline-sm text-body-sm font-semibold rounded flex items-center gap-1.5 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="send_money">send_money</span>
+            Release Settlement
+          </button>
+<div class="h-5 w-px bg-outline-variant mx-1"></div>
+<button class="p-2 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden bg-surface-container flex items-center justify-center font-label-badge text-body-sm text-on-surface font-semibold ml-1">
+            CF
+          </div>
+</div>
+</div>
+</header>
+<!-- MAIN BODY CONTENT -->
+<main class="p-8 max-w-[1440px] mx-auto w-full flex flex-col gap-6">
+<!-- TOP WORKSPACE HEADER & RECONCILIATION BAR -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Payments Operations &amp; Escrow Clearing</h1>
+<span class="px-2 py-0.5 rounded bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20 font-label-badge text-label-badge tracking-wider uppercase">
+              ECOBANK DIRECT NODE • TIER-1
+            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Ecobank Virtual Escrow Inbound Clearing &amp; Core-Banking Blaze Settlement Corridor
+          </p>
+</div>
+<!-- Action Bar: Reconcile Button & Export -->
+<div class="flex items-center gap-3 shrink-0">
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant rounded-lg p-1.5 pl-3">
+<span class="material-symbols-outlined text-primary text-[18px] animate-spin-slow" data-icon="sync">sync</span>
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant">Last reconciled: 7:30 PM WAT (30s ago)</span>
+<button class="ml-2 px-3 py-1 bg-surface-container-high hover:bg-surface-container text-on-surface font-headline-sm text-body-sm font-semibold rounded border border-outline-variant transition-colors">
+              Reconcile with Bank
+            </button>
+</div>
+<button class="px-3 py-2 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-on-surface font-headline-sm text-body-sm rounded-lg flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+            Export Treasury CSV
+          </button>
+</div>
+</section>
+<!-- SEGMENTED TAB SWITCHER -->
+<div class="flex items-center gap-2 border-b border-outline-variant">
+<button class="flex items-center gap-2.5 px-4 py-3 border-b-2 border-primary text-on-surface font-headline-sm text-body-md font-semibold transition-all" id="tab-inbound" onclick="switchTab('inbound')">
+<span class="material-symbols-outlined text-primary" data-icon="call_received">call_received</span>
+<span>Deposits &amp; Escrow Inbound</span>
+<span class="px-2 py-0.5 rounded-full bg-[#FFEEDB] text-[#9C4A00] font-label-badge text-label-badge">1 Unmatched</span>
+</button>
+<button class="flex items-center gap-2.5 px-4 py-3 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-headline-sm text-body-md transition-all" id="tab-payouts" onclick="switchTab('payouts')">
+<span class="material-symbols-outlined" data-icon="call_made">call_made</span>
+<span>Payouts &amp; Core Disbursements</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-badge text-label-badge text-on-surface-variant">4 Pending</span>
+</button>
+</div>
+<!-- SECTION 1: ATTENTION ALERT QUEUE (Burnt Orange Alert) -->
+<div class="bg-[#FFEEDB] border border-[#9C4A00]/30 rounded-lg p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-full bg-[#FFDF98] flex items-center justify-center shrink-0 border border-[#9C4A00]/20 text-[#9C4A00]">
+<span class="material-symbols-outlined" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-body-md font-semibold text-[#9C4A00]">1 Unmatched Bank Inflow Detected</span>
+<span class="font-label-badge text-label-badge px-2 py-0.5 bg-white/80 rounded border border-[#9C4A00]/20 text-[#9C4A00]">GTBANK INFLOW</span>
+</div>
+<p class="font-body-md text-body-md text-[#633F00] mt-0.5">
+<span class="font-label-numeric-md font-bold">₦500,000.00</span> received from <strong class="font-semibold text-[#17150F]">Guaranty Trust Bank / Acme Marketing</strong> on 28 Oct 2026 without match key <code class="font-label-numeric-sm bg-white/70 px-1 py-0.5 rounded border border-[#9C4A00]/20">CP-7K30-92XD</code>.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="px-4 py-2 bg-[#9C4A00] text-white hover:bg-[#803d00] font-headline-sm text-body-md font-semibold rounded-lg flex items-center gap-2 shadow-sm transition-all active:scale-[0.98]" onclick="toggleModal(true)">
+<span class="material-symbols-outlined text-[18px]" data-icon="link">link</span>
+            Manual Match Deposit
+          </button>
+</div>
+</div>
+<!-- SECTION 2: TAB 1 — MASTER INBOUND BANK DEPOSITS TABLE -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_6px_rgba(23,21,15,0.04)]">
+<!-- Table Header & Controls -->
+<div class="p-4 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-container-low/50">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Master Inbound Bank Deposits</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time ledger entries routed from Ecobank Virtual Escrow Webhooks</p>
+</div>
+<!-- Filters Bar -->
+<div class="flex flex-wrap items-center gap-2.5">
+<!-- Date Filter -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span>28 Oct 2026 (WAT)</span>
+</div>
+<!-- Status Filter -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Status:</span>
+<span class="font-semibold">All Records (3)</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<!-- Bank Corridor Filter -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Bank:</span>
+<span class="font-semibold">All Inflows</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Inbound Deposits Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider">
+<th class="py-3 px-4">Date &amp; Time (WAT)</th>
+<th class="py-3 px-4">Deposit Ref</th>
+<th class="py-3 px-4 text-right">Inbound Amount</th>
+<th class="py-3 px-4">Sender Organization &amp; Bank</th>
+<th class="py-3 px-4">Match Key / Narration</th>
+<th class="py-3 px-4">Assigned Campaign</th>
+<th class="py-3 px-4 text-center">Status</th>
+<th class="py-3 px-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md">
+<!-- Row 1: Unmatched Entry -->
+<tr class="hover:bg-surface-container-low/60 transition-colors bg-[#FFEEDB]/20">
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  28 Oct 2026, 06:15 PM WAT
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-md text-label-numeric-md text-on-surface font-semibold">
+                  DEP-ECO-99452
+                </td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>500,000.00
+                </td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Acme Marketing Holdings</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#E0533C]"></span> GTBank (NIP Transfer)
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<div class="text-[#B42318] flex items-center gap-1 font-body-sm text-body-sm font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="error">error</span>
+<span>"Transfer to CreatorPay"</span>
+</div>
+<div class="font-label-badge text-label-badge text-on-surface-variant italic">(Missing Ref Key)</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant italic">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant font-body-sm text-body-sm">Unallocated Pool</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#FFEEDB] text-[#9C4A00] border border-[#9C4A00]/30 font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9C4A00]"></span>
+                    Unmatched - Action Needed
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-3 py-1 bg-primary-container text-on-surface hover:bg-[#f5bc10] font-headline-sm text-body-sm font-semibold rounded border border-outline-variant transition-colors" onclick="toggleModal(true)">
+                    Link Vault
+                  </button>
+</td>
+</tr>
+<!-- Row 2: Matched Tranche 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  15 Oct 2026, 09:30 AM WAT
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-md text-label-numeric-md text-on-surface font-semibold">
+                  DEP-ECO-99401
+                </td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>1,000,000.00
+                </td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Acme Marketing Holdings</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#146C38]"></span> Ecobank Omni Direct Corridors
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<code class="font-label-numeric-sm text-label-numeric-sm bg-surface-container px-1.5 py-0.5 rounded text-on-surface">CP-7K30-92XD tranche 1</code>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface truncate max-w-[200px]">Ecobank Campus Ambassadors 2026</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Escrow ID: ESC-CAMP-01</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20 font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                    Matched (Success)
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="receipt_long">receipt_long</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Matched Tranche 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  15 Oct 2026, 02:45 PM WAT
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-md text-label-numeric-md text-on-surface font-semibold">
+                  DEP-ECO-99388
+                </td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>500,000.00
+                </td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Acme Marketing Holdings</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Interbank NIP Route
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<code class="font-label-numeric-sm text-label-numeric-sm bg-surface-container px-1.5 py-0.5 rounded text-on-surface">CP-7K30-92XD tranche 2</code>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface truncate max-w-[200px]">Ecobank Campus Ambassadors 2026</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Escrow ID: ESC-CAMP-01</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20 font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                    Matched (Success)
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="receipt_long">receipt_long</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 3: TAB 2 PREVIEW / MASTER PAYOUTS LEDGER -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_6px_rgba(23,21,15,0.04)]">
+<!-- Section Title & Meta -->
+<div class="p-4 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-container-low/50">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Creator Disbursements Corridor (Ecobank Blaze &amp; Interbank NIP)</h2>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge uppercase">
+                Active Batch #BLZ-402
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Automated milestone disbursement corridor linking approved campaign milestones to bank clearing</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label-badge text-label-badge text-on-surface-variant uppercase">Total Batch Value:</span>
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-on-surface">₦147,500.00</span>
+</div>
+</div>
+<!-- Master Payouts Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider">
+<th class="py-3 px-4">Creator &amp; Handle</th>
+<th class="py-3 px-4">Campaign</th>
+<th class="py-3 px-4">Destination Bank &amp; Account</th>
+<th class="py-3 px-4 text-right">Amount</th>
+<th class="py-3 px-4">Settlement Initiated</th>
+<th class="py-3 px-4">Core Transaction Ref</th>
+<th class="py-3 px-4 text-center">Corridor Status</th>
+<th class="py-3 px-4 text-right">Verification</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md">
+<!-- Creator Row 1: Ada Obi (Settled) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center font-bold text-primary text-xs">
+                      AO
+                    </div>
+<div>
+<div class="font-semibold text-on-surface">Ada Obi</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">@ada_creatives</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface font-medium truncate max-w-[180px]">
+                  Ecobank Campus Ambassadors
+                </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[#146C38] text-[16px]" data-icon="account_balance">account_balance</span>
+                    Ecobank Blaze ••••4821
+                  </div>
+<div class="font-label-badge text-label-badge text-on-surface-variant">Instant Settlement Tier</div>
+</td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>36,000.00
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  28 Oct, 04:30 PM WAT
+                </td>
+<td class="py-3.5 px-4">
+<code class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-1.5 py-0.5 rounded">ECO-BLZ-99381-NGN</code>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#146C38] text-white font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+<span class="material-symbols-outlined text-[13px]" data-icon="done_all">done_all</span>
+                    ✓ Settled
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<span class="inline-flex items-center gap-1 text-[#146C38] font-label-badge text-label-badge">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span> Ecobank Sign-off
+                  </span>
+</td>
+</tr>
+<!-- Creator Row 2: Chidi Nnamdi (Payable - Violet) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center font-bold text-primary text-xs">
+                      CN
+                    </div>
+<div>
+<div class="font-semibold text-on-surface">Chidi Nnamdi</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">@chidi_tech</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface font-medium truncate max-w-[180px]">
+                  Ecobank Campus Ambassadors
+                </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[#146C38] text-[16px]" data-icon="account_balance">account_balance</span>
+                    Ecobank Blaze ••••1109
+                  </div>
+<div class="font-label-badge text-label-badge text-on-surface-variant">Direct Ledger Account</div>
+</td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>60,000.00
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  28 Oct, 05:10 PM WAT
+                </td>
+<td class="py-3.5 px-4">
+<code class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-1.5 py-0.5 rounded">ECO-BLZ-99402-NGN</code>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#EFEAFB] text-[#5B3FA8] border border-[#5B3FA8]/20 font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+                    Payable - Awaiting Sign-off
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 bg-[#146C38] text-white hover:bg-[#115b2f] font-label-badge text-label-badge rounded font-semibold transition-colors">
+                    Authorize
+                  </button>
+</td>
+</tr>
+<!-- Creator Row 3: Zainab Bello (Info Blue / NIP) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center font-bold text-primary text-xs">
+                      ZB
+                    </div>
+<div>
+<div class="font-semibold text-on-surface">Zainab Bello</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">@zainab_lifestyle</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface font-medium truncate max-w-[180px]">
+                  Lagos Tech Fest Promo
+                </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="account_balance">account_balance</span>
+                    GTBank ••••9920
+                  </div>
+<div class="font-label-badge text-label-badge text-on-surface-variant">NIP Interswitch Switch</div>
+</td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>28,500.00
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  28 Oct, 05:40 PM WAT
+                </td>
+<td class="py-3.5 px-4">
+<code class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-1.5 py-0.5 rounded">NIP-TX-88219</code>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#EBF3FE] text-[#1B64DA] border border-[#1B64DA]/20 font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+                    Submitted to NIP
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<!-- Manual Settlement Disclaimer Tag -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-tertiary text-tertiary font-label-badge text-label-badge">
+                    Recorded Manually — not bank-confirmed
+                  </span>
+</td>
+</tr>
+<!-- Creator Row 4: Oluwaseun Davies (Approved) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center font-bold text-primary text-xs">
+                      OD
+                    </div>
+<div>
+<div class="font-semibold text-on-surface">Oluwaseun Davies</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">@seun_vibes</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface font-medium truncate max-w-[180px]">
+                  Campus Ambassadors 2026
+                </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[#146C38] text-[16px]" data-icon="account_balance">account_balance</span>
+                    Ecobank Blaze ••••7723
+                  </div>
+<div class="font-label-badge text-label-badge text-on-surface-variant">Core Escrow Settlement</div>
+</td>
+<td class="py-3.5 px-4 text-right font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+<span class="font-label-badge text-label-badge text-on-surface-variant mr-1">NGN</span>23,000.00
+                </td>
+<td class="py-3.5 px-4 font-label-numeric-sm text-label-numeric-sm text-on-surface whitespace-nowrap">
+                  28 Oct, 06:00 PM WAT
+                </td>
+<td class="py-3.5 px-4">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant italic">Pending Batch</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#EBF3FE] text-[#1B64DA] border border-[#1B64DA]/20 font-label-badge text-label-badge tracking-wider uppercase font-semibold">
+                    Approved
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high border border-outline-variant font-label-badge text-label-badge rounded font-semibold text-on-surface transition-colors">
+                    Queue Batch
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Master Payouts Ledger Footer -->
+<div class="p-3 bg-surface-container-low border-t border-outline-variant flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+<span>All outgoing payments are cryptographically counter-signed via Ecobank Corporate API key <code>ECO-KEY-PROD-092</code>.</span>
+</div>
+<div class="flex items-center gap-1 font-label-numeric-sm">
+<span>Showing 4 disbursements in current corridor window</span>
+</div>
+</div>
+</section>
+<!-- BOTTOM COMPLIANCE INSTITUTIONAL FOOTNOTE -->
+<footer class="p-4 rounded-lg bg-surface-container border border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-3 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#146C38]" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-body-sm text-body-sm font-medium">
+            Ecobank Nigeria Plc Tier-1 Escrow Clearing Corridor • CBN Regulated • Dual-Key Multi-Signature Approval Enabled
+          </span>
+</div>
+<div class="flex items-center gap-3 font-label-badge text-label-badge uppercase">
+<span>Corridor ID: ECO-CORR-4029</span>
+<span class="text-outline">•</span>
+<span>ISO 20022 Compliant</span>
+</div>
+</footer>
+</main>
+</div>
+<!-- SLIDE-OUT / MODAL DRAWER: MANUAL MATCH DEPOSIT -->
+<div class="fixed inset-0 z-50 bg-[#17150F]/40 backdrop-blur-[2px] hidden items-center justify-center p-4" id="match-modal">
+<div class="bg-surface-container-lowest border-[1.5px] border-[#17150F] rounded-xl max-w-xl w-full p-6 shadow-2xl relative">
+<!-- Modal Header -->
+<div class="flex items-start justify-between pb-4 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#FFEEDB] text-[#9C4A00] flex items-center justify-center border border-[#9C4A00]/20">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Manual Deposit Reconciliation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Assign unmatched bank transfer to active campaign escrow vault</p>
+</div>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" onclick="toggleModal(false)">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="py-5 flex flex-col gap-4 font-body-md text-body-md">
+<!-- Inflow Summary Card -->
+<div class="p-3.5 bg-surface-container-low rounded-lg border border-outline-variant flex justify-between items-center">
+<div>
+<div class="font-label-badge text-label-badge text-on-surface-variant uppercase">Received Bank Inflow</div>
+<div class="font-label-numeric-md text-label-numeric-md font-bold text-on-surface mt-0.5">₦500,000.00</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">GTBank (Acme Marketing) • Ref: DEP-ECO-99452</div>
+</div>
+<span class="px-2.5 py-1 rounded bg-[#FFEEDB] text-[#9C4A00] font-label-badge text-label-badge uppercase">Unlinked</span>
+</div>
+<!-- Target Campaign Selector -->
+<div>
+<label class="block font-label-badge text-label-badge uppercase text-on-surface-variant mb-1.5">Target Campaign Escrow Pool</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded p-2.5 text-on-surface font-body-md focus:border-on-surface focus:ring-1 focus:ring-primary-container">
+<option selected="">Ecobank Campus Ambassadors 2026 (Ref: CP-7K30-92XD)</option>
+<option>Lagos Tech Fest Creator Showcase (Ref: CP-99A1-12KL)</option>
+<option>West Africa FinTech Tour Launch (Ref: CP-33F8-88GH)</option>
+</select>
+</div>
+<!-- Match Key Override Input -->
+<div>
+<label class="block font-label-badge text-label-badge uppercase text-on-surface-variant mb-1.5">Assign Match Key / Narration Token</label>
+<div class="flex">
+<span class="inline-flex items-center px-3 bg-surface-container text-on-surface-variant border border-r-0 border-outline-variant rounded-l font-label-numeric-sm text-label-numeric-sm">
+              TOKEN:
+            </span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-r p-2 text-on-surface font-label-numeric-sm focus:border-on-surface focus:ring-1 focus:ring-primary-container" type="text" value="CP-7K30-92XD"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">This will update the transaction ledger and release the milestone balance to the escrow vault.</p>
+</div>
+<!-- CFO Two-Factor Sign-off note -->
+<div class="p-3 bg-surface rounded border border-outline-variant flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="lock">lock</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Requires Level-2 Treasury Officer signature token verification.</span>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="pt-4 border-t border-outline-variant flex items-center justify-end gap-3">
+<button class="px-4 py-2 bg-surface hover:bg-surface-container text-on-surface font-headline-sm text-body-md rounded border border-outline-variant transition-colors" onclick="toggleModal(false)">
+          Cancel
+        </button>
+<button class="px-4 py-2 bg-primary-container text-on-surface hover:bg-[#f5bc10] font-headline-sm text-body-md font-semibold rounded border border-outline-variant flex items-center gap-2 transition-colors" onclick="confirmMatch()">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+          Confirm &amp; Reconcile Inflow
+        </button>
+</div>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    function toggleModal(show) {
+      const modal = document.getElementById('match-modal');
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function confirmMatch() {
+      alert("Ledger updated: Inbound deposit DEP-ECO-99452 successfully linked to Ecobank Campus Ambassadors 2026 Escrow Pool.");
+      toggleModal(false);
+    }
+
+    function switchTab(tab) {
+      const tInbound = document.getElementById('tab-inbound');
+      const tPayouts = document.getElementById('tab-payouts');
+      if (tab === 'inbound') {
+        tInbound.className = "flex items-center gap-2.5 px-4 py-3 border-b-2 border-primary text-on-surface font-headline-sm text-body-md font-semibold transition-all";
+        tPayouts.className = "flex items-center gap-2.5 px-4 py-3 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-headline-sm text-body-md transition-all";
+      } else {
+        tPayouts.className = "flex items-center gap-2.5 px-4 py-3 border-b-2 border-primary text-on-surface font-headline-sm text-body-md font-semibold transition-all";
+        tInbound.className = "flex items-center gap-2.5 px-4 py-3 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-headline-sm text-body-md transition-all";
+      }
+    }
+  </script>
+</body></html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creator Rewards &amp; Earnings Detail</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e3e2df",
+            "secondary-fixed": "#ffddb4",
+            "primary": "#775a00",
+            "primary-fixed-dim": "#f6be0a",
+            "error": "#ba1a1a",
+            "outline": "#817660",
+            "on-secondary-fixed": "#291800",
+            "surface-tint": "#775a00",
+            "tertiary": "#674bb4",
+            "inverse-primary": "#f6be0a",
+            "surface-container": "#efeeea",
+            "primary-container": "#ffc61a",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "on-surface": "#1b1c1a",
+            "on-primary-container": "#6e5400",
+            "secondary-fixed-dim": "#fabb61",
+            "tertiary-fixed": "#e8ddff",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#754c00",
+            "surface": "#faf9f5",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#f2f1ed",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#2f312e",
+            "tertiary-fixed-dim": "#cebdff",
+            "on-tertiary-fixed": "#21005e",
+            "surface-container-low": "#f4f4f0",
+            "on-background": "#1b1c1a",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#ffdf98",
+            "surface-bright": "#faf9f5",
+            "on-tertiary-container": "#6044ad",
+            "secondary-container": "#fdbe63",
+            "on-surface-variant": "#4f4632",
+            "surface-dim": "#dbdad6",
+            "on-primary-fixed": "#251a00",
+            "tertiary-container": "#d5c6ff",
+            "background": "#faf9f5",
+            "on-primary-fixed-variant": "#5a4300",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#633f00",
+            "secondary": "#825500",
+            "surface-container-high": "#e9e8e4",
+            "outline-variant": "#d3c5ac",
+            "surface-container-highest": "#e3e2df"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.25rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "label-numeric-md": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-badge": ["JetBrains Mono"],
+            "label-numeric-sm": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "label-numeric-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-numeric-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "label-numeric-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased flex justify-center min-h-screen">
+<!-- Mobile Container (390px strictly budgeted width) -->
+<div class="w-full max-w-[390px] min-h-screen bg-background relative flex flex-col pb-28">
+<!-- Top Navigation Anchor (Shared Component: TopAppBar specification) -->
+<header class="fixed top-0 max-w-[390px] w-full z-40 flex justify-between items-center px-gutter-mobile py-space-sm bg-surface shadow-sm">
+<div class="flex items-center gap-2">
+<button aria-label="Go back" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px] text-on-surface">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none font-bold">Earnings &amp; Rewards</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight">Contract Ledger #EP-88219</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<!-- Ecobank Blaze Verified Payout Badge -->
+<div class="flex items-center gap-1 bg-[#146C38]/10 text-[#146C38] px-2 py-1 rounded-full border border-[#146C38]/20">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-badge text-label-badge font-bold uppercase text-[10px] tracking-wider">Ecobank Blaze</span>
+</div>
+<button aria-label="Notifications" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 px-gutter-mobile flex flex-col gap-4 mt-1">
+<!-- Settlement Overview Summary Header -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/60 shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label-badge text-label-badge text-on-surface-variant tracking-wider uppercase">Active Cycle Gross</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-label-numeric-lg text-label-numeric-lg text-on-surface tracking-tight">₦96,000.00</span>
+<span class="font-label-badge text-label-badge text-on-surface-variant px-1.5 py-0.5 bg-surface-container rounded">NGN</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-badge text-label-badge text-[#146C38] bg-[#E6F4EA] px-2 py-0.5 rounded border border-[#146C38]/20 font-bold uppercase">
+              Audit Clear
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px] mt-1">Settlement Corridor: NG-BLAZE</p>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant/40 flex justify-between items-center text-[12px]">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">lock_clock</span>
+            Escrow Verification Window
+          </span>
+<span class="font-label-numeric-sm text-label-numeric-sm font-semibold text-primary">48h Direct Route</span>
+</div>
+</section>
+<!-- Settlement Lifecycle Stepper Card -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/60 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-on-surface">account_tree</span>
+<h2 class="font-headline-sm text-[15px] font-bold text-on-surface">Settlement Lifecycle</h2>
+</div>
+<span class="font-label-badge text-label-badge text-[#9C4A00] bg-[#FFEEDB] px-1.5 py-0.5 rounded uppercase">
+            Est. 2 hrs remaining
+          </span>
+</div>
+<!-- Horizontal Stepper Progress Bar -->
+<div class="relative py-2">
+<!-- Stepper Track Base -->
+<div class="absolute top-[22px] left-4 right-4 h-[3px] bg-surface-container rounded-full z-0">
+<!-- Active Progress (reaches stage 3) -->
+<div class="h-full bg-primary-container w-[72%] rounded-full"></div>
+</div>
+<!-- 4 Progress Nodes -->
+<div class="relative z-10 grid grid-cols-4 gap-1">
+<!-- Stage 1 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-7 h-7 rounded-full bg-[#146C38] text-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<span class="font-body-sm text-[10px] font-semibold text-on-surface mt-1.5 leading-tight">1. Calculated</span>
+<span class="font-label-badge text-[9px] text-[#146C38]">Completed</span>
+</div>
+<!-- Stage 2 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-7 h-7 rounded-full bg-[#146C38] text-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<span class="font-body-sm text-[10px] font-semibold text-on-surface mt-1.5 leading-tight">2. Approved</span>
+<span class="font-label-badge text-[9px] text-[#146C38]">Completed</span>
+</div>
+<!-- Stage 3 (Active) -->
+<div class="flex flex-col items-center text-center">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center border-2 border-surface-container-lowest ring-2 ring-primary-container/40">
+<span class="material-symbols-outlined text-[14px] animate-spin">sync</span>
+</div>
+<span class="font-body-sm text-[10px] font-bold text-on-surface mt-1.5 leading-tight">3. Initiated</span>
+<span class="font-label-badge text-[9px] text-primary font-bold">In Progress</span>
+</div>
+<!-- Stage 4 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-7 h-7 rounded-full bg-surface-container text-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">account_balance</span>
+</div>
+<span class="font-body-sm text-[10px] text-on-surface-variant mt-1.5 leading-tight">4. Settled</span>
+<span class="font-label-badge text-[9px] text-on-surface-variant">Ecobank Blaze</span>
+</div>
+</div>
+</div>
+<div class="mt-3 p-2 bg-surface-container-low rounded flex items-center justify-between text-[11px] font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">bolt</span>
+            Instant Settlement via Ecobank NIP Core
+          </span>
+<span class="font-label-numeric-sm text-label-numeric-sm font-medium text-on-surface">Auto-Release Active</span>
+</div>
+</section>
+<!-- Section Title: Itemized Breakdown -->
+<div class="flex items-center justify-between pt-1">
+<h3 class="font-headline-sm text-[16px] font-bold text-on-surface">Itemized Formulas</h3>
+<span class="font-label-badge text-label-badge text-on-surface-variant">NO HIDDEN DEDUCTIONS</span>
+</div>
+<!-- Itemized Cards Stack -->
+<div class="flex flex-col gap-3">
+<!-- Card 1: Performance Conversions -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/60 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#5B3FA8]"></div>
+<div class="flex justify-between items-start mb-2 pl-1">
+<div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Performance Conversions</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Affiliate link referral verification</p>
+</div>
+<!-- Status Badge: Payable (Violet) -->
+<span class="h-6 px-2 rounded flex items-center gap-1 bg-[#EFEAFB] text-[#5B3FA8] border border-[#5B3FA8]/20 font-label-badge text-label-badge font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-[#5B3FA8]"></span>
+              Payable
+            </span>
+</div>
+<!-- Mathematical Formula Box -->
+<div class="bg-surface-container-low rounded-lg p-2.5 my-2 border border-outline-variant/40">
+<div class="text-[11px] font-body-sm text-on-surface-variant mb-1 flex items-center justify-between">
+<span>Audited Equation:</span>
+<span class="font-label-badge text-[10px] text-primary">Live Tracking Confirmed</span>
+</div>
+<div class="font-label-numeric-md text-[13px] font-semibold text-on-surface flex items-center justify-between">
+<span>42 eligible registrations × ₦500.00</span>
+<span class="text-[#5B3FA8]">= ₦21,000.00</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 pl-1">
+<span class="flex items-center gap-1 font-body-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary">hub</span>
+              Attribution Hash: <span class="font-label-numeric-sm font-normal">#99A-401C</span>
+</span>
+<span class="font-label-badge text-label-badge text-tertiary font-semibold uppercase">Pending Batch 11</span>
+</div>
+</article>
+<!-- Card 2: Fixed Fee Deliverables -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/60 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#1F5FBF]"></div>
+<div class="flex justify-between items-start mb-2 pl-1">
+<div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Fixed Fee Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Instagram Campaign Assets SLA</p>
+</div>
+<!-- Status Badge: Approved (Blue #1F5FBF) -->
+<span class="h-6 px-2 rounded flex items-center gap-1 bg-[#E8F1FC] text-[#1F5FBF] border border-[#1F5FBF]/20 font-label-badge text-label-badge font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1F5FBF]"></span>
+              Approved
+            </span>
+</div>
+<!-- Mathematical Formula Box -->
+<div class="bg-surface-container-low rounded-lg p-2.5 my-2 border border-outline-variant/40">
+<div class="text-[11px] font-body-sm text-on-surface-variant mb-1 flex items-center justify-between">
+<span>Deliverable Formula:</span>
+<span class="font-label-badge text-[10px] text-[#1F5FBF]">Brand Sign-off 100%</span>
+</div>
+<div class="font-label-numeric-md text-[13px] font-semibold text-on-surface flex items-center justify-between">
+<span>3 approved Reels @ ₦5,000.00</span>
+<span class="text-[#1F5FBF]">= ₦15,000.00</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 pl-1">
+<span class="flex items-center gap-1 font-body-sm">
+<span class="material-symbols-outlined text-[13px] text-[#1F5FBF]">video_library</span>
+              Asset Verification: <span class="font-label-numeric-sm font-normal">SHA-256 Valid</span>
+</span>
+<span class="font-label-badge text-label-badge text-[#1F5FBF] font-semibold uppercase">Locked in Escrow</span>
+</div>
+</article>
+<!-- Card 3: Prior Milestone Settlement -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/60 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#146C38]"></div>
+<div class="flex justify-between items-start mb-2 pl-1">
+<div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Prior Milestone Settlement</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Ecobank Q3 Partner Kickoff</p>
+</div>
+<!-- Status Badge: Paid (Solid Green #146C38) -->
+<span class="h-6 px-2 rounded flex items-center gap-1 bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20 font-label-badge text-label-badge font-bold uppercase">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              Paid
+            </span>
+</div>
+<!-- Mathematical Formula Box -->
+<div class="bg-surface-container-low rounded-lg p-2.5 my-2 border border-outline-variant/40">
+<div class="text-[11px] font-body-sm text-on-surface-variant mb-1 flex items-center justify-between">
+<span>Contractual Grant:</span>
+<span class="font-label-badge text-[10px] text-[#146C38]">Settled to Ledger</span>
+</div>
+<div class="font-label-numeric-md text-[13px] font-semibold text-on-surface flex items-center justify-between">
+<span>Launch Bonus</span>
+<span class="text-[#146C38] font-bold">= ₦60,000.00</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 pl-1">
+<span class="flex items-center gap-1 font-body-sm">
+<span class="material-symbols-outlined text-[13px] text-[#146C38]">receipt_long</span>
+              Ecobank Reference: <span class="font-label-numeric-sm font-normal">ECO-893021-TX</span>
+</span>
+<span class="font-label-badge text-label-badge text-[#146C38] font-semibold uppercase">Credited</span>
+</div>
+</article>
+</div>
+<!-- Ecobank & CrediCorp Asset Financing Banner (High-contrast card with gold/yellow border and Ecobank seal) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border-2 border-primary-container shadow-md relative overflow-hidden mt-1">
+<!-- Top decorative badge ribbon -->
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1 bg-primary-container/20 text-on-primary-container px-2 py-0.5 rounded border border-primary-container font-label-badge text-label-badge font-bold uppercase">
+<span>⚡ Institutional Credit Offer</span>
+</div>
+<!-- Dual Brand Trust Badges -->
+<div class="flex items-center gap-1 text-[10px] font-semibold text-on-surface-variant">
+<span class="bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant font-label-badge">Ecobank</span>
+<span>×</span>
+<span class="bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant font-label-badge">CrediCorp</span>
+</div>
+</div>
+<h4 class="font-headline-sm text-[16px] font-bold text-on-surface flex items-center gap-1.5">
+          Equipment Financing Pre-Approved!
+        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 leading-relaxed text-[13px]">
+          Based on your verified CreatorPay earnings of <span class="font-label-numeric-sm font-semibold text-on-surface">₦245,000.00</span>, you qualify for <span class="font-label-numeric-sm font-bold text-[#146C38] bg-[#E6F4EA] px-1 rounded">₦150,000.00</span> in Creator Gear Financing (Cameras/Laptops/iPhones) with <span class="font-semibold text-on-surface">0% down</span> via Ecobank &amp; CrediCorp.
+        </p>
+<!-- Terms Highlight Box -->
+<div class="grid grid-cols-2 gap-2 my-3 p-2 bg-surface-container-low rounded-lg border border-outline-variant/40">
+<div>
+<span class="text-[10px] font-body-sm text-on-surface-variant uppercase tracking-wider block">Down Payment</span>
+<span class="font-label-numeric-sm text-[13px] font-bold text-[#146C38]">₦0.00 (0% Down)</span>
+</div>
+<div>
+<span class="text-[10px] font-body-sm text-on-surface-variant uppercase tracking-wider block">Repayment Term</span>
+<span class="font-label-numeric-sm text-[13px] font-bold text-on-surface">3-6 Mo. via Payouts</span>
+</div>
+</div>
+<!-- Call to Action Button: Primary Ecobank Institutional Trigger -->
+<button class="w-full bg-primary-container text-on-primary-container font-headline-sm text-[14px] font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-[#F5BC10] active:scale-95 transition-all shadow-sm" type="button">
+<span>Apply via Ecobank</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</section>
+<!-- Institutional Transparency Note -->
+<footer class="text-center py-2">
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px] flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-[#146C38]" style="font-variation-settings: 'FILL' 1;">shield</span>
+          Regulated Payout Pipeline by Ecobank Transnational Inc.
+        </p>
+</footer>
+</main>
+<!-- Bottom Navigation Bar (Shared Component: BottomNavBar with 'Earnings' active) -->
+<!-- Prohibiting top border line as mandated in shell border rules; separated via subtle shadow and background tonal shift -->
+<nav aria-label="Bottom Navigation" class="fixed bottom-0 max-w-[390px] w-full z-50 flex justify-around items-center px-gutter-mobile py-space-xs bg-surface shadow-[0_-4px_16px_rgba(23,21,15,0.06)]">
+<!-- Destination 1: Home -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-colors hover:text-primary active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span class="font-body-sm text-body-sm text-[11px] mt-0.5">Home</span>
+</button>
+<!-- Destination 2: Campaigns -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-colors hover:text-primary active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+<span class="font-body-sm text-body-sm text-[11px] mt-0.5">Campaigns</span>
+</button>
+<!-- Destination 3: Earnings (ACTIVE TAB MANDATE) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-space-md py-space-xs transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm text-[11px] font-bold mt-0.5">Earnings</span>
+</button>
+<!-- Destination 4: Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-colors hover:text-primary active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">person</span>
+<span class="font-body-sm text-body-sm text-[11px] mt-0.5">Profile</span>
+</button>
+</nav>
+</div>
+</body></html>

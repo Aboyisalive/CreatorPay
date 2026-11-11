@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorPay Enterprise — Create New Campaign Wizard</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#6044ad",
+            "inverse-on-surface": "#f2f1ed",
+            "outline-variant": "#d3c5ac",
+            "tertiary-fixed-dim": "#cebdff",
+            "surface-container-low": "#f4f4f0",
+            "on-background": "#1b1c1a",
+            "primary-fixed": "#ffdf98",
+            "primary": "#775a00",
+            "surface-container": "#efeeea",
+            "secondary-fixed": "#ffddb4",
+            "surface-dim": "#dbdad6",
+            "surface-bright": "#faf9f5",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "surface": "#faf9f5",
+            "error-container": "#ffdad6",
+            "primary-container": "#ffc61a",
+            "tertiary": "#674bb4",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "on-primary-container": "#6e5400",
+            "on-surface-variant": "#4f4632",
+            "on-tertiary-fixed": "#21005e",
+            "secondary-container": "#fdbe63",
+            "tertiary-fixed": "#e8ddff",
+            "primary-fixed-dim": "#f6be0a",
+            "on-primary-fixed": "#251a00",
+            "surface-container-highest": "#e3e2df",
+            "surface-variant": "#e3e2df",
+            "on-surface": "#1b1c1a",
+            "on-secondary-fixed-variant": "#633f00",
+            "surface-tint": "#775a00",
+            "secondary-fixed-dim": "#fabb61",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#5a4300",
+            "surface-container-high": "#e9e8e4",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#f6be0a",
+            "secondary": "#825500",
+            "on-secondary-fixed": "#291800",
+            "error": "#ba1a1a",
+            "background": "#faf9f5",
+            "on-error": "#ffffff",
+            "outline": "#817660",
+            "tertiary-container": "#d5c6ff",
+            "inverse-surface": "#2f312e",
+            "on-secondary-container": "#754c00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.25rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "label-numeric-md": ["JetBrains Mono"],
+            "headline-lg": ["Inter"],
+            "label-numeric-sm": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "label-badge": ["JetBrains Mono"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "label-numeric-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-numeric-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-numeric-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #17150F;
+      border: 3px solid #FFC61A;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar (Authoritative JSON Execution)              -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-72 flex flex-col justify-between bg-surface border-r border-outline-variant shrink-0 z-30 select-none">
+<!-- Header identity -->
+<div class="p-4 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-on-background flex items-center justify-center text-primary-container font-headline-sm text-headline-sm font-bold tracking-tight shadow-sm shrink-0">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface uppercase tracking-wider truncate">CreatorPay Enterprise</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant truncate">Ecobank Secured Corridor #4029</span>
+</div>
+</div>
+</div>
+<!-- Navigation List (Exact strings & icons from JSON) -->
+<div class="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+<!-- Item 1: Campaign Overview -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">dashboard</span>
+<span class="text-body-md font-body-md">Campaign Overview</span>
+</a>
+<!-- Item 2: Deliverable Proofs -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">fact_check</span>
+<span class="text-body-md font-body-md">Deliverable Proofs</span>
+</a>
+<!-- Item 3: Conversion Tracking -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">sync_alt</span>
+<span class="text-body-md font-body-md">Conversion Tracking</span>
+</a>
+<!-- Item 4: Ledger Settlements -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">account_balance_wallet</span>
+<span class="text-body-md font-body-md">Ledger Settlements</span>
+</a>
+<!-- Item 5: Ecobank Escrow Pool (ACTIVE INTENT TAB) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-high text-on-surface font-semibold border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-primary font-bold">verified_user</span>
+<span class="text-body-md font-body-md">Ecobank Escrow Pool</span>
+</a>
+<!-- Primary Action CTA -->
+<div class="pt-4 pb-2">
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container text-on-background px-4 py-2.5 rounded-lg font-headline-sm text-body-md font-semibold hover:bg-primary-fixed-dim transition-colors border border-secondary shadow-sm active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-on-background text-lg">account_balance</span>
+<span>Fund Escrow Vault</span>
+</button>
+</div>
+</div>
+<!-- Footer Secondary Nav Links -->
+<div class="p-4 border-t border-outline-variant space-y-1 bg-surface-container-low">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-outline">history</span>
+<span class="text-body-sm font-body-sm">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-outline">tune</span>
+<span class="text-body-sm font-body-sm">Escrow Rail Settings</span>
+</a>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between text-body-sm font-body-sm text-outline">
+<span class="font-label-badge text-label-badge">ORCHESTRATOR v2.4.9</span>
+<span class="w-2 h-2 rounded-full bg-primary-container ring-2 ring-outline-variant"></span>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTAINER (Offset by fixed sidebar w-72)                   -->
+<!-- ========================================================================= -->
+<div class="pl-72 flex-1 flex flex-col min-w-0 bg-surface">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar (Exact JSON Execution)                         -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 right-0 w-full z-20 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center h-16 px-6">
+<!-- Left: Search & Breadcrumb context -->
+<div class="flex items-center gap-6 flex-1 max-w-2xl">
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg pointer-events-none">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-9 pr-3 py-1.5 text-body-md font-body-md text-on-surface focus:outline-none focus:border-on-surface focus:ring-1 focus:ring-primary-container placeholder:text-outline" placeholder="Search corridors, creators, hashes..." type="text"/>
+</div>
+<!-- Global navigation links from JSON -->
+<nav class="hidden lg:flex items-center gap-5 text-body-md">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors pb-1" href="#">Overview</a>
+<a class="text-on-surface border-b-2 border-primary font-semibold pb-1" href="#">Submissions Queue</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors pb-1" href="#">Conversion Axis</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors pb-1" href="#">Rewards Ledger</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors pb-1" href="#">Omni Escrow</a>
+</nav>
+</div>
+<!-- Right Actions & Profile Identity -->
+<div class="flex items-center gap-3 shrink-0">
+<!-- Secondary Action: Audit Export -->
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-body-sm font-body-sm font-medium hover:bg-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-outline text-base">download</span>
+<span>Audit Export</span>
+</button>
+<!-- Primary Action: Release Settlement -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-on-background text-primary-container border border-outline-variant rounded-lg text-body-sm font-body-sm font-semibold hover:bg-surface-dim transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">payments</span>
+<span>Release Settlement</span>
+</button>
+<!-- Icon triggers -->
+<div class="h-5 w-px bg-outline-variant mx-1"></div>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors relative" title="Notifications" type="button">
+<span class="material-symbols-outlined text-lg">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Escrow Vault Status" type="button">
+<span class="material-symbols-outlined text-lg text-primary">shield_with_heart</span>
+</button>
+<!-- Profile Workspace Identity -->
+<div class="flex items-center gap-2 pl-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center font-bold text-body-sm text-on-surface">
+            CP
+          </div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- INNER CANVAS CONTENT: Create-Campaign Wizard (Desktop 1440px)             -->
+<!-- ========================================================================= -->
+<main class="flex-1 px-8 py-6 max-w-7xl w-full mx-auto space-y-6">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<a class="hover:text-on-surface transition-colors" href="#">Campaigns</a>
+<span class="material-symbols-outlined text-sm text-outline">chevron_right</span>
+<span class="hover:text-on-surface transition-colors">New Campaign</span>
+<span class="material-symbols-outlined text-sm text-outline">chevron_right</span>
+<span class="text-on-surface font-semibold">4-Step Guided Wizard</span>
+</nav>
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="text-headline-lg font-headline-lg text-on-surface font-bold tracking-tight">Create New Campaign</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed text-label-badge font-label-badge">
+              DRAFT STAGE 01
+            </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">
+            Define objectives, deterministic escrow rules, and deliverable SLAs.
+          </p>
+</div>
+<!-- Rapid Actions -->
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-body-sm font-body-sm hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-outline">file_upload</span>
+<span>Import Template</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-body-sm font-body-sm hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-outline">help_outline</span>
+<span>Policy Guidance</span>
+</button>
+</div>
+</div>
+<!-- Step Wizard Progress Bar (Horizontal 4 Steps) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Step 1: Active -->
+<div class="flex items-center gap-3 p-2 rounded-lg bg-surface-container border-l-4 border-primary">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-background flex items-center justify-center font-bold text-label-numeric-md">
+              01
+            </div>
+<div>
+<div class="text-body-sm font-headline-sm font-bold text-on-surface">1. Basics</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Active Editing</span>
+</div>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="flex items-center gap-3 p-2 rounded-lg opacity-90">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<div class="text-body-sm font-headline-sm font-semibold text-on-surface">2. Reward Rules</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Configured (3 tiers)</div>
+</div>
+</div>
+<!-- Step 3: Completed -->
+<div class="flex items-center gap-3 p-2 rounded-lg opacity-90">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<div class="text-body-sm font-headline-sm font-semibold text-on-surface">3. Deliverables</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">SLAs Set (5 Proofs)</div>
+</div>
+</div>
+<!-- Step 4: Upcoming / Inspection -->
+<div class="flex items-center gap-3 p-2 rounded-lg border border-dashed border-outline-variant bg-surface-container-low">
+<div class="w-8 h-8 rounded-full bg-surface-dim text-on-surface-variant flex items-center justify-center font-bold text-label-numeric-md">
+              04
+            </div>
+<div>
+<div class="text-body-sm font-headline-sm font-semibold text-on-surface">4. Review &amp; Publish</div>
+<div class="text-body-sm font-body-sm text-error font-medium">Pending 2 Fixes</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MAIN 2-COLUMN GRID (Step 1 Form vs Step 4 Review & Publish Readiness) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- ================================================================= -->
+<!-- LEFT COLUMN: Form Section (Step 1: Basics) [Span 8]               -->
+<!-- ================================================================= -->
+<section class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm space-y-6">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">tune</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Core Metadata &amp; Corridor Rules</h2>
+</div>
+<span class="text-label-badge font-label-badge text-outline">STEP 1 OF 4</span>
+</div>
+<!-- Campaign Name Input -->
+<div class="space-y-1.5">
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+              Campaign Name <span class="text-error">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 py-2.5 text-body-md font-body-md text-on-surface focus:outline-none focus:border-on-surface focus:ring-2 focus:ring-primary-container font-medium" type="text" value="Ecobank Campus Ambassadors 2026 — Pan-Nigeria Cohort"/>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Public legal reference applied to creator smart contracts and Ecobank payment slips.</p>
+</div>
+<!-- Campaign Summary & Character Counter -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+                Summary &amp; Narrative Scope
+              </label>
+<span class="text-label-badge font-label-badge text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">
+                94 / 280 characters
+              </span>
+</div>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 py-2.5 text-body-md font-body-md text-on-surface focus:outline-none focus:border-on-surface focus:ring-2 focus:ring-primary-container leading-relaxed resize-none" rows="3">Driving student registrations for Ecobank Blaze youth accounts across 589 tertiary campuses.</textarea>
+</div>
+<!-- Campaign Objectives (Multi-select Chips) -->
+<div class="space-y-2">
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+              Campaign Objectives <span class="text-body-sm font-body-sm text-on-surface-variant font-normal">(Select all primary key outcomes)</span>
+</label>
+<div class="flex flex-wrap gap-2.5">
+<!-- Unselected: Awareness -->
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant bg-surface text-body-md font-body-md text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+                Awareness
+              </button>
+<!-- Unselected: Traffic -->
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant bg-surface text-body-md font-body-md text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+                Traffic
+              </button>
+<!-- Unselected: Leads -->
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant bg-surface text-body-md font-body-md text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+                Leads
+              </button>
+<!-- Selected: Registrations (Active yellow-100 border-yellow-500) -->
+<button class="px-3.5 py-1.5 rounded-lg border-2 border-primary-container bg-primary-fixed text-on-primary-fixed font-semibold text-body-md flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+<span>Registrations</span>
+</button>
+<!-- Selected: Purchases -->
+<button class="px-3.5 py-1.5 rounded-lg border-2 border-primary-container bg-primary-fixed text-on-primary-fixed font-semibold text-body-md flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+<span>Purchases</span>
+</button>
+</div>
+</div>
+<!-- Destination URL with Test Link Button -->
+<div class="space-y-1.5">
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+              Destination URL &amp; Telemetry Target
+            </label>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg">link</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-9 pr-3 py-2 text-body-md font-label-numeric-sm text-on-surface focus:outline-none focus:border-on-surface focus:ring-2 focus:ring-primary-container" type="url" value="https://ecobank.com/blaze-campus-reg?corridor=4029"/>
+</div>
+<button class="px-3.5 py-2 bg-surface-container border border-outline-variant hover:bg-surface-container-high rounded-lg text-body-sm font-body-sm font-semibold text-on-surface flex items-center gap-1 transition-colors shrink-0" type="button">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+<span>Test Link</span>
+</button>
+</div>
+</div>
+<!-- Date Range & Timezone (WAT) & Escrow Budget Input (2 Columns) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Date Range Picker -->
+<div class="space-y-1.5">
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+                Activation Window (WAT)
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg">date_range</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-9 pr-3 py-2 text-label-numeric-sm font-label-numeric-sm text-on-surface cursor-pointer focus:outline-none focus:border-on-surface" readonly="" type="text" value="15 Oct 2026, 08:00 AM WAT — 15 Nov 2026, 11:59 PM WAT"/>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant">31 Days Active Escrow Cycle</span>
+</div>
+<!-- Escrow Budget Input (Fixed ₦ prefix + JetBrains Mono) -->
+<div class="space-y-1.5">
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+                Total Escrow Budget <span class="text-error">*</span>
+</label>
+<div class="flex rounded-lg border border-outline-variant bg-surface-container-lowest overflow-hidden focus-within:border-on-surface focus-within:ring-2 focus-within:ring-primary-container">
+<span class="bg-surface-container px-3 py-2 text-label-numeric-md font-label-numeric-md font-bold text-on-surface border-r border-outline-variant select-none">
+                  ₦
+                </span>
+<input class="flex-1 bg-transparent px-3 py-2 text-label-numeric-md font-label-numeric-md text-on-surface focus:outline-none font-semibold text-right" type="text" value="1,500,000.00"/>
+<span class="bg-surface-container px-2.5 py-2 text-label-badge font-label-badge text-outline border-l border-outline-variant select-none flex items-center">
+                  NGN
+                </span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Locking corridor #4029</span>
+<span class="font-label-numeric-sm text-on-surface-variant">Min deposit: ₦250,000.00</span>
+</div>
+</div>
+</div>
+<!-- Attribution Window Slider -->
+<div class="space-y-2 p-4 bg-surface-container-low border border-outline-variant rounded-lg">
+<div class="flex justify-between items-center">
+<div>
+<label class="block text-body-sm font-headline-sm font-semibold text-on-surface">
+                  Attribution Window Slider
+                </label>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Lookback duration for creator referral cookie tagging.</p>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest border border-outline-variant font-label-numeric-md text-label-numeric-md font-bold text-on-surface">
+                7 days (Standard)
+              </span>
+</div>
+<div class="pt-2">
+<input class="w-full h-2 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-on-background" max="90" min="1" type="range" value="7"/>
+<div class="flex justify-between text-label-badge font-label-badge text-outline mt-1.5">
+<span>1 DAY (DIRECT)</span>
+<span class="text-on-surface font-bold">7 DAYS (ECOBANK BENCHMARK)</span>
+<span>30 DAYS</span>
+<span>90 DAYS (ENTERPRISE MAX)</span>
+</div>
+</div>
+</div>
+<!-- Ecobank Institutional Feature Banner / Checkbox -->
+<div class="p-4 rounded-xl border border-primary-container bg-surface-bright relative overflow-hidden shadow-sm">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary-container/20 rounded-full pointer-events-none"></div>
+<div class="flex items-start gap-3">
+<div class="pt-0.5">
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary-container border-outline-variant cursor-pointer" id="ecobank-campus" type="checkbox"/>
+</div>
+<div class="space-y-1">
+<label class="text-body-md font-headline-sm font-bold text-on-surface cursor-pointer flex items-center gap-2" for="ecobank-campus">
+<span>Deploy across Ecobank Campus Network (Target 589 Tertiary Institutions)</span>
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">verified</span>
+</label>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+                  Auto-matches student creators with verified Ecobank Blaze accounts and assigns campus rep ambassadors across approved Nigerian universities and polytechnics.
+                </p>
+<div class="pt-2 flex items-center gap-4 text-body-sm font-label-badge text-outline">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">school</span> 589 CAMPUSES
+                  </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">account_balance</span> BLAZE ENGINE ENABLED
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Navigation Actions -->
+<div class="pt-4 border-t border-outline-variant flex justify-between items-center">
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-body-md font-body-md font-medium text-on-surface hover:bg-surface-container transition-colors" type="button">
+              Discard Changes
+            </button>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-surface-container border border-outline-variant rounded-lg text-body-md font-body-md font-semibold text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+                Save &amp; Continue to Rules
+              </button>
+</div>
+</div>
+</section>
+<!-- ================================================================= -->
+<!-- RIGHT COLUMN: Step 4 Review & Publish Readiness Panel [Span 4]     -->
+<!-- ================================================================= -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Readiness Inspection Alert Box (Burnt orange/Error tint) -->
+<div class="bg-surface-container-lowest border-2 border-error/40 rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-error font-headline-sm font-bold">
+<span class="material-symbols-outlined text-xl">error</span>
+<span class="text-body-md font-headline-sm">Publish Readiness: Fix 2 issues to publish</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-badge text-label-badge font-bold">
+                BLOCKING
+              </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Campaign launch requires strict cryptographic and bank treasury clearance under Ecobank Corridor #4029.
+            </p>
+<!-- Issue Items -->
+<div class="space-y-3 pt-1">
+<!-- Item 1: Escrow unfunded -->
+<div class="p-3 rounded-lg bg-surface border border-outline-variant space-y-2">
+<div class="flex items-start gap-2">
+<span class="text-base leading-none">⚠️</span>
+<div class="text-body-sm font-body-sm text-on-surface">
+<strong class="font-semibold text-error">Escrow Vault Deposit:</strong> Ecobank Omni Virtual Account unfunded 
+                    <span class="font-label-numeric-sm font-bold">(₦1,500,000.00 required)</span>
+</div>
+</div>
+<div class="pl-6">
+<button class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-container text-on-background font-semibold rounded text-body-sm font-body-sm hover:bg-primary-fixed-dim transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">account_balance</span>
+<span>Fund Escrow</span>
+</button>
+</div>
+</div>
+<!-- Item 2: Terms v1 Locking -->
+<div class="p-3 rounded-lg bg-surface border border-outline-variant space-y-2">
+<div class="flex items-start gap-2">
+<span class="text-base leading-none">⚠️</span>
+<div class="text-body-sm font-body-sm text-on-surface">
+<strong class="font-semibold text-error">Terms v1 Locking:</strong> Reviewer SLA signature pending compliance approval.
+                  </div>
+</div>
+<div class="pl-6">
+<a class="text-body-sm font-body-sm font-semibold text-primary hover:underline inline-flex items-center gap-1" href="#">
+<span>Send Signature Request</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Checklist Box -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Contract Summary Checklist</h3>
+<span class="text-label-badge font-label-badge text-outline">LOCKED DRAFT</span>
+</div>
+<ul class="space-y-3.5 text-body-sm font-body-sm divide-y divide-outline-variant/60">
+<!-- Deliverables item -->
+<li class="pt-2 first:pt-0 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-lg">videocam</span>
+<div>
+<span class="font-semibold text-on-surface block">Deliverables</span>
+<span class="text-on-surface-variant">3 Reels, 2 Stories per creator (Asset hash tracked)</span>
+</div>
+</li>
+<!-- Reward Rule item -->
+<li class="pt-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-lg">payments</span>
+<div>
+<span class="font-semibold text-on-surface block">Reward Rule Architecture</span>
+<div class="text-on-surface-variant">
+                    Fixed <span class="font-label-numeric-sm font-semibold text-on-surface">₦15,000.00</span> + 
+                    <span class="font-label-numeric-sm font-semibold text-on-surface">₦500.00</span> per verified registration 
+                    <span class="block text-outline font-label-badge mt-0.5">(CAP: ₦50,000.00 PER CREATOR)</span>
+</div>
+</div>
+</li>
+<!-- Attribution Logic item -->
+<li class="pt-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-lg">track_changes</span>
+<div>
+<span class="font-semibold text-on-surface block">Attribution Logic</span>
+<span class="text-on-surface-variant">Last eligible click within 7-day window with UTM corridor integrity</span>
+</div>
+</li>
+<!-- Auto-Settlement window -->
+<li class="pt-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5 text-lg">timer</span>
+<div>
+<span class="font-semibold text-on-surface block">Ecobank 48-Hour Auto-Settlement</span>
+<span class="text-on-surface-variant">Disbursements release automatically if deliverable review expires unflagged.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- Publication Action Controls -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm space-y-3">
+<!-- Save Draft (Secondary Outline) -->
+<button class="w-full py-2.5 px-4 bg-surface border border-outline-variant hover:bg-surface-container rounded-lg text-body-md font-body-md font-semibold text-on-surface transition-colors" type="button">
+              Save Draft
+            </button>
+<!-- Publish Campaign Button (Disabled State with Tooltip Notice) -->
+<div class="relative group">
+<button class="w-full py-2.5 px-4 bg-surface-dim text-outline rounded-lg text-body-md font-headline-sm font-bold cursor-not-allowed border border-outline-variant flex items-center justify-center gap-2 select-none" disabled="" type="button">
+<span class="material-symbols-outlined text-base">lock</span>
+<span>Publish Campaign (Locks Terms v1)</span>
+</button>
+<!-- Hover Tooltip explaining blockage -->
+<div class="mt-2 p-2.5 rounded bg-surface-container-high border border-outline-variant text-body-sm font-body-sm text-on-surface-variant flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-base shrink-0 mt-0.5">info</span>
+<span>
+<strong>Action Blocked:</strong> Cannot publish until Ecobank Escrow deposit is confirmed or CFO bypass override is authenticated.
+                </span>
+</div>
+</div>
+<!-- Audit Hash Footer Reference -->
+<div class="pt-2 text-center">
+<span class="text-label-badge font-label-badge text-outline">
+                PRE-HASH: ECO-NG-2026-BLAZE-0982-SHA256
+              </span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>

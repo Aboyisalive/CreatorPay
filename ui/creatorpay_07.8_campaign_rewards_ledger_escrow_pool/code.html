@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorPay Enterprise | Rewards Ledger &amp; Settlement Operations</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#ffdf98",
+            "primary-fixed-dim": "#f6be0a",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#4f4632",
+            "on-secondary-fixed-variant": "#633f00",
+            "error-container": "#ffdad6",
+            "surface-tint": "#775a00",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#f2f1ed",
+            "on-primary": "#ffffff",
+            "background": "#faf9f5",
+            "surface-container-lowest": "#ffffff",
+            "primary": "#775a00",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "inverse-surface": "#2f312e",
+            "on-tertiary-fixed": "#21005e",
+            "surface-variant": "#e3e2df",
+            "outline": "#817660",
+            "primary-container": "#ffc61a",
+            "surface-container": "#efeeea",
+            "on-primary-fixed-variant": "#5a4300",
+            "surface-container-high": "#e9e8e4",
+            "tertiary-fixed": "#e8ddff",
+            "surface-container-highest": "#e3e2df",
+            "on-tertiary": "#ffffff",
+            "surface-container-low": "#f4f4f0",
+            "inverse-primary": "#f6be0a",
+            "surface": "#faf9f5",
+            "secondary-fixed": "#ffddb4",
+            "surface-dim": "#dbdad6",
+            "tertiary-fixed-dim": "#cebdff",
+            "on-secondary-fixed": "#291800",
+            "on-secondary-container": "#754c00",
+            "on-primary-container": "#6e5400",
+            "outline-variant": "#d3c5ac",
+            "secondary-fixed-dim": "#fabb61",
+            "on-primary-fixed": "#251a00",
+            "tertiary": "#674bb4",
+            "on-tertiary-container": "#6044ad",
+            "tertiary-container": "#d5c6ff",
+            "on-surface": "#1b1c1a",
+            "secondary": "#825500",
+            "surface-bright": "#faf9f5",
+            "secondary-container": "#fdbe63",
+            "on-background": "#1b1c1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "gutter": "1.25rem"
+          },
+          "fontFamily": {
+            "headline-sm": [
+              "Inter"
+            ],
+            "body-md": [
+              "Inter"
+            ],
+            "label-numeric-md": [
+              "JetBrains Mono"
+            ],
+            "label-numeric-lg": [
+              "JetBrains Mono"
+            ],
+            "headline-md": [
+              "Inter"
+            ],
+            "headline-lg": [
+              "Inter"
+            ],
+            "display-lg-mobile": [
+              "Inter"
+            ],
+            "body-lg": [
+              "Inter"
+            ],
+            "display-lg": [
+              "Inter"
+            ],
+            "label-numeric-sm": [
+              "JetBrains Mono"
+            ],
+            "body-sm": [
+              "Inter"
+            ],
+            "label-badge": [
+              "JetBrains Mono"
+            ]
+          },
+          "fontSize": {
+            "headline-sm": [
+              "18px",
+              {
+                "lineHeight": "24px",
+                "letterSpacing": "-0.01em",
+                "fontWeight": "600"
+              }
+            ],
+            "body-md": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "letterSpacing": "0em",
+                "fontWeight": "400"
+              }
+            ],
+            "label-numeric-md": [
+              "15px",
+              {
+                "lineHeight": "20px",
+                "letterSpacing": "0em",
+                "fontWeight": "500"
+              }
+            ],
+            "label-numeric-lg": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-md": [
+              "22px",
+              {
+                "lineHeight": "28px",
+                "letterSpacing": "-0.015em",
+                "fontWeight": "600"
+              }
+            ],
+            "headline-lg": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "600"
+              }
+            ],
+            "display-lg-mobile": [
+              "32px",
+              {
+                "lineHeight": "40px",
+                "letterSpacing": "-0.025em",
+                "fontWeight": "700"
+              }
+            ],
+            "body-lg": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "letterSpacing": "-0.005em",
+                "fontWeight": "400"
+              }
+            ],
+            "display-lg": [
+              "40px",
+              {
+                "lineHeight": "48px",
+                "letterSpacing": "-0.03em",
+                "fontWeight": "700"
+              }
+            ],
+            "label-numeric-sm": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.02em",
+                "fontWeight": "500"
+              }
+            ],
+            "body-sm": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.01em",
+                "fontWeight": "400"
+              }
+            ],
+            "label-badge": [
+              "11px",
+              {
+                "lineHeight": "14px",
+                "letterSpacing": "0.06em",
+                "fontWeight": "600"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Institutional & Brand Palette Tokens */
+    .bg-ecobank-green { background-color: #146C38; }
+    .text-ecobank-green { color: #146C38; }
+    .border-ecobank-green { border-color: #146C38; }
+    .bg-ecobank-soft { background-color: #E6F4EA; }
+    .bg-banner-warn { background-color: #FFF8DC; border-color: #FFE885; }
+    .bg-badge-violet { background-color: #EFEAFB; color: #5B3FA8; }
+    .bg-badge-info { background-color: #E7EFFC; color: #1F5FBF; }
+    .bg-badge-warn { background-color: #FFEEDB; color: #9C4A00; }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex antialiased selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- LEFT NAVIGATION SIDEBAR (Shared Component: SideNavBar) -->
+<aside class="fixed top-0 left-0 h-screen w-72 flex flex-col justify-between bg-surface border-r border-outline-variant z-50 shrink-0">
+<div class="p-4 flex flex-col gap-5">
+<!-- Brand & Workspace Header -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-surface font-bold text-headline-sm">C</span>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface uppercase tracking-wider">CreatorPay Enterprise</span>
+</div>
+</div>
+<!-- Ecobank Verified Corridor Seal -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-surface-container border border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-ecobank-green text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-on-surface leading-tight">Ecobank Secured Corridor #4029</span>
+<span class="text-label-badge font-label-badge text-on-surface-variant">Omni Lite API Integrated</span>
+</div>
+</div>
+<span class="inline-block w-2 h-2 rounded-full bg-ecobank-green animate-pulse"></span>
+</div>
+<!-- Workspace Switcher -->
+<div class="mt-1 flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low border border-outline-variant hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 rounded bg-primary-fixed-dim flex items-center justify-center font-bold text-label-badge text-on-primary-fixed">FW</div>
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-on-surface leading-none">Flutterwave Growth Hub</span>
+<span class="text-label-badge font-label-badge text-on-surface-variant mt-0.5">Enterprise Corp Tenant</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<div class="text-label-badge font-label-badge text-on-surface-variant uppercase px-2 mb-1">Treasury &amp; Program</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-body-md font-body-md">Campaign Overview</span>
+</a>
+<!-- Campaigns [ACTIVE] -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-semibold border-l-2 border-primary active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="text-body-md font-body-md flex-1">Campaigns</span>
+<span class="px-1.5 py-0.5 text-label-badge font-label-badge bg-primary-container text-on-primary-container rounded">Active</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>
+<span class="text-body-md font-body-md flex-1">Deliverable Proofs</span>
+<span class="text-label-badge font-label-badge px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant">12</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+<span class="text-body-md font-body-md">Conversion Tracking</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span class="text-body-md font-body-md">Ledger Settlements</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px] text-ecobank-green">verified_user</span>
+<span class="text-body-md font-body-md">Ecobank Escrow Pool</span>
+</a>
+<div class="h-[1px] bg-outline-variant my-2"></div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-body-md font-body-md">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="text-body-md font-body-md">Escrow Rail Settings</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Footer / Identity & Primary Action -->
+<div class="p-4 border-t border-outline-variant flex flex-col gap-3">
+<!-- Escrow Vault Fund CTA -->
+<button class="w-full py-2.5 px-3 rounded-lg bg-primary-container text-on-surface font-semibold text-body-md flex items-center justify-center gap-2 hover:bg-[#F5BC10] active:scale-[0.98] transition-all border border-[#8A5A00]/20">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+<span>Fund Escrow Vault</span>
+</button>
+<!-- User Role Identity Card -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low border border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-label-badge font-label-badge text-on-surface font-bold border border-outline-variant">
+            CF
+          </div>
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-on-surface leading-tight">Kemi Adeleke</span>
+<span class="text-label-badge font-label-badge text-ecobank-green font-semibold">Finance (Full Payout Authority)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- MAIN VIEWPORT CONTAINER (Adjusted for 72px left-offset + desktop max-w 1440px) -->
+<div class="flex-1 ml-72 flex flex-col min-h-screen bg-background">
+<!-- TOP COMMAND BAR (Shared Component: TopNavBar) -->
+<header class="sticky top-0 w-full z-40 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center h-16 px-8 w-full">
+<!-- Breadcrumbs Navigation -->
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+<span>Campaigns</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">Campus Ambassadors 2026 (Ecobank 589 Tertiary Network)</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold bg-surface-container px-2 py-0.5 rounded text-label-badge font-label-badge">Screen 7.8 Rewards Ledger &amp; Escrow Pool</span>
+</div>
+<!-- Right System Indicators & Profile -->
+<div class="flex items-center gap-5">
+<!-- Live WAT Clock -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container-low border border-outline-variant">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">schedule</span>
+<span class="text-label-numeric-sm font-label-numeric-sm text-on-surface">Live WAT: 28 Oct 2026, 7:48 PM WAT</span>
+</div>
+<!-- Ecobank InnovateX 2026 Partner Badge -->
+<div class="flex items-center gap-1 text-label-badge font-label-badge bg-ecobank-soft text-ecobank-green px-2.5 py-1 rounded border border-ecobank-green/30">
+<span class="material-symbols-outlined text-[14px]">stars</span>
+<span>InnovateX 2026 Finalist Corridors</span>
+</div>
+<!-- In-App Notifications with counter -->
+<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-primary-container text-on-surface font-bold text-label-badge font-label-badge rounded-full flex items-center justify-center leading-none">3</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">shield_with_heart</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<!-- Quick Action Group -->
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant text-body-sm font-body-sm font-semibold text-on-surface bg-surface-container-lowest hover:bg-surface transition-colors">
+            Audit Export
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-ecobank-green text-white text-body-sm font-body-sm font-semibold hover:bg-[#0f542b] transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">send</span>
+<span>Release Settlement</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CANVAS -->
+<main class="p-8 flex flex-col gap-6 max-w-[1440px] mx-auto w-full">
+<!-- 'WHAT TO DO NEXT' STRATEGIC ACTION BANNER -->
+<div class="bg-banner-warn border border-[#FFE885] rounded-xl p-4 flex items-center justify-between shadow-[0px_2px_6px_rgba(23,21,15,0.03)]">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[22px]" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-body-md font-body-md font-bold text-on-surface">Escrow Disbursement Pending Execution</span>
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-primary-container/40 text-on-secondary-container uppercase">Omni Core Ready</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-0.5">
+              Omni Escrow has <span class="font-label-numeric-md text-on-surface font-semibold">₦3,850,000.00</span> funded. <span class="font-label-numeric-md text-on-surface font-semibold">₦512,500.00</span> is currently Payable — initiate Ecobank core-banking disbursement to trigger zero-fee creator payouts.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="px-4 py-2 rounded-lg border border-outline-variant bg-white text-on-surface text-body-sm font-body-sm font-semibold hover:bg-surface-container-low transition-colors">
+            Inspect Tranches
+          </button>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-surface text-body-sm font-body-sm font-bold flex items-center gap-1.5 hover:bg-[#F5BC10] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Initiate Payout</span>
+</button>
+</div>
+</div>
+<!-- CAMPAIGN LIFECYCLE & ESCROW HEADER -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 flex flex-col gap-5">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-3">
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight">
+                Ecobank Campus Brand Ambassadors 2026 — Pan-Nigeria Cohort
+              </h1>
+<span class="px-2.5 py-0.5 rounded-full text-label-badge font-label-badge bg-ecobank-soft text-ecobank-green flex items-center gap-1 border border-ecobank-green/20">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+<span>Published</span>
+</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-badge font-label-badge bg-ecobank-soft text-ecobank-green flex items-center gap-1 border border-ecobank-green/20">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span>Escrow Funded</span>
+</span>
+</div>
+<div class="flex items-center gap-4 text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Timeline: 15 Oct 2026 – 15 Nov 2026 (WAT)</span>
+</span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">account_tree</span>
+<span>Corridor: Ecobank Nigeria Plc (Tertiary Banking Network 589 Nodes)</span>
+</span>
+<span>•</span>
+<span class="text-label-badge font-label-badge font-semibold text-primary">Blaze Instant Settlement Rail Enabled</span>
+</div>
+</div>
+<!-- Omni Escrow Badge Card -->
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-surface-container-low border border-outline-variant">
+<div class="w-10 h-10 rounded-lg bg-ecobank-green flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">assured_workload</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-badge font-label-badge text-on-surface-variant uppercase">Ecobank Omni Virtual Escrow</span>
+<div class="flex items-center gap-2">
+<span class="text-label-numeric-md font-label-numeric-md text-on-surface font-semibold">VA: 0429810291</span>
+<span class="text-label-badge font-label-badge px-1.5 rounded bg-ecobank-soft text-ecobank-green">Locked</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CAMPAIGN TAB BAR -->
+<div class="flex items-center gap-6 border-b border-outline-variant -mb-6 overflow-x-auto text-body-sm font-body-sm">
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">overview</span>
+<span>Overview</span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>Terms v2 (Locked)</span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span>Deliverables Matrix</span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+<span>Participants (24 Creators)</span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">fact_check</span>
+<span>Submissions Queue (12)</span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">ads_click</span>
+<span>Conversion Events</span>
+</a>
+<!-- Rewards Ledger [ACTIVE] -->
+<a class="pb-3 text-on-surface font-bold border-b-2 border-primary flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+<span>Rewards Ledger</span>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Ecobank Escrow Pool</span>
+</a>
+<a class="pb-3 text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px]">monitoring</span>
+<span>Analytics</span>
+</a>
+</div>
+</div>
+<!-- SECTION 1: EXECUTIVE METRICS STRIP -->
+<section class="grid grid-cols-6 gap-4">
+<!-- Metric 1: Total Funded -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-badge font-label-badge uppercase">Total Funded in Escrow</span>
+<span class="material-symbols-outlined text-[18px] text-ecobank-green">account_balance_wallet</span>
+</div>
+<div class="mt-3">
+<div class="text-label-numeric-lg font-label-numeric-lg text-on-surface font-bold">₦5,000,000.00</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5 truncate">
+              Omni Lite Pool • <span class="font-label-numeric-sm">0429810291</span>
+</div>
+</div>
+</div>
+<!-- Metric 2: Verified Deliverables -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-badge font-label-badge uppercase">Verified Deliverables</span>
+<span class="material-symbols-outlined text-[18px] text-primary">fact_check</span>
+</div>
+<div class="mt-3">
+<div class="text-label-numeric-lg font-label-numeric-lg text-on-surface font-bold">68 / 72 Approved</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              94.4% Completion Rate
+            </div>
+</div>
+</div>
+<!-- Metric 3: Conversions -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-badge font-label-badge uppercase">Attributed Conversions</span>
+<span class="material-symbols-outlined text-[18px] text-primary">track_changes</span>
+</div>
+<div class="mt-3">
+<div class="text-label-numeric-lg font-label-numeric-lg text-on-surface font-bold">1,842 Regs</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              Unit Rate: <span class="font-label-numeric-sm font-semibold">₦500.00/unit</span>
+</div>
+</div>
+</div>
+<!-- Metric 4: Rewards Payable -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-badge font-label-badge uppercase">Rewards Payable</span>
+<span class="px-1.5 py-0.5 text-label-badge font-label-badge rounded bg-badge-violet font-semibold">M3 Truth</span>
+</div>
+<div class="mt-3">
+<div class="text-label-numeric-lg font-label-numeric-lg text-[#5B3FA8] font-bold">₦512,500.00</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              8 Creators ready to clear
+            </div>
+</div>
+</div>
+<!-- Metric 5: Bank-Settled Total (Exclusively Solid Green) -->
+<div class="bg-ecobank-green text-white rounded-xl p-4 flex flex-col justify-between shadow-[0px_4px_12px_rgba(20,108,56,0.15)]">
+<div class="flex items-center justify-between text-white/80">
+<span class="text-label-badge font-label-badge uppercase">Bank-Settled Total</span>
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="mt-3">
+<div class="text-label-numeric-lg font-label-numeric-lg font-bold text-white">₦1,248,000.00</div>
+<div class="text-body-sm font-body-sm text-white/90 mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Ecobank Blaze Confirmed</span>
+</div>
+</div>
+</div>
+<!-- Metric 6: Unsettled / Under Review -->
+<div class="bg-surface-container-lowest rounded-xl border-2 border-dashed border-outline-variant p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-badge font-label-badge uppercase">Under Review</span>
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+</div>
+<div class="mt-3">
+<div class="text-label-numeric-lg font-label-numeric-lg text-on-surface-variant italic font-semibold">≈₦82,500.00</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              Level 1 Estimated Math
+            </div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: ACTION & FILTER BAR -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<!-- Engine Timestamp Indicator -->
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">autorenew</span>
+<span>Engine calculated at <strong class="text-on-surface">7:48 PM WAT</strong> (Deterministic attribution window: <strong>7 days</strong>)</span>
+</div>
+<!-- Calculation Action -->
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container text-on-surface text-body-sm font-body-sm font-bold flex items-center gap-1.5 hover:bg-[#F5BC10] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[16px]">calculate</span>
+<span>Calculate Rewards</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<!-- Filter Chips -->
+<div class="flex items-center gap-1.5 p-1 bg-surface-container-low rounded-lg border border-outline-variant">
+<button class="px-2.5 py-1 rounded text-label-badge font-label-badge bg-surface-container-lowest text-on-surface font-semibold shadow-sm">All Creators (24)</button>
+<button class="px-2.5 py-1 rounded text-label-badge font-label-badge text-on-surface-variant hover:text-on-surface">Approved (6)</button>
+<button class="px-2.5 py-1 rounded text-label-badge font-label-badge text-[#5B3FA8] bg-badge-violet font-semibold">Payable (8)</button>
+<button class="px-2.5 py-1 rounded text-label-badge font-label-badge text-ecobank-green hover:bg-ecobank-soft transition-colors">Settled/Paid (10)</button>
+<button class="px-2.5 py-1 rounded text-label-badge font-label-badge text-error hover:bg-error-container/20">Flagged (0)</button>
+</div>
+<!-- Institutional Primary CTA -->
+<button class="px-4 py-2 rounded-lg bg-ecobank-green text-white text-body-sm font-body-sm font-bold flex items-center gap-2 hover:bg-[#0f542b] active:scale-[0.98] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+<span>Initiate Bank Payouts via Ecobank Blaze Rails</span>
+</button>
+</div>
+</section>
+<!-- MAIN SPLIT WORKSPACE: LEDGER TABLE (70%) + ESCROW INSPECTOR MODAL PREVIEW (30%) -->
+<div class="grid grid-cols-12 gap-6 items-start">
+<!-- SECTION 3: THE 4 LEVELS OF TRUTH REWARDS LEDGER TABLE (8 COLUMNS) -->
+<section class="col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface">Audit Ledger &amp; Milestone Attributions</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Hierarchical consensus from draft estimate to core-banking cryptographic receipt</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Showing 5 of 24 records</span>
+<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-banner-warn border-b border-outline-variant text-label-badge font-label-badge text-on-surface-variant uppercase">
+<th class="py-3 px-4">Creator / Identity</th>
+<th class="py-3 px-4">Disbursement Rail</th>
+<th class="py-3 px-4 text-right">Fixed Fee</th>
+<th class="py-3 px-4 text-right">Performance Pay</th>
+<th class="py-3 px-4 text-right">Total Earned</th>
+<th class="py-3 px-4 text-center">Audit Status</th>
+<th class="py-3 px-4 text-right">Settlement Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-md font-body-md">
+<!-- ROW 1: Ada Obi (Bank Confirmed Paid - Solid Green) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-container/30 border border-primary text-on-surface font-bold text-label-badge flex items-center justify-center">
+                        AO
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-tight">Ada Obi</span>
+<span class="text-label-numeric-sm text-on-surface-variant">@ada_creatives</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-label-badge font-label-badge font-semibold text-ecobank-green flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> Ecobank Blaze
+                      </span>
+<span class="text-label-numeric-sm text-on-surface-variant">••••4821 (Zero-fee rail)</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦15,000.00</div>
+<span class="text-label-badge text-on-surface-variant">3 Reels verified</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦21,000.00</div>
+<span class="text-label-badge text-on-surface-variant">42 regs × ₦500.00</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-bold text-on-surface">₦36,000.00</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<!-- Solid Green Paid Chip -->
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-ecobank-green text-white text-label-badge font-label-badge font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[13px]">check</span>
+<span>✓ Paid</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2 py-1 text-label-badge font-label-badge text-ecobank-green border border-ecobank-green/30 rounded hover:bg-ecobank-soft transition-colors">
+                      View Receipt
+                    </button>
+</td>
+</tr>
+<!-- Sub-row: Math Details & Cryptographic Settlement Reference -->
+<tr class="bg-surface-container-low/30 border-b border-outline-variant">
+<td class="py-2 px-4" colspan="7">
+<div class="flex items-center justify-between text-label-badge font-label-badge text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-ecobank-green">receipt_long</span>
+<span>Ecobank Core Settlement Ref:</span>
+<code class="bg-white px-2 py-0.5 rounded border border-outline-variant text-on-surface font-label-numeric-sm font-semibold">ECO-BLZ-99381-NGN</code>
+</div>
+<div class="flex items-center gap-2 font-label-numeric-sm">
+<span>Formula: [Fixed ₦15,000.00] + [(42 Conversions × ₦500.00) = ₦21,000.00] = ₦36,000.00</span>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 2: Chidi Nnamdi (Payable - Violet Badge) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high border border-outline-variant text-on-surface font-bold text-label-badge flex items-center justify-center">
+                        CN
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-tight">Chidi Nnamdi</span>
+<span class="text-label-numeric-sm text-on-surface-variant">@chidi_tech</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-label-badge font-label-badge font-semibold text-ecobank-green flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> Ecobank Blaze
+                      </span>
+<span class="text-label-numeric-sm text-on-surface-variant">••••1109</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦15,000.00</div>
+<span class="text-label-badge text-on-surface-variant">3 Posts verified</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦45,000.00</div>
+<span class="text-label-badge text-[#9C4A00]">90 regs (Cap: max ₦50k)</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-bold text-[#5B3FA8]">₦60,000.00</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-badge-violet text-[#5B3FA8] text-label-badge font-label-badge font-semibold border border-[#5B3FA8]/20">
+<span class="material-symbols-outlined text-[13px]">payments</span>
+<span>Payable</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2 py-1 text-label-badge font-label-badge bg-surface-container hover:bg-surface-container-high rounded text-on-surface transition-colors">
+                        Approve
+                      </button>
+<button class="px-2.5 py-1 text-label-badge font-label-badge bg-ecobank-green text-white font-semibold rounded hover:bg-[#0f542b] transition-colors">
+                        Disburse to Blaze
+                      </button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: Zainab Bello (Recorded Manually - NUBAN) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high border border-outline-variant text-on-surface font-bold text-label-badge flex items-center justify-center">
+                        ZB
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-tight">Zainab Bello</span>
+<span class="text-label-numeric-sm text-on-surface-variant">@zainab_lifestyle</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-label-badge font-label-badge font-semibold text-on-surface">GTBank (NUBAN)</span>
+<span class="text-label-numeric-sm text-on-surface-variant">••••9920</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦10,000.00</div>
+<span class="text-label-badge text-on-surface-variant">2 Stories verified</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦18,500.00</div>
+<span class="text-label-badge text-on-surface-variant">37 registrations</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-bold text-on-surface">₦28,500.00</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="inline-flex flex-col items-center">
+<span class="px-2 py-0.5 rounded text-label-badge font-label-badge border border-[#5B3FA8] text-[#5B3FA8] bg-badge-violet/30 font-medium">
+                        Recorded Manually
+                      </span>
+<span class="text-[10px] text-on-surface-variant mt-0.5">By Kemi (Finance) • MAN-TX-8821</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2 py-1 text-label-badge font-label-badge border border-outline-variant rounded hover:bg-surface-container transition-colors">
+                      Reconcile
+                    </button>
+</td>
+</tr>
+<!-- ROW 4: Oluwaseun Davies (Approved - Info Blue) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high border border-outline-variant text-on-surface font-bold text-label-badge flex items-center justify-center">
+                        OD
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-tight">Oluwaseun Davies</span>
+<span class="text-label-numeric-sm text-on-surface-variant">@seun_vibes</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-label-badge font-label-badge font-semibold text-ecobank-green flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> Ecobank Blaze
+                      </span>
+<span class="text-label-numeric-sm text-on-surface-variant">••••7723</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦15,000.00</div>
+<span class="text-label-badge text-on-surface-variant">3 Posts verified</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦8,000.00</div>
+<span class="text-label-badge text-on-surface-variant">16 registrations</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md font-bold text-on-surface">₦23,000.00</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-badge-info text-[#1F5FBF] text-label-badge font-label-badge font-semibold">
+<span class="material-symbols-outlined text-[13px]">done_all</span>
+<span>Approved</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2 py-1 text-label-badge font-label-badge bg-primary-container text-on-surface rounded font-semibold hover:bg-[#F5BC10] transition-colors">
+                      Queue Escrow
+                    </button>
+</td>
+</tr>
+<!-- ROW 5: Fatima Aliyu (Level 1 Truth Estimated - Dashed) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors bg-surface-container-low/20">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high border border-dashed border-outline-variant text-on-surface font-bold text-label-badge flex items-center justify-center">
+                        FA
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-tight">Fatima Aliyu</span>
+<span class="text-label-numeric-sm text-on-surface-variant">@fatima_unilag</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-label-badge font-label-badge font-semibold text-ecobank-green flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> Ecobank Blaze
+                      </span>
+<span class="text-label-numeric-sm text-on-surface-variant">••••3312</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md italic text-on-surface-variant">≈₦5,000.00</div>
+<span class="text-label-badge text-on-surface-variant">Pending Proof</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md italic text-on-surface-variant">≈₦12,500.00</div>
+<span class="text-label-badge text-on-surface-variant">Estimated Clicks</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="font-label-numeric-md font-label-numeric-md italic font-semibold text-on-surface-variant">≈₦17,500.00</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-dashed border-outline-variant text-on-surface-variant text-label-badge font-label-badge italic">
+                      Level 1 Truth
+                    </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2 py-1 text-label-badge font-label-badge border border-outline-variant text-on-surface-variant rounded hover:bg-surface-container transition-colors">
+                      Review Proof
+                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Pagination -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-low/40 flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span>Showing 1 to 5 of 24 records</span>
+<span class="text-outline-variant">|</span>
+<span class="text-label-badge font-label-badge font-semibold text-ecobank-green">All payouts cleared directly via Ecobank NIP switch</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 rounded border border-outline-variant bg-white disabled:opacity-50">Prev</button>
+<button class="px-3 py-1 rounded border border-outline-variant bg-primary-container text-on-surface font-bold">1</button>
+<button class="px-3 py-1 rounded border border-outline-variant bg-white hover:bg-surface-container">2</button>
+<button class="px-3 py-1 rounded border border-outline-variant bg-white hover:bg-surface-container">3</button>
+<button class="px-3 py-1 rounded border border-outline-variant bg-white">Next</button>
+</div>
+</div>
+</section>
+<!-- SECTION 4: FLOATING INSPECTOR / MODAL PREVIEW (M4 PRE-CALCULATION & ESCROW BREAKDOWN) -->
+<aside class="col-span-4 flex flex-col gap-5">
+<!-- ECOBANK ESCROW POOL VIRTUAL SLIP CARD -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 shadow-[0px_2px_6px_rgba(23,21,15,0.04),0px_8px_24px_rgba(74,70,61,0.06)] relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-ecobank-soft opacity-40 pointer-events-none"></div>
+<div class="flex items-center justify-between border-b border-outline-variant pb-3.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-ecobank-green text-[22px]">account_balance</span>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">Ecobank Escrow Pool</span>
+</div>
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-ecobank-soft text-ecobank-green font-bold uppercase">
+                Active Vault
+              </span>
+</div>
+<!-- Virtual Bank Voucher Slip -->
+<div class="mt-4 p-4 rounded-lg bg-surface-container-low border border-outline-variant flex flex-col gap-3 font-label-numeric-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Designated Bank:</span>
+<span class="font-semibold text-on-surface">Ecobank Nigeria Plc</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-sm font-body-sm">Virtual Pool NUBAN:</span>
+<span class="font-bold text-on-surface font-label-numeric-md">0429810291</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-sm font-body-sm">Narration Ref:</span>
+<div class="flex items-center gap-1">
+<code class="bg-white px-2 py-0.5 rounded border border-outline-variant text-on-surface font-semibold text-[11px]">CPAY-ECO-AMB-2026</code>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant cursor-pointer hover:text-on-surface">content_copy</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/60">
+<span class="text-on-surface-variant font-body-sm font-body-sm">Escrow Protection:</span>
+<span class="text-ecobank-green font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span> 48h Dual-Authorization
+                </span>
+</div>
+</div>
+<!-- Vault Ledger Status -->
+<div class="mt-4 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Initial Escrow Deposit:</span>
+<span class="font-label-numeric-md font-semibold text-on-surface">₦5,000,000.00</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Disbursed (Settled):</span>
+<span class="font-label-numeric-md font-semibold text-ecobank-green">- ₦1,248,000.00</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Locked for Current Queue:</span>
+<span class="font-label-numeric-md font-semibold text-[#5B3FA8]">- ₦512,500.00</span>
+</div>
+<div class="h-[1px] bg-outline-variant my-1"></div>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-surface text-body-md font-body-md">Remaining Vault Balance:</span>
+<span class="font-label-numeric-lg font-label-numeric-lg font-bold text-on-surface">₦3,239,500.00</span>
+</div>
+</div>
+<!-- Action within Modal Preview -->
+<div class="mt-5 flex flex-col gap-2">
+<button class="w-full py-2.5 rounded-lg bg-ecobank-green text-white font-bold text-body-sm font-body-sm hover:bg-[#0f542b] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Execute Batch Disbursement (8 Creators)</span>
+</button>
+<button class="w-full py-2 rounded-lg border border-outline-variant text-on-surface font-semibold text-body-sm font-body-sm hover:bg-surface-container transition-colors">
+                Download Central Bank Ledger Stamp
+              </button>
+</div>
+</div>
+<!-- CREDICORP EQUIPMENT FINANCING BANNER -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 relative overflow-hidden">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed-dim/30 border border-primary flex items-center justify-center shrink-0 text-on-primary-fixed">
+<span class="material-symbols-outlined text-[22px]">videocam</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">CrediCorp Asset Line</span>
+<span class="text-label-badge font-label-badge px-1.5 py-0.5 bg-primary-container text-on-primary-container rounded font-bold">Unlocked</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1 leading-snug">
+                  Creators in this cohort have unlocked <strong class="text-on-surface font-label-numeric-sm">₦850,000.00</strong> in verified asset financing eligibility based on automated deliverable velocity.
+                </p>
+<div class="mt-3 flex items-center gap-3">
+<button class="text-label-badge font-label-badge font-bold text-primary hover:underline flex items-center gap-1">
+<span>Inspect Pre-Approved Creators</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- LIVE CORRIDOR AUDIT TRAIL LOG -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-label-badge font-label-badge text-on-surface-variant uppercase">Real-Time Core Audit Stream</span>
+<span class="w-2 h-2 rounded-full bg-ecobank-green animate-pulse"></span>
+</div>
+<div class="flex flex-col gap-2.5 font-label-numeric-sm">
+<div class="flex items-start gap-2 text-on-surface-variant">
+<span class="text-label-badge text-outline-variant">19:48:12</span>
+<span class="text-on-surface text-[11px] leading-tight">Batch #BLZ-4029 validated against Ecobank Omni Vault. Consensus OK.</span>
+</div>
+<div class="flex items-start gap-2 text-on-surface-variant">
+<span class="text-label-badge text-outline-variant">19:42:04</span>
+<span class="text-on-surface text-[11px] leading-tight">Disbursement of ₦36,000.00 posted to Ada Obi (ECO-BLZ-99381-NGN).</span>
+</div>
+<div class="flex items-start gap-2 text-on-surface-variant">
+<span class="text-label-badge text-outline-variant">19:30:19</span>
+<span class="text-on-surface text-[11px] leading-tight">Omni Escrow auto-lock extended for 48h settlement cycle.</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- FOOTER STATUS BAR -->
+<footer class="mt-4 pt-4 border-t border-outline-variant flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1 text-ecobank-green font-semibold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Ecobank Core Banking API 4.2 Connected</span>
+</span>
+<span>•</span>
+<span>Latency: <strong class="font-label-numeric-sm text-on-surface">24ms</strong></span>
+<span>•</span>
+<span>Blaze Instant Settlement Rail Node: <strong class="font-label-numeric-sm text-on-surface">LOS-CORR-01</strong></span>
+</div>
+<div class="text-label-badge font-label-badge text-outline">
+          CreatorPay Enterprise © 2026 Ecobank InnovateX Finalist Edition
+        </div>
+</footer>
+</main>
+</div>
+</body></html>

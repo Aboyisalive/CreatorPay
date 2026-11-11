@@ -1,0 +1,17 @@
+# Fixed-IP relay to the Ecobank UAT gateway, so Vercel's changing IPs never
+# hit Ecobank's whitelist. Caddy gets a TLS certificate automatically.
+#
+# DOMAIN: your VPS IP via sslip.io (e.g. 203.0.113.10.sslip.io) or a real domain.
+# PROXY_KEY: same value as ECOBANK_PROXY_KEY on Vercel.
+
+{$DOMAIN} {
+	@unauthorized not header X-Proxy-Key {$PROXY_KEY}
+	respond @unauthorized "Forbidden" 403
+
+	reverse_proxy https://apimuat-gateway.ecobank.com {
+		header_up Host apimuat-gateway.ecobank.com
+		header_up -X-Proxy-Key
+		header_up -X-Forwarded-For
+		header_up -X-Real-Ip
+	}
+}

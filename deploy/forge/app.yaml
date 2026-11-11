@@ -1,0 +1,38 @@
+# Replace <registry>/<image>:<tag>. Secret `app-env` holds DATABASE_URL, AUTH_SECRET, FORGE_*.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: app }
+  template:
+    metadata:
+      labels: { app: app }
+    spec:
+      # imagePullSecrets: [{ name: regcred }]
+      containers:
+      - name: app
+        image: hakisolos/creatorpay:v1
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - secretRef: { name: huawei-gateway, optional: true }   # GATEWAY_KEY
+        - secretRef: { name: app-env }
+        readinessProbe:
+          httpGet: { path: /health/live, port: 8080 }
+          periodSeconds: 5
+        resources:
+          requests: { cpu: 50m, memory: 128Mi }
+          limits: { cpu: 500m, memory: 512Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  selector: { app: app }
+  ports:
+  - port: 80
+    targetPort: 8080

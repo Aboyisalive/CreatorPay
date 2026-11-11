@@ -1,0 +1,844 @@
+// CreatorPay domain model.
+//
+// Design notes:
+// - Money is stored as integer minor units (kobo for NGN) in PostgreSQL NUMERIC
+//   columns, surfaced in TypeScript as Prisma Decimal (never JS floating point).
+// - Campaign terms are snapshotted into CampaignTermVersion rows and never mutated
+//   once published. A participant records the exact term version they accepted.
+// - Verification (is the evidence real?) and eligibility (does it earn a reward?)
+//   are separate axes on conversion events.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum WorkspaceType {
+  BUSINESS
+  AGENCY
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  CAMPAIGN_MANAGER
+  REVIEWER
+  FINANCE
+  ANALYST
+}
+
+enum CampaignObjective {
+  AWARENESS
+  TRAFFIC
+  LEADS
+  REGISTRATIONS
+  PURCHASES
+  OTHER
+}
+
+enum CampaignStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
+  CLOSED
+  ARCHIVED
+}
+
+enum ParticipationMode {
+  INVITE_ONLY
+  APPLICATION
+  BOTH
+}
+
+enum AttributionModel {
+  LAST_ELIGIBLE_CLICK
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+enum ParticipantStatus {
+  ACTIVE
+  COMPLETED
+  REMOVED
+  WITHDRAWN
+}
+
+enum RewardRuleType {
+  FIXED_DELIVERABLE
+  PER_EVENT
+  TIERED_BONUS
+}
+
+enum DeliverableType {
+  CONTENT_POST
+  CONTENT_STORY
+  CONTENT_REEL
+  CONTENT_VIDEO
+  CONTENT_BLOG
+  CONTENT_LIVE
+  OTHER
+}
+
+enum DeliverableEvidenceType {
+  URL
+  FILE
+  TEXT
+  SOCIAL_HANDLE
+}
+
+enum SubmissionStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REVISION_REQUESTED
+  REJECTED
+}
+
+enum EventType {
+  REGISTRATION
+  LEAD
+  PURCHASE
+  SUBSCRIPTION
+  APPLICATION
+  OTHER
+}
+
+enum EventSource {
+  API
+  IMPORT
+  MANUAL
+  PROMO_CODE
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum EligibilityStatus {
+  PENDING
+  ELIGIBLE
+  INELIGIBLE
+  UNDER_REVIEW
+}
+
+enum RewardStatus {
+  CALCULATED
+  PENDING_REVIEW
+  APPROVED
+  PAYABLE
+  PAYMENT_INITIATED
+  PAID
+  PAYMENT_FAILED
+  DISPUTED
+  ADJUSTED
+}
+
+// ---------------------------------------------------------------------------
+// Identity and tenancy
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  lastLoginAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  memberships    Membership[]
+  creatorProfile CreatorProfile?
+  auditEvents    AuditEvent[]          @relation("AuditActor")
+  termVersions   CampaignTermVersion[] @relation("TermVersionCreatedBy")
+  approvedRewards RewardCalculation[]  @relation("RewardApprovedBy")
+  invitationsSent CampaignInvitation[] @relation("InvitationInvitedBy")
+  reviewedSubmissions Submission[]     @relation("SubmissionReviewer")
+  recordedSettlements Settlement[]     @relation("SettlementRecordedBy")
+  notifications       Notification[]
+  idempotencyKeys     IdempotencyKey[]
+  adjustmentsMade     RewardAdjustment[]       @relation("RewardAdjustmentActor")
+  credentialsCreated  IntegrationCredential[]  @relation("IntegrationCredentialCreatedBy")
+}
+
+model Workspace {
+  id        String        @id @default(cuid())
+  name      String
+  slug      String        @unique
+  type      WorkspaceType @default(BUSINESS)
+  currency  String        @default("NGN")
+  timezone  String        @default("Africa/Lagos")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  memberships           Membership[]
+  campaigns             Campaign[]
+  auditEvents           AuditEvent[]
+  idempotencyKeys       IdempotencyKey[]
+  integrationCredentials IntegrationCredential[]
+}
+
+model Membership {
+  id          String    @id @default(cuid())
+  userId      String
+  workspaceId String
+  role        Role      @default(CAMPAIGN_MANAGER)
+  createdAt   DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workspaceId])
+  @@index([workspaceId])
+}
+
+model CreatorProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  displayName String
+  bio         String?
+  phone       String?
+  socials     Json     @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  participations CampaignParticipant[]
+  invitations    CampaignInvitation[]
+  bankDetails    CreatorBankDetails?
+}
+
+// ---------------------------------------------------------------------------
+// Campaigns and versioned terms
+// ---------------------------------------------------------------------------
+
+model Campaign {
+  id                      String            @id @default(cuid())
+  workspaceId             String
+  name                    String
+  summary                 String?
+  description             String?
+  objectives              CampaignObjective[]
+  status                  CampaignStatus   @default(DRAFT)
+  participationMode       ParticipationMode @default(INVITE_ONLY)
+  attributionModel        AttributionModel  @default(LAST_ELIGIBLE_CLICK)
+  attributionWindowDays   Int               @default(7)
+  destinationUrl          String
+  startAt                 DateTime?
+  endAt                   DateTime?
+  budgetMinor             Decimal           @default(0) @db.Decimal(18, 0)
+  currency                String            @default("NGN")
+  currentTermVersionId    String?           @unique
+  // Payment backbone: a stable funding reference the brand quotes as the bank
+  // narration, plus the funding gate. Escrow balance is NOT denormalized here --
+  // it is derived from the double-entry JournalEntry ledger (source of truth).
+  fundingReference        String?           @unique
+  fundingStatus           CampaignFundingStatus @default(UNFUNDED)
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
+
+  workspace          Workspace             @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  currentTermVersion CampaignTermVersion?  @relation("CurrentTermVersion", fields: [currentTermVersionId], references: [id], onDelete: SetNull)
+  termVersions       CampaignTermVersion[] @relation("CampaignTermVersions")
+  invitations        CampaignInvitation[]
+  participants       CampaignParticipant[]
+  trackingLinks         TrackingLink[]
+  clickEvents           ClickEvent[]
+  conversionEvents      ConversionEvent[]
+  rewardCalculations    RewardCalculation[]
+  deliverableRequirements DeliverableRequirement[]
+  submissions           Submission[]
+  deposits              Deposit[]
+
+  @@index([workspaceId, status])
+  @@index([workspaceId, createdAt])
+}
+
+model CampaignTermVersion {
+  id          String    @id @default(cuid())
+  campaignId  String
+  version     Int
+  snapshot    Json
+  createdById String?
+  createdAt   DateTime  @default(now())
+  publishedAt DateTime?
+
+  campaign           Campaign             @relation("CampaignTermVersions", fields: [campaignId], references: [id], onDelete: Cascade)
+  currentFor         Campaign?            @relation("CurrentTermVersion")
+  createdBy          User?                @relation("TermVersionCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  rewardRules        RewardRule[]
+  acceptedBy         CampaignParticipant[] @relation("ParticipantAcceptedTerm")
+  rewardCalculations RewardCalculation[]
+
+  @@unique([campaignId, version])
+  @@index([campaignId])
+}
+
+model RewardRule {
+  id            String         @id @default(cuid())
+  termVersionId String
+  type          RewardRuleType
+  name          String
+  eventType     EventType?
+  amountMinor   Decimal @db.Decimal(18, 0)
+  maxCount      Int?
+  capMinor      Decimal? @db.Decimal(18, 0)
+  createdAt     DateTime       @default(now())
+
+  termVersion CampaignTermVersion @relation(fields: [termVersionId], references: [id], onDelete: Cascade)
+  lines       RewardLine[]
+
+  @@index([termVersionId])
+}
+
+// ---------------------------------------------------------------------------
+// Participation
+// ---------------------------------------------------------------------------
+
+model CampaignInvitation {
+  id               String           @id @default(cuid())
+  campaignId       String
+  email            String
+  // Invitation tokens are secrets that grant campaign access, so only a
+  // SHA-256 hash is stored. The raw token is shown once at creation time.
+  tokenHash        String           @unique
+  status           InvitationStatus @default(PENDING)
+  invitedById      String?
+  creatorProfileId String?
+  respondedAt      DateTime?
+  acceptedAt       DateTime?
+  expiresAt        DateTime?
+  createdAt        DateTime         @default(now())
+
+  campaign       Campaign        @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  invitedBy      User?           @relation("InvitationInvitedBy", fields: [invitedById], references: [id], onDelete: SetNull)
+  creatorProfile CreatorProfile? @relation(fields: [creatorProfileId], references: [id], onDelete: SetNull)
+
+  @@unique([campaignId, email])
+  @@index([campaignId, status])
+}
+
+model CampaignParticipant {
+  id                   String            @id @default(cuid())
+  campaignId           String
+  creatorProfileId     String
+  status               ParticipantStatus @default(ACTIVE)
+  acceptedTermVersionId String?
+  acceptedAt           DateTime?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  campaign            Campaign            @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  creatorProfile      CreatorProfile      @relation(fields: [creatorProfileId], references: [id], onDelete: Cascade)
+  acceptedTermVersion CampaignTermVersion? @relation("ParticipantAcceptedTerm", fields: [acceptedTermVersionId], references: [id], onDelete: SetNull)
+  trackingLinks       TrackingLink[]
+  clickEvents         ClickEvent[]
+  conversionEvents    ConversionEvent[]
+  rewardCalculations  RewardCalculation[]
+  submissions         Submission[]
+  attributionRecords  AttributionRecord[]
+
+  @@unique([campaignId, creatorProfileId])
+  @@index([campaignId, status])
+  @@index([creatorProfileId])
+}
+
+model DeliverableRequirement {
+  id            String               @id @default(cuid())
+  campaignId    String
+  name          String
+  type          DeliverableType
+  description   String?
+  quantity      Int                  @default(1)
+  evidenceType  DeliverableEvidenceType @default(URL)
+  dueAt         DateTime?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+
+  campaign   Campaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  submissions Submission[]
+
+  @@index([campaignId])
+}
+
+model Submission {
+  id                    String            @id @default(cuid())
+  campaignId            String
+  participantId         String
+  deliverableId         String
+  evidenceUrl           String?
+  evidenceFileKey       String?
+  evidenceText          String?
+  note                  String?
+  status                SubmissionStatus  @default(SUBMITTED)
+  reviewerId            String?
+  reviewNote            String?
+  submittedAt           DateTime          @default(now())
+  reviewedAt            DateTime?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  campaign      Campaign             @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  participant   CampaignParticipant  @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  deliverable   DeliverableRequirement @relation(fields: [deliverableId], references: [id], onDelete: Cascade)
+  reviewer      User?                @relation("SubmissionReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+
+  @@index([campaignId, status])
+  @@index([participantId])
+  @@index([deliverableId])
+}
+
+model TrackingLink {
+  id             String    @id @default(cuid())
+  campaignId     String
+  participantId  String
+  token          String    @unique
+  destinationUrl String
+  active         Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  disabledAt     DateTime?
+
+  campaign    Campaign            @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  participant CampaignParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  clicks      ClickEvent[]
+  attributionRecords AttributionRecord[]
+
+  @@index([campaignId])
+  @@index([participantId])
+}
+
+// ---------------------------------------------------------------------------
+// Tracking evidence
+// ---------------------------------------------------------------------------
+
+model ClickEvent {
+  id             String   @id @default(cuid())
+  campaignId     String
+  participantId  String
+  trackingLinkId String
+  occurredAt     DateTime @default(now())
+  receivedAt     DateTime @default(now())
+  visitorKey     String?
+  ipHash         String?
+  userAgent      String?
+  isBot          Boolean  @default(false)
+  isEligible     Boolean  @default(true)
+  invalidReason  String?
+
+  campaign     Campaign            @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  participant  CampaignParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  trackingLink TrackingLink        @relation(fields: [trackingLinkId], references: [id], onDelete: Cascade)
+  attributionRecords AttributionRecord[]
+
+  @@index([campaignId, occurredAt])
+  @@index([participantId, occurredAt])
+  @@index([trackingLinkId])
+}
+
+model ConversionEvent {
+  id                 String             @id @default(cuid())
+  campaignId         String
+  participantId      String?
+  trackingLinkId     String?
+  externalEventId    String
+  eventType          EventType
+  valueMinor         Decimal? @db.Decimal(18, 0)
+  currency           String?            @default("NGN")
+  occurredAt         DateTime
+  receivedAt         DateTime           @default(now())
+  source             EventSource        @default(MANUAL)
+  verificationStatus VerificationStatus @default(PENDING)
+  eligibilityStatus  EligibilityStatus  @default(PENDING)
+  reviewReason       String?
+  isTest             Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  campaign    Campaign             @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  participant CampaignParticipant? @relation(fields: [participantId], references: [id], onDelete: SetNull)
+  rewardLines RewardLine[]
+  attributionRecord AttributionRecord?
+
+  @@unique([campaignId, externalEventId])
+  @@index([campaignId, eventType, eligibilityStatus])
+  @@index([campaignId, occurredAt])
+  @@index([participantId])
+}
+
+// ---------------------------------------------------------------------------
+// Rewards and settlement
+// ---------------------------------------------------------------------------
+
+model RewardCalculation {
+  id             String       @id @default(cuid())
+  campaignId     String
+  participantId  String
+  termVersionId  String
+  version        Int          @default(1)
+  status         RewardStatus @default(CALCULATED)
+  currency       String       @default("NGN")
+  totalMinor     Decimal      @default(0) @db.Decimal(18, 0)
+  breakdown      Json         @default("{}")
+  calculatedAt   DateTime     @default(now())
+  approvedAt     DateTime?
+  approvedById   String?
+  disputedAt     DateTime?
+  disputeReason  String?
+  notes          String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  campaign    Campaign            @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  participant CampaignParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  termVersion CampaignTermVersion @relation(fields: [termVersionId], references: [id], onDelete: Restrict)
+  approvedBy  User?               @relation("RewardApprovedBy", fields: [approvedById], references: [id], onDelete: SetNull)
+  lines       RewardLine[]
+  settlements Settlement[]
+  adjustments RewardAdjustment[]
+  payouts     Payout[]
+
+  @@unique([participantId, version])
+  @@index([campaignId, status])
+  @@index([participantId, calculatedAt])
+}
+
+model Settlement {
+  id                 String       @id @default(cuid())
+  rewardCalculationId String
+  amountMinor        Decimal @db.Decimal(18, 0)
+  currency           String       @default("NGN")
+  method             String?
+  reference          String?
+  note               String?
+  recordedById       String?
+  createdAt          DateTime     @default(now())
+
+  rewardCalculation RewardCalculation @relation(fields: [rewardCalculationId], references: [id], onDelete: Cascade)
+  recordedBy        User?             @relation("SettlementRecordedBy", fields: [recordedById], references: [id], onDelete: SetNull)
+
+  @@index([rewardCalculationId])
+}
+
+model RewardLine {
+  id                  String         @id @default(cuid())
+  rewardCalculationId String
+  rewardRuleId        String?
+  conversionEventId   String?
+  type                RewardRuleType
+  description         String
+  quantity            Int            @default(1)
+  unitAmountMinor     Decimal @db.Decimal(18, 0)
+  amountMinor         Decimal @db.Decimal(18, 0)
+
+  rewardCalculation RewardCalculation @relation(fields: [rewardCalculationId], references: [id], onDelete: Cascade)
+  rewardRule        RewardRule?       @relation(fields: [rewardRuleId], references: [id], onDelete: SetNull)
+  conversionEvent   ConversionEvent?  @relation(fields: [conversionEventId], references: [id], onDelete: SetNull)
+
+  @@index([rewardCalculationId])
+  @@index([conversionEventId])
+}
+
+// ---------------------------------------------------------------------------
+// Contract-supporting records (idempotency, attribution, adjustments, keys)
+// ---------------------------------------------------------------------------
+
+// Replay-safe execution of money-moving or duplicate-prone writes. A client
+// that retries a request with the same Idempotency-Key gets the stored response
+// instead of a second side effect.
+model IdempotencyKey {
+  id             String   @id @default(cuid())
+  workspaceId    String
+  userId         String
+  // Namespaces the key, e.g. "POST /v1/rewards/settle".
+  endpoint       String
+  // The client-supplied Idempotency-Key header value.
+  key            String
+  // SHA-256 of the canonical request body, used to detect key reuse with a
+  // different payload (which is a client bug, not a replay).
+  requestHash    String
+  responseStatus Int
+  responseBody   Json
+  createdAt      DateTime @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([endpoint, key, userId])
+  @@index([workspaceId, createdAt])
+  @@index([createdAt])
+}
+
+// Durable record of how a conversion event was attributed, kept separate from
+// the event row so the decision can be audited or re-derived later.
+model AttributionRecord {
+  id                String   @id @default(cuid())
+  conversionEventId String   @unique
+  participantId     String?
+  trackingLinkId    String?
+  clickId           String?
+  model             AttributionModel
+  windowDays        Int
+  // Human-readable reason, including why an event stayed unattributed.
+  reason            String?
+  decidedAt         DateTime @default(now())
+
+  conversionEvent ConversionEvent    @relation(fields: [conversionEventId], references: [id], onDelete: Cascade)
+  participant     CampaignParticipant? @relation(fields: [participantId], references: [id], onDelete: SetNull)
+  trackingLink    TrackingLink?      @relation(fields: [trackingLinkId], references: [id], onDelete: SetNull)
+  click           ClickEvent?        @relation(fields: [clickId], references: [id], onDelete: SetNull)
+
+  @@index([participantId])
+  @@index([clickId])
+}
+
+// Signed, reasoned corrections to a reward. Amounts are deltas in minor units;
+// history is never overwritten by recalculation.
+model RewardAdjustment {
+  id                  String   @id @default(cuid())
+  rewardCalculationId String
+  // Signed delta in minor units (can be negative for reductions).
+  amountMinor         Decimal  @db.Decimal(18, 0)
+  reason              String
+  actorUserId         String?
+  createdAt           DateTime @default(now())
+
+  rewardCalculation RewardCalculation @relation(fields: [rewardCalculationId], references: [id], onDelete: Cascade)
+  actor             User?             @relation("RewardAdjustmentActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([rewardCalculationId])
+}
+
+// A workspace API credential for server-to-server event ingestion. Only a hash
+// of the secret is stored; the plaintext is returned once at creation.
+model IntegrationCredential {
+  id          String    @id @default(cuid())
+  workspaceId String
+  name        String
+  // Human-recognisable prefix, e.g. "cpk_live_ab12…", for display in lists.
+  keyPrefix   String
+  keyHash     String    @unique
+  scopes      String[]  @default(["events:write"])
+  createdById String?
+  revokedAt   DateTime?
+  lastUsedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdBy   User?     @relation("IntegrationCredentialCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId])
+}
+
+// ---------------------------------------------------------------------------
+// Audit
+// ---------------------------------------------------------------------------
+
+model Notification {
+  id          String    @id @default(cuid())
+  userId      String
+  workspaceId String?
+  type        String
+  title       String
+  body        String?
+  entityType  String?
+  entityId    String?
+  readAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([userId, readAt])
+}
+
+model AuditEvent {
+  id          String   @id @default(cuid())
+  workspaceId String?
+  actorUserId String?
+  action      String
+  entityType  String
+  entityId    String
+  metadata    Json     @default("{}")
+  createdAt   DateTime @default(now())
+
+  workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+  actor     User?      @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId, createdAt])
+  @@index([entityType, entityId])
+}
+
+// ---------------------------------------------------------------------------
+// Payment backbone (Ecobank integration)
+//
+// The internal double-entry ledger is the source of truth for money movement.
+// Ecobank is the rail. These tables wire the payment flow directly into the
+// existing CreatorPay domain:
+//   - Campaign gains a fundingReference + fundingStatus (escrow gate).
+//   - CreatorBankDetails hangs off CreatorProfile (where a payout goes).
+//   - Payout replaces/augments the manual Settlement, linked to RewardCalculation.
+//   - JournalEntry is the append-only double-entry ledger.
+//   - ProviderCall / WebhookEvent are the audit + integration seams.
+// ---------------------------------------------------------------------------
+
+enum CampaignFundingStatus {
+  UNFUNDED
+  AWAITING_FUNDS
+  FUNDED
+}
+
+enum DepositState {
+  RECEIVED
+  MATCHED
+  UNMATCHED
+  REJECTED
+}
+
+enum DepositMatchedBy {
+  REFERENCE
+  AMOUNT_SENDER
+  MANUAL
+  SIMULATED
+}
+
+enum PayoutState {
+  APPROVED
+  SUBMITTED
+  PENDING
+  SETTLED
+  FAILED
+  UNKNOWN
+}
+
+// Creator payout destination. 1:1 with a creator's profile.
+model CreatorBankDetails {
+  id                   String   @id @default(cuid())
+  creatorProfileId     String   @unique
+  bankCode             String
+  accountNo            String
+  accountNameConfirmed String?
+  // NUBAN shape is valid + passes our checksum. Never proof the account exists.
+  nubanOk              Boolean  @default(false)
+  // Only true when the bank itself confirmed the name (Account Enquiry / credit
+  // source name check). We cannot subscribe to Account Enquiry yet, so this
+  // stays false until a real name-confirmation call exists.
+  verifiedByBank       Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  creatorProfile CreatorProfile @relation(fields: [creatorProfileId], references: [id], onDelete: Cascade)
+}
+
+// Brand inbound funds, awaiting (or having completed) matching to a campaign.
+model Deposit {
+  id            String            @id @default(cuid())
+  // Null while unmatched -- sits in the unmatched queue.
+  campaignId    String?
+  // Provider-supplied unique id, or a synthetic one for manual/simulated rows.
+  // Enforced unique so a retried/dead-lettered webhook cannot double-credit.
+  dedupeKey     String            @unique
+  bankReference String?
+  amountMinor   Decimal           @db.Decimal(18, 0)
+  currency      String            @default("NGN")
+  senderHint    String?
+  matchedBy     DepositMatchedBy?
+  state         DepositState      @default(RECEIVED)
+  createdAt     DateTime          @default(now())
+
+  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+
+  @@index([state, createdAt])
+  @@index([campaignId])
+  @@index([bankReference])
+}
+
+// The double-entry ledger. Append-only: never update or delete a row. Every
+// money movement is a single balanced debit+credit pair, so total debits always
+// equal total credits. refType/refId link the entry to its cause (deposit,
+// payout, adjustment) without a hard FK.
+model JournalEntry {
+  id            String   @id @default(cuid())
+  refType       String
+  refId         String
+  debitAccount  String
+  creditAccount String
+  amountMinor   Decimal  @db.Decimal(18, 0)
+  currency      String   @default("NGN")
+  createdAt     DateTime @default(now())
+
+  @@index([refType, refId])
+  @@index([debitAccount])
+  @@index([creditAccount])
+}
+
+// A bank payout against an approved reward. Multiple attempts may exist per
+// reward (each attempt = one idempotent bank call = one requestId); the service
+// enforces that only one attempt ever reaches SETTLED.
+model Payout {
+  id                  String      @id @default(cuid())
+  rewardCalculationId String
+  // Minted + persisted BEFORE any bank call, reused verbatim on retry. Unique --
+  // this is the idempotency key that stops us double-paying.
+  requestId           String      @unique
+  // The bank's transactionReference on success. Wide, never truncated.
+  bankReference       String?
+  amountMinor         Decimal     @db.Decimal(18, 0)
+  currency            String      @default("NGN")
+  bankCode            String
+  accountNo           String
+  narration           String
+  state               PayoutState @default(APPROVED)
+  // Last response body code (NOT HTTP status -- the bank reports 200 on refusal).
+  rawCode             String?
+  lastCheckedAt       DateTime?
+  settledAt           DateTime?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  rewardCalculation RewardCalculation @relation(fields: [rewardCalculationId], references: [id], onDelete: Cascade)
+
+  @@index([rewardCalculationId])
+  @@index([state, createdAt])
+}
+
+// Audit of every bank call. Request payload stored redacted (never the secret,
+// never the secureHash). Response body kept verbatim for diagnostics.
+model ProviderCall {
+  id           String   @id @default(cuid())
+  requestId    String
+  endpoint     String
+  provider     String   @default("mock")
+  responseCode String?
+  httpStatus   Int?
+  durationMs   Int?
+  createdAt    DateTime @default(now())
+
+  @@index([requestId])
+  @@index([createdAt])
+}
+
+// Raw inbound webhook, stored verbatim before any processing. dedupeKey stops a
+// redelivery from being applied twice; processedAt marks a handled event.
+model WebhookEvent {
+  id          String    @id @default(cuid())
+  dedupeKey   String?   @unique
+  rawBody     Json
+  rawHeaders  Json
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+}

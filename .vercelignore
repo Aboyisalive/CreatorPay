@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+envifile
+envi.toml
+/ui
+/docs
+/deploy
+node_modules
+.next
+src/generated

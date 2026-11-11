@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorPay Enterprise — Submissions Review Queue &amp; Revision Modal</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed-variant": "#633f00",
+            "tertiary-container": "#d5c6ff",
+            "on-primary-container": "#6e5400",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#754c00",
+            "on-primary": "#ffffff",
+            "surface-container-high": "#e9e8e4",
+            "background": "#faf9f5",
+            "surface-bright": "#faf9f5",
+            "tertiary-fixed": "#e8ddff",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#e3e2df",
+            "on-surface": "#1b1c1a",
+            "outline": "#817660",
+            "primary-fixed": "#ffdf98",
+            "surface-tint": "#775a00",
+            "on-error": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#f6be0a",
+            "secondary-container": "#fdbe63",
+            "inverse-surface": "#2f312e",
+            "on-surface-variant": "#4f4632",
+            "primary-container": "#ffc61a",
+            "surface-dim": "#dbdad6",
+            "on-tertiary-fixed": "#21005e",
+            "secondary-fixed-dim": "#fabb61",
+            "outline-variant": "#d3c5ac",
+            "surface-container": "#efeeea",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#ffddb4",
+            "inverse-on-surface": "#f2f1ed",
+            "on-tertiary-container": "#6044ad",
+            "primary": "#775a00",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "surface-container-low": "#f4f4f0",
+            "on-primary-fixed": "#251a00",
+            "error": "#ba1a1a",
+            "surface": "#faf9f5",
+            "on-primary-fixed-variant": "#5a4300",
+            "inverse-primary": "#f6be0a",
+            "tertiary-fixed-dim": "#cebdff",
+            "secondary": "#825500",
+            "on-background": "#1b1c1a",
+            "surface-variant": "#e3e2df",
+            "tertiary": "#674bb4",
+            "on-secondary-fixed": "#291800"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "gutter": "1.25rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Inter"],
+            "label-numeric-sm": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "label-badge": ["JetBrains Mono"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-numeric-md": ["JetBrains Mono"],
+            "display-lg": ["Inter"],
+            "display-lg-mobile": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-numeric-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-numeric-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-numeric-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md min-h-screen relative overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- SCREEN 07.5: SUBMISSIONS REVIEW QUEUE BACKGROUND CANVAS                   -->
+<!-- ========================================================================= -->
+<div class="flex min-h-screen w-full">
+<!-- SideNavBar (from Shared Components JSON) -->
+<aside class="fixed top-0 left-0 h-screen w-72 flex flex-col justify-between shrink-0 bg-surface dark:bg-surface border-r border-outline-variant dark:border-outline-variant p-4 z-10 select-none">
+<!-- Top Section -->
+<div class="flex flex-col gap-6">
+<!-- Brand / Corridor Seal -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-fixed font-bold text-headline-sm border border-outline-variant/40">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-inverse-on-surface uppercase tracking-wider">CreatorPay Enterprise</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#146C38]"></span>
+              Ecobank Secured Corridor #4029
+            </p>
+</div>
+</div>
+<!-- Primary CTA Fund Escrow -->
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary-container text-on-surface font-semibold text-body-md flex items-center justify-center gap-2 hover:bg-[#F5BC10] transition-colors border border-outline-variant/60 active:scale-[0.99]">
+<span class="material-symbols-outlined text-primary" data-icon="add_circle">add_circle</span>
+          Fund Escrow Vault
+        </button>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<!-- Item 1: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-md font-body-md">Campaign Overview</span>
+</a>
+<!-- Item 2: ACTIVE (Deliverable Proofs / Review Queue Screen) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-high dark:bg-surface-container-high text-on-surface dark:text-inverse-on-surface font-semibold border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-primary" data-icon="fact_check" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+<span class="text-body-md font-body-md">Deliverable Proofs</span>
+<span class="ml-auto text-label-badge font-label-badge bg-primary-container px-1.5 py-0.5 rounded text-on-primary-container">4 NEW</span>
+</a>
+<!-- Item 3: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="sync_alt">sync_alt</span>
+<span class="text-body-md font-body-md">Conversion Tracking</span>
+</a>
+<!-- Item 4: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-body-md font-body-md">Ledger Settlements</span>
+</a>
+<!-- Item 5: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="text-body-md font-body-md">Ecobank Escrow Pool</span>
+</a>
+</nav>
+</div>
+<!-- Footer Rail Settings -->
+<div class="pt-4 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="history">history</span>
+<span class="text-body-sm font-body-sm">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="tune">tune</span>
+<span class="text-body-sm font-body-sm">Escrow Rail Settings</span>
+</a>
+<div class="mt-2 p-2.5 rounded-lg bg-surface-container flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#146C38] animate-pulse"></div>
+<span class="text-label-badge font-label-badge text-on-surface-variant">ECOBANK API CONNECTED</span>
+</div>
+</div>
+</aside>
+<!-- Main Workspace Container -->
+<div class="pl-72 flex-1 flex flex-col min-w-0">
+<!-- TopNavBar (from Shared Components JSON) -->
+<header class="sticky top-0 right-0 w-full z-20 bg-surface-container-lowest dark:bg-surface-container-lowest border-b border-outline-variant dark:border-outline-variant h-16 px-6 flex justify-between items-center">
+<!-- Search bar on left -->
+<div class="flex items-center gap-6">
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">Campaign Command Center</h2>
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-body-lg" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 text-body-md font-body-md bg-surface border border-outline-variant rounded-lg text-on-surface focus:outline-none focus:border-on-surface focus:ring-1 focus:ring-primary-container" placeholder="Search deliverables, hash, creator..." type="text"/>
+</div>
+</div>
+<!-- Center links -->
+<nav class="hidden lg:flex items-center gap-6 text-body-md font-body-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-3 pt-3 transition-colors" href="#">Overview</a>
+<a class="text-on-surface dark:text-inverse-on-surface border-b-2 border-primary dark:border-inverse-primary font-semibold pb-3 pt-3" href="#">Submissions Queue</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-3 pt-3 transition-colors" href="#">Conversion Axis</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-3 pt-3 transition-colors" href="#">Rewards Ledger</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-3 pt-3 transition-colors" href="#">Omni Escrow</a>
+</nav>
+<!-- Trailing actions -->
+<div class="flex items-center gap-3">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg relative" title="Notifications">
+<span class="material-symbols-outlined text-body-lg" data-icon="notifications">notifications</span>
+<span class="w-2 h-2 rounded-full bg-error absolute top-2 right-2"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg" title="Corridor Vault Shield">
+<span class="material-symbols-outlined text-body-lg" data-icon="shield_with_heart">shield_with_heart</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant text-on-surface font-medium text-body-md hover:bg-surface-container transition-colors">
+            Audit Export
+          </button>
+<button class="px-4 py-1.5 rounded-lg bg-[#146C38] text-white font-medium text-body-md hover:bg-[#0f542b] transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-label-numeric-md" data-icon="check_circle">check_circle</span>
+            Release Settlement
+          </button>
+<!-- CFO Profile avatar -->
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden ml-2" title="Chief Financial Officer Workspace Identity">
+<img class="w-full h-full object-cover" data-alt="A portrait photograph of a confident corporate financial director wearing a bespoke tailored charcoal blazer with subtle African print accents on the lapel, situated in a modern glass-walled corporate fintech office in Victoria Island Lagos with warm afternoon light streaming in." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhxKC69oFOtHTbk4D8-Y6Zk_PHV6jAiyJfj06Ml4gewa1xFmnULEUwa7ANgqGZ-q_NkKk04PiONBpnsMuiIRI6P6IrqkYbkgc1ng3LlsMdTFCIjDHJUx989BjI5AGhq3NMvvRfyM7L9zXqLuUuWFd_2rJloblIonNVvxRKAvX6S4Ekhorh1FIN3PbnHUOLkCHOljenchdXp403sGeQsmY_4erqT0p2OZM45uRJm0U"/>
+</div>
+</div>
+</header>
+<!-- Submissions Queue Canvas (Screen 07.5 underlay) -->
+<main class="p-8 space-y-6">
+<!-- Submissions Header Banner -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-label-badge font-label-badge uppercase tracking-wider text-on-surface-variant">CORRIDOR WORKSPACE • NIGERIA TIER-1</span>
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-[#E6F4EA] text-[#146C38] font-bold">48H ESCROW RAIL ACTIVE</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Screen 07.5: Submissions Review Queue</h1>
+<p class="text-body-md font-body-md text-on-surface-variant">Reviewing proof of deliverables submitted by authorized creators. Escrow milestones unlock automatically upon validation.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-3 flex items-center gap-4">
+<div>
+<p class="text-label-badge font-label-badge uppercase text-on-surface-variant">Total In Review Hold</p>
+<p class="text-label-numeric-lg font-label-numeric-lg text-on-surface">₦4,250,000.00</p>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div>
+<p class="text-label-badge font-label-badge uppercase text-on-surface-variant">Auto-Disbursing Soon</p>
+<p class="text-label-numeric-lg font-label-numeric-lg text-[#9C4A00]">6 Deliverables</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Row -->
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-on-surface text-white text-body-md font-medium">All Submissions (18)</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface-variant text-body-md hover:bg-surface-container">Pending Action (4)</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface-variant text-body-md hover:bg-surface-container">Revisions In Progress (3)</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface-variant text-body-md hover:bg-surface-container">Verified &amp; Paid (11)</button>
+</div>
+<div class="flex items-center gap-2 text-label-numeric-sm font-label-numeric-sm text-on-surface-variant">
+<span>Filter by Platform:</span>
+<span class="px-2 py-1 bg-surface-container rounded border border-outline-variant">Instagram Reels</span>
+<span class="px-2 py-1 bg-surface-container rounded border border-outline-variant">TikTok</span>
+</div>
+</div>
+<!-- Submission List Table / Cards -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden divide-y divide-outline-variant">
+<!-- Row 1: Ada O. (Target of the current modal) -->
+<div class="p-5 bg-surface-container/30 flex items-center justify-between hover:bg-surface transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up editorial portrait of Ada Okon, an energetic young Nigerian female tech influencer with creative braided hairstyle, photographed under vibrant warm studio lights with subtle gold accents in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcyWvZr8EvY9LkA1UlPk7J5EEBcF7Ol5ywchEricdzepJrZl1iktnY-HZzoLOaJqmeQVsC6ccglXeFucuuhSEKw77eKwckAHWRHDBSlJxPStXsw50Fa1dwoDVeugoJPtVISVMguxwU5zXaZBbT4yjl8g9msZoG5vUE7xf_kMjBSM_TWo8jeehZm35Gfroq6LG5CcCS2ddHWRo6WLSWbU1z9LNUQuJgVIkiSMGdnBE"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm font-semibold text-on-surface">Ada O.</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">(@ada_tech_hub)</span>
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-[#FFEEDB] text-[#9C4A00] font-bold">DELIVERABLE REVIEW</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Reel 1 (Onboarding Walkthrough) • Ecobank Campus Ambassador</p>
+<div class="flex items-center gap-3 mt-1.5 text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 font-label-numeric-sm text-label-numeric-sm">
+<span class="material-symbols-outlined text-body-sm" data-icon="link">link</span> instagram.com/reel/C892kL...
+                  </span>
+<span>•</span>
+<span class="flex items-center gap-1 font-label-numeric-sm text-label-numeric-sm text-[#9C4A00]">
+<span class="material-symbols-outlined text-body-sm" data-icon="schedule">schedule</span> 14h 22m remaining until auto-settlement
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-label-badge font-label-badge text-on-surface-variant uppercase">Escrow Locked</p>
+<p class="text-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦5,000.00</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant text-on-surface text-body-md font-medium bg-surface-container-lowest hover:bg-surface-container">Preview Proof</button>
+<button class="px-3.5 py-1.5 rounded-lg border border-[#9C4A00]/40 text-[#9C4A00] bg-[#FFEEDB] text-body-md font-semibold hover:bg-[#ffdfbd]">Request Revision</button>
+<button class="px-4 py-1.5 rounded-lg bg-[#146C38] text-white text-body-md font-semibold hover:bg-[#0f542b]">Approve &amp; Pay</button>
+</div>
+</div>
+</div>
+<!-- Row 2: Babatunde F. -->
+<div class="p-5 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Studio portrait of a modern West African male video creator smiling with sleek glasses against a muted minimalist sandstone backdrop, illuminated with cinematic golden rim lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo-jobrC5gX11EhIpcwofvdv19Gl_1jlY5GJoDSAsZIEjVswMmeIr0eFPMiL4Sru-uE47uH_fGx9mM4p3YSAp2yQX2ljqUkKMJ3ivovg1fUL0PWzZCaHWL2NXwTfiVNpaB83oR7Gdu_4-SXKskflioDnuy0Ff4ZtdZxN9XlcnWFa04d4otzRPqZjfK82GrtU0F1vK8_LNKJDdp8CYoLX96_DBcUxRwiv9BfWuE8qw"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm font-semibold text-on-surface">Babatunde F.</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">(@babs_fintech)</span>
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-[#E6F4EA] text-[#146C38] font-bold">PAID (BANK CONFIRMED)</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Carousel Breakdown: Ecobank Virtual Card Setup</p>
+<div class="flex items-center gap-3 mt-1.5 text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 font-label-numeric-sm text-label-numeric-sm">
+<span class="material-symbols-outlined text-body-sm" data-icon="verified">verified</span> Settlement Reference: #ECO-99420-NG
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-label-badge font-label-badge text-on-surface-variant uppercase">Settled to Vault</p>
+<p class="text-label-numeric-md font-label-numeric-md font-semibold text-[#146C38]">₦12,500.00</p>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant text-on-surface text-body-md hover:bg-surface-container">View Ledger</button>
+</div>
+</div>
+<!-- Row 3: Chioma D. -->
+<div class="p-5 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of an African female lifestyle creator smiling outdoors in Lagos, wearing natural makeup and an elegant ochre yellow blazer against an architectural glass background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByK8bW76N7RNiMbj6fcC_qy6JKXJBhFMdrf8X8zAhhQjwgIa72Kx0GpCUhxcnKwmmXf3LcBDen9jjXC_JQJiT8S1udXWw7JnfY64v6ILeQSZkFPB9YbdVeuMp5mDOLZN5ZKNXggAj1dn9XzkTkyUsCEG8nWK9QnNVAKFWJ32dwXwk_R1Nc_nUrhK5_L90LJO5H7B1xEIVnrWQuEDpF7gFuMzLrSPc8kyqRdEicJ98"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm font-semibold text-on-surface">Chioma D.</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">(@chioma_daily)</span>
+<span class="text-label-badge font-label-badge px-2 py-0.5 rounded bg-[#EFEAFB] text-[#5B3FA8] font-bold">ESCROWED / PAYABLE</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">TikTok Sprint Video: Instant International Remittance</p>
+<div class="flex items-center gap-3 mt-1.5 text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 font-label-numeric-sm text-label-numeric-sm">
+<span class="material-symbols-outlined text-body-sm" data-icon="hourglass_top">hourglass_top</span> 42h 10m until auto-unlock
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-label-badge font-label-badge text-on-surface-variant uppercase">Escrow Locked</p>
+<p class="text-label-numeric-md font-label-numeric-md font-semibold text-on-surface">₦8,000.00</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-1.5 rounded-lg border border-outline-variant text-on-surface text-body-md font-medium hover:bg-surface-container">Preview Proof</button>
+<button class="px-4 py-1.5 rounded-lg bg-[#146C38] text-white text-body-md font-semibold hover:bg-[#0f542b]">Approve &amp; Pay</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- SCREEN M2: BUSINESS REVISION REQUEST MODAL DIALOG OVERLAY (DESKTOP 1440)  -->
+<!-- ========================================================================= -->
+<!-- Scrim / Dimmed Backdrop -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-[#17150F]/60 backdrop-blur-[4px] p-4 transition-all">
+<!-- Modal Card (w-[600px] max-w-full bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl overflow-hidden) -->
+<div class="w-[600px] max-w-full bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-[0px_16px_48px_rgba(23,21,15,0.22)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+<!-- 1. Modal Header -->
+<div class="flex items-center justify-between p-6 border-b border-outline-variant bg-surface">
+<div class="flex items-center gap-3.5">
+<!-- Leading Icon in Burnt-Orange Circle -->
+<div class="w-10 h-10 rounded-full bg-[#FFEEDB] border border-[#9C4A00]/25 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#9C4A00]" data-icon="edit_note">edit_note</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-semibold text-on-surface leading-tight">
+              Request Revision from Ada O. — Reel #2
+            </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              Submission #DLV-4029-01 • Ecobank Campus Ambassador
+            </p>
+</div>
+</div>
+<!-- Close Button [✕] -->
+<button aria-label="Close dialog" class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-body-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body Content -->
+<div class="p-6 space-y-5 bg-surface-container-lowest">
+<!-- 2. Warning Notice Banner -->
+<div class="bg-[#FFEEDB] border border-[#9C4A00]/20 text-[#9C4A00] p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-headline-sm shrink-0 mt-0.5" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-body-sm font-body-sm leading-relaxed text-[#9C4A00]">
+            This will move the submission to <strong>'Revision Requested'</strong> and notify the creator immediately via WhatsApp &amp; In-App push. The 48h auto-release escrow countdown will pause.
+          </p>
+</div>
+<!-- 3. Deliverable Summary Pill Row -->
+<div class="flex flex-wrap items-center gap-2 pt-1 pb-1">
+<!-- Pill 1: Deliverable name -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface border border-outline-variant text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-body-sm text-on-surface-variant" data-icon="movie">movie</span>
+<span class="font-medium">Deliverable: Reel 1 (Onboarding Walkthrough)</span>
+</div>
+<!-- Pill 2: Milestone Escrow Hold -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#EFEAFB] border border-[#5B3FA8]/20 text-body-sm font-body-sm text-[#5B3FA8]">
+<span class="material-symbols-outlined text-body-sm" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-medium">Milestone Escrow Hold: <span class="font-label-numeric-sm font-semibold">₦5,000.00</span> (Locked)</span>
+</div>
+</div>
+<!-- 4. Required Text Area Field -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-body-md font-body-md font-medium text-on-surface" for="feedback-input">
+              Feedback for Creator <span class="text-[#ba1a1a]">*</span>
+</label>
+<span class="text-label-numeric-sm font-label-numeric-sm text-on-surface-variant">118 / 500</span>
+</div>
+<div class="relative">
+<textarea class="w-full p-3.5 bg-surface border border-outline-variant rounded-xl text-body-md font-body-md text-on-surface focus:outline-none focus:border-on-surface focus:ring-2 focus:ring-primary-container transition-all resize-none shadow-inner" id="feedback-input" placeholder="Provide clear, actionable revision instructions..." rows="4">Great hook! Please add the official discount code and link sticker in your bio so clicks can be tracked accurately.</textarea>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1.5 pt-0.5">
+<span class="material-symbols-outlined text-body-sm text-on-surface-variant" data-icon="info">info</span>
+            Be constructive and specific. The creator will have 48 hours to resubmit evidence before escalation.
+          </p>
+</div>
+<!-- 5. Checkbox Field -->
+<div class="pt-2">
+<label class="flex items-start gap-3 cursor-pointer select-none group">
+<div class="pt-0.5">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary-container border-outline-variant focus:ring-offset-0 transition cursor-pointer" type="checkbox"/>
+</div>
+<span class="text-body-md font-body-md text-on-surface group-hover:text-primary transition-colors">
+              Allow creator to replace URL without resetting attribution logs
+            </span>
+</label>
+</div>
+</div>
+<!-- 6. Modal Action Footer -->
+<div class="flex items-center justify-end gap-3 p-6 border-t border-outline-variant bg-surface-container-low">
+<!-- Secondary Button: Cancel -->
+<button class="px-5 py-2.5 rounded-lg border border-outline font-medium text-body-md font-body-md text-on-surface hover:bg-surface-container active:scale-[0.98] transition-all" type="button">
+          Cancel
+        </button>
+<!-- Primary Button: Send Revision Request -->
+<button class="px-6 py-2.5 rounded-lg bg-[#9C4A00] hover:bg-[#853f00] text-white font-semibold text-body-md font-body-md flex items-center gap-2 shadow-sm active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-body-lg text-white" data-icon="send">send</span>
+          Send Revision Request
+        </button>
+</div>
+</div>
+</div>
+</body></html>

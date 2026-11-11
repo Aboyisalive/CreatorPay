@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorPay — Campaign Accountability &amp; Automated Settlement Rails</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with custom theme config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#f6be0a",
+            "secondary-fixed-dim": "#fabb61",
+            "on-primary-fixed": "#251a00",
+            "surface-dim": "#dbdad6",
+            "secondary": "#825500",
+            "on-secondary-fixed-variant": "#633f00",
+            "surface-container-high": "#e9e8e4",
+            "on-surface-variant": "#4f4632",
+            "outline-variant": "#d3c5ac",
+            "on-primary-container": "#6e5400",
+            "surface-container-highest": "#e3e2df",
+            "on-tertiary": "#ffffff",
+            "primary-fixed": "#ffdf98",
+            "secondary-container": "#fdbe63",
+            "inverse-primary": "#f6be0a",
+            "tertiary": "#674bb4",
+            "secondary-fixed": "#ffddb4",
+            "background": "#faf9f5",
+            "primary": "#775a00",
+            "on-tertiary-fixed": "#21005e",
+            "on-secondary-container": "#754c00",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#817660",
+            "surface-container": "#efeeea",
+            "on-primary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#ffc61a",
+            "inverse-on-surface": "#f2f1ed",
+            "error": "#ba1a1a",
+            "inverse-surface": "#2f312e",
+            "tertiary-fixed": "#e8ddff",
+            "on-tertiary-container": "#6044ad",
+            "tertiary-fixed-dim": "#cebdff",
+            "on-primary-fixed-variant": "#5a4300",
+            "surface-tint": "#775a00",
+            "surface-variant": "#e3e2df",
+            "surface": "#faf9f5",
+            "on-secondary": "#ffffff",
+            "on-background": "#1b1c1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "on-surface": "#1b1c1a",
+            "tertiary-container": "#d5c6ff",
+            "surface-container-low": "#f4f4f0",
+            "surface-bright": "#faf9f5",
+            "on-secondary-fixed": "#291800"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.25rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "display-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-numeric-md": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "label-badge": ["JetBrains Mono"],
+            "display-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-numeric-sm": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-numeric-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label-numeric-md": ["15px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "label-badge": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+            "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400"}],
+            "label-numeric-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-on-surface">
+<!-- 1. NAVIGATION BAR -->
+<header class="sticky top-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/60 shadow-[0_1px_3px_rgba(23,21,15,0.03)]">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+<!-- Brand & Partner Badges -->
+<div class="flex items-center gap-4">
+<a class="flex items-center gap-2 group" href="#">
+<div class="w-9 h-9 bg-primary-container rounded flex items-center justify-center border border-on-surface font-headline-sm text-headline-sm font-bold shadow-[1px_1px_0px_#17150F]">
+<span>CP</span>
+</div>
+<span class="font-headline-lg text-headline-lg tracking-tight text-on-surface font-bold">CreatorPay</span>
+</a>
+<div class="hidden sm:flex items-center gap-2 pl-4 border-l border-outline-variant py-1">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low border border-outline-variant/80 text-on-surface-variant font-label-badge text-label-badge uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+            Ecobank InnovateX Finalist 2026
+          </span>
+<span class="hidden xl:inline-flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm opacity-80">
+<span class="material-symbols-outlined text-[15px] text-[#146C38]" data-icon="verified">verified</span>
+            Corridor Verified
+          </span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-1" href="#product">Product</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-1" href="#workflow">Workflow</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-1" href="#ledger">Escrow Security</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-1" href="#architecture">Pricing</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-1" href="#creators">For Creators</a>
+</nav>
+<!-- Action Items -->
+<div class="flex items-center gap-3">
+<a class="px-4 py-2.5 rounded font-body-md text-body-md text-on-surface hover:bg-surface-container transition-colors" href="#">
+          Log In
+        </a>
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-primary-container hover:bg-primary-fixed-dim text-on-surface font-body-md text-body-md font-semibold border border-on-surface shadow-[2px_2px_0px_#17150F] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all" href="#campaign-flow">
+<span>Start a Campaign</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</header>
+<!-- 2. HERO SECTION -->
+<section class="relative pt-16 pb-20 border-b border-outline-variant bg-gradient-to-b from-surface via-surface-container-low/50 to-surface overflow-hidden">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="max-w-4xl mx-auto text-center">
+<!-- Badge Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant shadow-sm mb-6">
+<span class="w-2 h-2 rounded-full bg-primary-container border border-primary"></span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-on-surface-variant">Campaign Accountability &amp; Automated Settlement Rails</span>
+<span class="font-label-badge text-label-badge text-tertiary bg-tertiary-fixed px-1.5 py-0.5 rounded">v2.4 Live</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-lg text-display-lg lg:text-[52px] lg:leading-[58px] text-on-surface font-bold tracking-tight mb-6">
+          Make creator marketing accountable. <br class="hidden sm:inline"/>
+<span class="underline decoration-primary-container decoration-4 underline-offset-4">Know what your creators deliver</span>, not just what they post.
+        </h1>
+<!-- Subhead -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto mb-10 leading-relaxed">
+          Deterministic milestone tracking, verified conversion attribution, and bankruptcy-remote Ecobank Omni escrow settlement for high-growth African brands and creators.
+        </p>
+<!-- Dual CTAs -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded bg-primary-container hover:bg-[#F5BC10] text-on-surface font-body-lg text-body-lg font-bold border border-on-surface shadow-[3px_3px_0px_#17150F] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all" href="#campaign-flow">
+<span>Start a Campaign</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="north_east">north_east</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface font-body-lg text-body-lg font-semibold transition-colors" href="#creators">
+<span>I'm a Creator</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="badge">badge</span>
+</a>
+</div>
+</div>
+<!-- Trust Strip -->
+<div class="max-w-4xl mx-auto pt-6 border-t border-outline-variant/60 flex flex-wrap items-center justify-center gap-y-3 gap-x-6 text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider text-center">
+<span class="inline-flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="account_balance">account_balance</span>
+          Protected by Ecobank Nigeria Plc
+        </span>
+<span class="text-outline-variant">•</span>
+<span class="inline-flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="verified_user">verified_user</span>
+          Central Bank of Nigeria (CBN) Regulated Corridors
+        </span>
+<span class="text-outline-variant">•</span>
+<span class="inline-flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="payments">payments</span>
+          ₦0 Core-Banking Payout Rails
+        </span>
+</div>
+</div>
+</section>
+<!-- 3. 7-STEP INTERACTIVE WORKFLOW PIPELINE -->
+<section class="py-20 bg-surface-container-lowest border-b border-outline-variant" id="workflow">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<div class="font-label-badge text-label-badge uppercase tracking-wider text-tertiary mb-2">Automated Execution Protocol</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">The 7-Stage Deterministic Payout Pipeline</h2>
+</div>
+<div class="mt-4 md:mt-0 font-body-sm text-body-sm text-on-surface-variant max-w-md">
+          Zero manual spreadsheets. Every step triggers programmatic state transitions directly reflected on the bank ledger.
+        </div>
+</div>
+<!-- Horizontal Sequence Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 relative">
+<!-- Step 1 -->
+<div class="relative bg-surface rounded p-4 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-primary px-2 py-0.5 bg-primary-fixed/60 rounded">01</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors" data-icon="gavel">gavel</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Define</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Objective &amp; Contract SLA parameters locked in smart escrow contract.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-on-surface-variant uppercase">
+            Vault Lock ₦
+          </div>
+</div>
+<!-- Step 2 -->
+<div class="relative bg-surface rounded p-4 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-primary px-2 py-0.5 bg-primary-fixed/60 rounded">02</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors" data-icon="person_add">person_add</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Manage</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Invite creators &amp; issue cryptographically unique tracking slugs.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-on-surface-variant uppercase">
+            Slug Provisioning
+          </div>
+</div>
+<!-- Step 3 -->
+<div class="relative bg-surface rounded p-4 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-primary px-2 py-0.5 bg-primary-fixed/60 rounded">03</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors" data-icon="sync_alt">sync_alt</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Track</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Deterministic 7-day referral telemetry with zero cookie attrition.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-on-surface-variant uppercase">
+            Event Stream
+          </div>
+</div>
+<!-- Step 4 -->
+<div class="relative bg-surface rounded p-4 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-primary px-2 py-0.5 bg-primary-fixed/60 rounded">04</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors" data-icon="fact_check">fact_check</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Verify</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Two-axis content proof hash &amp; verified conversion audit.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-on-surface-variant uppercase">
+            Hash SLA Check
+          </div>
+</div>
+<!-- Step 5 -->
+<div class="relative bg-surface rounded p-4 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-primary px-2 py-0.5 bg-primary-fixed/60 rounded">05</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors" data-icon="calculate">calculate</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Calculate</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Formulaic reward ledger engine aggregates unit milestone earnings.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-on-surface-variant uppercase">
+            Math Determinism
+          </div>
+</div>
+<!-- Step 6 -->
+<div class="relative bg-surface rounded p-4 border border-primary-container bg-primary-fixed/10 flex flex-col justify-between group shadow-sm">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-[#146C38] px-2 py-0.5 bg-[#E6F4EA] rounded">06</span>
+<span class="material-symbols-outlined text-[18px] text-[#146C38]" data-icon="flash_on">flash_on</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Settle</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zero-fee Ecobank Blaze instant disbursement to creator bank accounts.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-[#146C38] font-bold uppercase">
+            Instant Payout
+          </div>
+</div>
+<!-- Step 7 -->
+<div class="relative bg-surface rounded p-4 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-primary px-2 py-0.5 bg-primary-fixed/60 rounded">07</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors" data-icon="query_stats">query_stats</span>
+</div>
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold mb-1">Learn</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Attribution ROI analysis &amp; CrediCorp underwriting access score.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 font-label-badge text-[10px] text-tertiary font-bold uppercase">
+            Credit Rating
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. INTERACTIVE LEDGER FIXTURE / TEASER -->
+<section class="py-20 bg-surface border-b border-outline-variant" id="ledger">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="max-w-3xl mb-12">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container border border-outline-variant font-label-badge text-label-badge uppercase text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+          Ledger Integrity Standard
+        </div>
+<h2 class="font-headline-lg text-headline-lg lg:text-[32px] lg:leading-[40px] text-on-surface font-bold tracking-tight mb-3">
+          The 4 Levels of Truth — Transparent Financial Rigor
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          No blended vague balances. Every single Naira is strictly classified by settlement certainty, backed by institutional banking protocols.
+        </p>
+</div>
+<!-- Visual State Explanation Badges Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+<div class="p-3 bg-surface-container-lowest rounded border border-outline-variant flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-1 rounded font-label-badge text-label-badge uppercase bg-[#FFEEDB] text-[#9C4A00] font-bold">Review</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Content SLA under inspection</span>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded border border-outline-variant flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-1 rounded font-label-badge text-label-badge uppercase bg-[#E7EFFC] text-[#1F5FBF] font-bold">Approved</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Deliverable accepted by brand</span>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded border border-outline-variant flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-1 rounded font-label-badge text-label-badge uppercase bg-[#EFEAFB] text-[#5B3FA8] font-bold">Payable</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Escrow release scheduled</span>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded border border-outline-variant flex items-center gap-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded font-label-badge text-label-badge uppercase bg-[#146C38] text-white font-bold gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+            Paid
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ecobank verified in bank account</span>
+</div>
+</div>
+<!-- Master Ledger Card Fixture -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0_4px_24px_rgba(23,21,15,0.04)] overflow-hidden">
+<!-- Ledger Header Bar -->
+<div class="px-6 py-4 bg-surface-container-low border-b border-outline-variant flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100"></span>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Ledger Cohort: Fintech Q2 Growth Corridor</span>
+<span class="ml-2 font-label-badge text-label-badge text-on-surface-variant uppercase">Vault #ECO-9941</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<span class="block font-body-sm text-[11px] text-on-surface-variant uppercase tracking-wider font-semibold">Locked Escrow Deposit</span>
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-on-surface tabular-nums">₦4,250,000.00</span>
+</div>
+<div class="text-right border-l border-outline-variant pl-6">
+<span class="block font-body-sm text-[11px] text-on-surface-variant uppercase tracking-wider font-semibold">Bank Confirmed Paid</span>
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-[#146C38] tabular-nums">₦1,894,500.00</span>
+</div>
+</div>
+</div>
+<!-- Ledger Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider">
+<th class="py-3.5 px-6">Creator / Partner Identity</th>
+<th class="py-3.5 px-6">Milestone Proofs &amp; Formula Math</th>
+<th class="py-3.5 px-6 text-center">Status Level</th>
+<th class="py-3.5 px-6">Release Corridor</th>
+<th class="py-3.5 px-6 text-right">Computed Payout (NGN)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60 font-body-md text-body-md">
+<!-- Creator Row 1: Ada Okafor -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5 px-6 align-top">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-on-primary-fixed border border-primary text-[14px]">
+                      AO
+                    </div>
+<div>
+<div class="font-headline-sm text-[15px] font-semibold text-on-surface">Ada Okafor</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span>@ada_creatives</span>
+<span class="text-outline-variant">•</span>
+<span class="text-[11px] bg-surface-container px-1 rounded">Instagram / TikTok</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6 align-top">
+<div class="space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-on-surface font-medium">3 of 3 High-Retention Reels Submitted</span>
+</div>
+<div class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant bg-surface px-2.5 py-1 rounded border border-outline-variant/60 inline-block tabular-nums">
+                      Formula: 42 verified signups × ₦500.00 = ₦21,000.00 + 3 Reels SLA = ₦15,000.00
+                    </div>
+</div>
+</td>
+<td class="py-5 px-6 align-top text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#146C38] text-white font-label-badge text-label-badge uppercase font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="done_all">done_all</span>
+                    Paid (Bank Confirmed)
+                  </span>
+<div class="font-label-numeric-sm text-[10px] text-on-surface-variant mt-1">Tx: #ECO-994101-NG</div>
+</td>
+<td class="py-5 px-6 align-top">
+<div class="font-body-sm text-body-sm text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="bolt">bolt</span>
+                    Ecobank Blaze Direct
+                  </div>
+<div class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant">0112948271 (Ecobank Nigeria)</div>
+</td>
+<td class="py-5 px-6 align-top text-right">
+<span class="font-label-numeric-lg text-label-numeric-lg text-on-surface font-bold tabular-nums">₦36,000.00</span>
+<div class="font-label-badge text-[11px] text-[#146C38] font-semibold">Settled • 0 Fee Corridor</div>
+</td>
+</tr>
+<!-- Creator Row 2: Chidi Nnamdi -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5 px-6 align-top">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed border border-secondary text-[14px]">
+                      CN
+                    </div>
+<div>
+<div class="font-headline-sm text-[15px] font-semibold text-on-surface">Chidi Nnamdi</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span>@chidi_tech</span>
+<span class="text-outline-variant">•</span>
+<span class="text-[11px] bg-surface-container px-1 rounded">YouTube / X (Twitter)</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6 align-top">
+<div class="space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#1F5FBF]" data-icon="task_alt">task_alt</span>
+<span class="font-body-md text-on-surface font-medium">Deep-Dive Video + Thread SLA Verified</span>
+</div>
+<div class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant bg-surface px-2.5 py-1 rounded border border-outline-variant/60 inline-block tabular-nums">
+                      Formula: 110 active app installs × ₦1,200.00 = ₦132,000.00 + Dedicated Review = ₦50,000.00
+                    </div>
+</div>
+</td>
+<td class="py-5 px-6 align-top text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#EFEAFB] text-[#5B3FA8] border border-[#5B3FA8]/30 font-label-badge text-label-badge uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock_clock">lock_clock</span>
+                    Payable (Escrow Locked)
+                  </span>
+<div class="font-label-numeric-sm text-[10px] text-on-surface-variant mt-1">48hr Auto-Release in 14h:20m</div>
+</td>
+<td class="py-5 px-6 align-top">
+<div class="font-body-sm text-body-sm text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="account_balance">account_balance</span>
+                    Ecobank Blaze Direct
+                  </div>
+<div class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant">2048591823 (Access Bank NIP)</div>
+</td>
+<td class="py-5 px-6 align-top text-right">
+<span class="font-label-numeric-lg text-label-numeric-lg text-on-surface font-bold tabular-nums">₦182,000.00</span>
+<div class="font-label-badge text-[11px] text-[#5B3FA8] font-semibold">Vault Funded • Awaiting Window</div>
+</td>
+</tr>
+<!-- Creator Row 3: Funke Balogun (Review / Approved) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5 px-6 align-top">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-bold text-on-surface border border-outline text-[14px]">
+                      FB
+                    </div>
+<div>
+<div class="font-headline-sm text-[15px] font-semibold text-on-surface">Funke Balogun</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span>@funkegrowth</span>
+<span class="text-outline-variant">•</span>
+<span class="text-[11px] bg-surface-container px-1 rounded">LinkedIn Series</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6 align-top">
+<div class="space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#1F5FBF]" data-icon="fact_check">fact_check</span>
+<span class="font-body-md text-on-surface font-medium">B2B Newsletter Sponsorship Delivered</span>
+</div>
+<div class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant bg-surface px-2.5 py-1 rounded border border-outline-variant/60 inline-block tabular-nums">
+                      Formula: Flat Deliverable Contract: ₦80,000.00 + 18 Qualified B2B Leads × ₦1,500.00
+                    </div>
+</div>
+</td>
+<td class="py-5 px-6 align-top text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#E7EFFC] text-[#1F5FBF] border border-[#1F5FBF]/30 font-label-badge text-label-badge uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span>
+                    Approved
+                  </span>
+<div class="font-label-numeric-sm text-[10px] text-on-surface-variant mt-1">Proof Hash: SHA256-829d...</div>
+</td>
+<td class="py-5 px-6 align-top">
+<div class="font-body-sm text-body-sm text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="bolt">bolt</span>
+                    Ecobank Blaze Direct
+                  </div>
+<div class="font-label-numeric-sm text-label-numeric-sm text-on-surface-variant">0039281729 (GTBank NIP)</div>
+</td>
+<td class="py-5 px-6 align-top text-right">
+<span class="font-label-numeric-lg text-label-numeric-lg text-on-surface font-bold tabular-nums">₦107,000.00</span>
+<div class="font-label-badge text-[11px] text-[#1F5FBF] font-semibold">Moving to Escrow Settlement</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Ledger Footer Summary Bar -->
+<div class="p-4 bg-surface border-t border-outline-variant flex flex-wrap items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="security">security</span>
+<span>All disbursements processed via Ecobank Central Bank clearing rails with instant proof of value.</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-badge text-label-badge uppercase text-on-surface">Deterministic Ledger Integrity: 100%</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-1" href="#workflow">
+<span>View Audit Hash Rules</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. TRUST & ESCROW ARCHITECTURE (CO-POWERED BY ECOBANK) -->
+<section class="py-20 bg-surface-container-lowest border-b border-outline-variant" id="architecture">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-outline-variant text-on-surface-variant font-label-badge text-label-badge uppercase mb-3">
+<span class="w-1.5 h-1.5 rounded-full bg-[#146C38]"></span>
+          Institutional Banking Partnership
+        </div>
+<h2 class="font-headline-lg text-headline-lg lg:text-[34px] lg:leading-[42px] text-on-surface font-bold tracking-tight mb-4">
+          Trust &amp; Escrow Architecture Co-Powered by Ecobank
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          Engineered for African commercial scale. We eliminate creator non-performance and late brand payments by locking contractual conditions into regulated banking corridors.
+        </p>
+</div>
+<!-- 3 Feature Bento Grid Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card A: Ecobank Omni Virtual Escrow -->
+<div class="bg-surface rounded-xl p-8 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between shadow-[0_2px_8px_rgba(23,21,15,0.03)] group">
+<div>
+<div class="w-14 h-14 rounded-lg bg-primary-fixed/40 border border-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[28px] text-primary" data-icon="account_balance">account_balance</span>
+</div>
+<div class="font-label-badge text-label-badge uppercase text-primary font-bold mb-1">Architecture 01</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-3">Ecobank Omni Virtual Escrow</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
+              Campaign deposits are ring-fenced inside dedicated virtual accounts under Ecobank Omni treasury protocols. Funds are bankruptcy-remote, immune to third-party claims, and only release when deliverable proof triggers match pre-agreed contract criteria.
+            </p>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Bankruptcy-remote segregated custodial vaults</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Deterministic 48-Hour Auto-Settlement window</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>CBN-compliant audit trail with exportable stamps</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/60 flex items-center justify-between">
+<span class="font-label-badge text-[11px] text-on-surface-variant uppercase">Institutional Escrow</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Card B: Ecobank Blaze ₦0 Payout Corridor -->
+<div class="bg-surface rounded-xl p-8 border border-on-surface relative shadow-[0_4px_16px_rgba(23,21,15,0.06)] flex flex-col justify-between group">
+<div class="absolute -top-3 right-6 bg-primary-container text-on-surface font-label-badge text-label-badge px-2.5 py-0.5 rounded border border-on-surface uppercase font-bold">
+            Zero-Fee Advantage
+          </div>
+<div>
+<div class="w-14 h-14 rounded-lg bg-emerald-100 border border-emerald-700 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[28px] text-[#146C38]" data-icon="bolt">bolt</span>
+</div>
+<div class="font-label-badge text-label-badge uppercase text-[#146C38] font-bold mb-1">Architecture 02</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-3">Ecobank Blaze ₦0 Payout Corridor</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
+              Direct core-banking settlements bypassing expensive third-party payment switch fees and weekend batch delays. Creators receive instantaneous account credits 24/7 across Nigeria and Pan-African corridors without paying transfer surcharges.
+            </p>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Sub-second settlement confirmation to any Nigerian bank</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>₦0 creator deduction: creators receive 100% of earned fees</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Cross-border clearance across Kenya (KES) &amp; Ghana (GHS)</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/60 flex items-center justify-between">
+<span class="font-label-badge text-[11px] text-[#146C38] uppercase font-bold">Real-Time Core Rails</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Card C: Ecobank & CrediCorp Asset Financing -->
+<div class="bg-surface rounded-xl p-8 border border-outline-variant hover:border-on-surface transition-all flex flex-col justify-between shadow-[0_2px_8px_rgba(23,21,15,0.03)] group">
+<div>
+<div class="w-14 h-14 rounded-lg bg-tertiary-fixed border border-tertiary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[28px] text-tertiary" data-icon="credit_score">credit_score</span>
+</div>
+<div class="font-label-badge text-label-badge uppercase text-tertiary font-bold mb-1">Architecture 03</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-3">Ecobank &amp; CrediCorp Asset Financing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
+              Top creators unlock 0%-down gear financing for 4K cinema cameras, MacBooks, and podcast studio gear. Platform earnings, verified milestone completions, and brand repeat rates serve as automated credit underwriting collateral.
+            </p>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Underwritten against verified future milestone contracts</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Direct delivery via verified electronics logistics partners</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#146C38]" data-icon="check_circle">check_circle</span>
+<span>Automated micropayment amortisation directly from payouts</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/60 flex items-center justify-between">
+<span class="font-label-badge text-[11px] text-tertiary uppercase font-bold">Creator Capital Access</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. CREATOR HIGHLIGHT / BOTTOM CTA STRIP -->
+<section class="py-16 bg-primary-container border-b border-on-surface" id="campaign-flow">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="bg-surface-container-lowest p-8 lg:p-12 rounded-xl border-2 border-on-surface shadow-[6px_6px_0px_#17150F] flex flex-col lg:flex-row items-center justify-between gap-8">
+<div class="max-w-2xl">
+<div class="font-label-badge text-label-badge uppercase tracking-wider text-primary font-bold mb-2">Ready to Deploy Escrow Rails?</div>
+<h2 class="font-headline-lg text-headline-lg lg:text-[34px] lg:leading-[40px] text-on-surface font-extrabold tracking-tight mb-3">
+            Deploy your first accountable creator campaign in under 10 minutes.
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            Join over 140 leading consumer brands and agencies running deterministic influencer pipelines on Ecobank infrastructure.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+<a class="w-full sm:w-auto text-center px-8 py-4 rounded bg-primary-container hover:bg-[#F5BC10] text-on-surface font-body-lg text-body-lg font-bold border border-on-surface shadow-[3px_3px_0px_#17150F] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all" href="#">
+            Launch Campaign Vault
+          </a>
+<a class="w-full sm:w-auto text-center px-6 py-4 rounded bg-surface hover:bg-surface-container text-on-surface font-body-lg text-body-lg font-semibold border border-outline-variant transition-colors" href="#">
+            Book Institutional Demo
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. FOOTER -->
+<footer class="bg-surface py-16 text-on-surface-variant">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<!-- Top Columns -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-outline-variant/80">
+<!-- Brand & Corridor Identity -->
+<div class="lg:col-span-2 pr-4">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center border border-on-surface font-headline-sm text-headline-sm font-bold">
+<span>CP</span>
+</div>
+<span class="font-headline-lg text-headline-lg tracking-tight text-on-surface font-bold">CreatorPay</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed max-w-sm">
+            Institutional escrow settlements, conversion telemetry, and deliverable verification for African creator commerce.
+          </p>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-surface-container border border-outline-variant font-label-badge text-label-badge text-on-surface uppercase">
+<span class="w-2 h-2 rounded-full bg-[#146C38]"></span>
+<span>Operating Corridor: Lagos (WAT) • Nairobi (EAT)</span>
+</div>
+</div>
+<!-- Links Column 1: Platform -->
+<div>
+<h4 class="font-headline-sm text-[15px] font-bold text-on-surface uppercase tracking-wider mb-4">Platform</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm">
+<li><a class="hover:text-on-surface transition-colors" href="#">Deterministic Tracking</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Ecobank Virtual Vaults</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Formula Ledger Engine</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Dispute Arbitration SLA</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Developer API &amp; Webhooks</a></li>
+</ul>
+</div>
+<!-- Links Column 2: Partners -->
+<div>
+<h4 class="font-headline-sm text-[15px] font-bold text-on-surface uppercase tracking-wider mb-4">Ecosystem</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm">
+<li><a class="hover:text-on-surface transition-colors" href="#">Ecobank Omni Integration</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Ecobank Blaze Rails</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">CrediCorp Creator Capital</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">InnovateX 2026 Program</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Agency Certification</a></li>
+</ul>
+</div>
+<!-- Links Column 3: Compliance -->
+<div>
+<h4 class="font-headline-sm text-[15px] font-bold text-on-surface uppercase tracking-wider mb-4">Governance</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm">
+<li><a class="hover:text-on-surface transition-colors" href="#">CBN Compliance Framework</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">NDPR Data Privacy Charter</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Custodial Escrow Disclosures</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Anti-Money Laundering (AML)</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Terms of Corridor Settlement</a></li>
+</ul>
+</div>
+</div>
+<!-- Regulatory Disclosures & Copyright -->
+<div class="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-body-sm text-[12px] text-on-surface-variant leading-relaxed">
+<div class="max-w-3xl">
+          CreatorPay Technologies Africa Limited is a financial technology partner collaborating with Ecobank Nigeria Plc. Custodial banking, escrow vaults, and settlement disbursements are provided via Central Bank of Nigeria (CBN) licensed commercial banking corridors. All brand deposits are held in dedicated trust vaults under Ecobank custodial oversight.
+        </div>
+<div class="shrink-0 font-label-badge text-label-badge text-on-surface">
+          © 2026 CreatorPay. All rights reserved.
+        </div>
+</div>
+</div>
+</footer>
+</body></html>

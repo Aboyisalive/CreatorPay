@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creator Home Dashboard - Ecobank Blaze</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e3e2df",
+            "secondary-fixed": "#ffddb4",
+            "primary": "#775a00",
+            "primary-fixed-dim": "#f6be0a",
+            "error": "#ba1a1a",
+            "outline": "#817660",
+            "on-secondary-fixed": "#291800",
+            "surface-tint": "#775a00",
+            "tertiary": "#674bb4",
+            "inverse-primary": "#f6be0a",
+            "surface-container": "#efeeea",
+            "primary-container": "#ffc61a",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "on-surface": "#1b1c1a",
+            "on-primary-container": "#6e5400",
+            "secondary-fixed-dim": "#fabb61",
+            "tertiary-fixed": "#e8ddff",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#754c00",
+            "surface": "#faf9f5",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#f2f1ed",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#2f312e",
+            "tertiary-fixed-dim": "#cebdff",
+            "on-tertiary-fixed": "#21005e",
+            "surface-container-low": "#f4f4f0",
+            "on-background": "#1b1c1a",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#ffdf98",
+            "surface-bright": "#faf9f5",
+            "on-tertiary-container": "#6044ad",
+            "secondary-container": "#fdbe63",
+            "on-surface-variant": "#4f4632",
+            "surface-dim": "#dbdad6",
+            "on-primary-fixed": "#251a00",
+            "tertiary-container": "#d5c6ff",
+            "background": "#faf9f5",
+            "on-primary-fixed-variant": "#5a4300",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#633f00",
+            "secondary": "#825500",
+            "surface-container-high": "#e9e8e4",
+            "outline-variant": "#d3c5ac",
+            "surface-container-highest": "#e3e2df"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.25rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "label-numeric-md": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-badge": ["JetBrains Mono"],
+            "label-numeric-sm": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "label-numeric-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-numeric-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "label-numeric-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      background-color: #FAF9F5;
+      color: #1B1C1A;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface flex justify-center min-h-screen">
+<!-- Mobile Container (390px viewport width) -->
+<div class="w-full max-w-[390px] min-h-screen bg-background relative flex flex-col pb-24 shadow-sm">
+<!-- TopAppBar (Anchored Shared Component) -->
+<header class="fixed top-0 left-0 right-0 max-w-[390px] mx-auto z-40 flex justify-between items-center px-gutter-mobile py-space-sm bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-space-sm">
+<!-- Leading Avatar -->
+<div class="relative w-9 h-9 rounded-full overflow-hidden border border-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a young modern African female content creator named Ada, smiling warmly with editorial high-contrast warm studio lighting. Styled with sophisticated natural makeup against an ivory cream architectural background reflecting modern African fintech aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHfOK1x1nUeG1SdkHzSucrBCiKS8i4KTSxE9V8AY8hpE4aN9FcXYZnZ0VXk6HXYCEm9t4GU6BcXvD2WAjszOuV33hvpJ-EraFIVd5LpYX4c4vtODvLT4S8YB1awPvm5kOTbseHh-H-95zD9cASnaPArLqQVKK-WHtDm-8GUx6KL1pIHosB-B_LCcn9oaMCL4AMBo02s4u5sGHOLjOEgRmIW0Owyzm_xAZn4XDOhSI"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-none tracking-tight">Hi, Ada</h1>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-[#146C38]"></span>
+</div>
+<!-- Blaze Institutional Badge -->
+<div class="inline-flex items-center gap-1 mt-0.5 px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-semibold tracking-wide">
+<span class="text-[9px]">⚡</span>
+<span>Ecobank Blaze • Active</span>
+</div>
+</div>
+</div>
+<!-- Trailing Notification Bell -->
+<button aria-label="Notifications" class="relative p-2 rounded-xl text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<!-- Unread badge indicator -->
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error border border-surface"></span>
+</button>
+</header>
+<!-- Main Content Canvas (Scrollable Mobile Space) -->
+<main class="flex-1 px-gutter-mobile pt-20 flex flex-col gap-space-md">
+<!-- Segmented Earnings Summary Card: 4 Levels of Truth -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-outline text-base" data-icon="account_balance_wallet">account_balance_wallet</span>
+<h2 class="font-body-sm text-body-sm uppercase tracking-wider font-semibold text-on-surface-variant">Earnings Ledger</h2>
+</div>
+<span class="font-label-badge text-label-badge text-outline uppercase">OCTOBER 2024</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight">
+          Strict institutional audit breakdown. Balances remain segmented by settlement status.
+        </p>
+<!-- 4 Levels Breakdown Container -->
+<div class="flex flex-col gap-2.5 pt-1">
+<!-- 1. Paid (Bank-Confirmed) -->
+<div class="bg-[#F3FAF5] border border-[#146C38]/20 rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-6 h-6 rounded bg-[#146C38] flex items-center justify-center text-white flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-white" data-icon="check" data-weight="fill">check</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-label-badge uppercase font-bold text-[#146C38] bg-[#E6F4EA] px-1.5 py-0.5 rounded">1. Paid (Bank Confirmed)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Disbursed to Blaze ••••4821</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-[#146C38] block">₦96,000.00</span>
+<span class="font-label-badge text-[10px] text-outline uppercase">Instant</span>
+</div>
+</div>
+<!-- 2. Payable (Escrow Ready) -->
+<div class="bg-[#FAF8FE] border border-[#5B3FA8]/20 rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-6 h-6 rounded bg-[#EFEAFB] text-[#5B3FA8] flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock_clock">lock_clock</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-label-badge uppercase font-bold text-[#5B3FA8] bg-[#EFEAFB] px-1.5 py-0.5 rounded">2. Payable</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Escrow Ready • Payout on 30 Oct</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-[#5B3FA8] block">₦21,000.00</span>
+<span class="font-label-badge text-[10px] text-outline uppercase">Auto-Release</span>
+</div>
+</div>
+<!-- 3. Approved (Deliverables Verified) -->
+<div class="bg-[#F6F9FE] border border-[#1F5FBF]/20 rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-6 h-6 rounded bg-[#E7EFFC] text-[#1F5FBF] flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified">verified</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-label-badge uppercase font-bold text-[#1F5FBF] bg-[#E7EFFC] px-1.5 py-0.5 rounded">3. Approved</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Deliverables Verified</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-bold text-[#1F5FBF] block">₦15,000.00</span>
+<span class="font-label-badge text-[10px] text-outline uppercase">Clearing</span>
+</div>
+</div>
+<!-- 4. Pending Review -->
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-6 h-6 rounded bg-[#EFEDE7] text-[#6B665B] flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="hourglass_top">hourglass_top</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-label-badge uppercase font-bold text-[#6B665B] bg-[#EFEDE7] px-1.5 py-0.5 rounded">4. Pending Review</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">1 Submission in Review</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-semibold text-on-surface block">₦5,000.00</span>
+<span class="font-label-badge text-[10px] text-outline uppercase">Audit Q</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Ecobank Blaze Perk Widget -->
+<section class="bg-[#FFFDF5] border border-[#FABB61] rounded-xl p-3.5 flex items-start gap-3 shadow-none">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-base flex-shrink-0">
+          ⚡
+        </div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-body-sm text-body-sm font-bold text-on-surface">Blaze Account Active</h3>
+<span class="font-label-badge text-[10px] text-primary font-bold">ECOBANK CORRIDOR</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">
+            2 of 3 free interbank transfers remaining this month.
+          </p>
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-primary font-semibold hover:text-on-primary-container mt-1.5 group" href="#">
+<span>Explore all Blaze perks</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Needs Attention Card (Warning Burnt Orange Tint) -->
+<section class="bg-[#FFF6F0] border-l-4 border-l-[#9C4A00] border border-[#FFE0CC] rounded-xl p-3.5 flex flex-col gap-2.5">
+<div class="flex items-center gap-2 text-[#9C4A00]">
+<span class="material-symbols-outlined text-lg" data-icon="warning">warning</span>
+<span class="font-label-badge text-label-badge font-bold uppercase tracking-wider">Revision Requested</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface">Reel #2 — Campaign Deliverable</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-normal">
+            Please show the pricing screen in the first 5 seconds. Audio levels on intro are approved.
+          </p>
+</div>
+<div class="flex justify-end pt-1">
+<button class="bg-[#FFEEDB] text-[#9C4A00] hover:bg-[#FFE0CC] border border-[#9C4A00]/20 px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm font-semibold flex items-center gap-1.5 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-sm" data-icon="upload_file">upload_file</span>
+<span>Resubmit Reel</span>
+</button>
+</div>
+</section>
+<!-- Active Campaign Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<div>
+<div class="inline-flex items-center gap-1.5 font-label-badge text-[10px] text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded font-bold uppercase mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+              Live Escrow
+            </div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug">Acme Summer Launch</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Budget Contract: ₦120,000.00</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="campaign">campaign</span>
+</div>
+<!-- Deliverables Progress Bar -->
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col gap-1.5 border border-outline-variant/40">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Deliverables Status</span>
+<span class="font-label-badge text-label-badge font-bold text-on-surface">2 of 3 approved</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden flex">
+<div class="bg-[#146C38] h-full w-2/3 rounded-full"></div>
+</div>
+</div>
+<!-- Personal Affiliate / Attribution Tracking Link -->
+<div class="flex flex-col gap-1.5 pt-1">
+<label class="font-label-badge text-label-badge uppercase font-medium text-outline">Creator Attribution Link</label>
+<div class="flex items-center justify-between bg-surface-container-low px-3 py-2 rounded-lg border border-outline-variant">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface truncate font-semibold">acme.cp.ng/ada-7k</span>
+<span class="material-symbols-outlined text-outline text-sm ml-2 flex-shrink-0" data-icon="link">link</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="flex items-center justify-center gap-1.5 py-2 px-3 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container rounded-lg font-body-sm text-body-sm font-semibold text-on-surface active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+<span>Copy Link</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 py-2 px-3 bg-primary-container text-on-primary-container hover:bg-primary-fixed-dim rounded-lg font-body-sm text-body-sm font-bold active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+<span>Share</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Anchored Shared Component) -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[390px] mx-auto z-50 flex justify-around items-center px-gutter-mobile py-space-xs bg-surface border-t border-outline-variant">
+<!-- Home Tab (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-space-md py-space-xs transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill">home</span>
+<span class="font-body-sm text-body-sm font-bold mt-0.5">Home</span>
+</a>
+<!-- Campaigns Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-colors hover:text-primary active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-body-sm text-body-sm mt-0.5">Campaigns</span>
+</a>
+<!-- Earnings Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-colors hover:text-primary active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm mt-0.5">Earnings</span>
+</a>
+<!-- Profile Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-colors hover:text-primary active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-sm text-body-sm mt-0.5">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

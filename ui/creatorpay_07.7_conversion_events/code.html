@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorPay Enterprise — Campaign Conversion Events</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#6044ad",
+            "inverse-on-surface": "#f2f1ed",
+            "outline-variant": "#d3c5ac",
+            "tertiary-fixed-dim": "#cebdff",
+            "surface-container-low": "#f4f4f0",
+            "on-background": "#1b1c1a",
+            "primary-fixed": "#ffdf98",
+            "primary": "#775a00",
+            "surface-container": "#efeeea",
+            "secondary-fixed": "#ffddb4",
+            "surface-dim": "#dbdad6",
+            "surface-bright": "#faf9f5",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "surface": "#faf9f5",
+            "error-container": "#ffdad6",
+            "primary-container": "#ffc61a",
+            "tertiary": "#674bb4",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#4f319b",
+            "on-primary-container": "#6e5400",
+            "on-surface-variant": "#4f4632",
+            "on-tertiary-fixed": "#21005e",
+            "secondary-container": "#fdbe63",
+            "tertiary-fixed": "#e8ddff",
+            "primary-fixed-dim": "#f6be0a",
+            "on-primary-fixed": "#251a00",
+            "surface-container-highest": "#e3e2df",
+            "surface-variant": "#e3e2df",
+            "on-surface": "#1b1c1a",
+            "on-secondary-fixed-variant": "#633f00",
+            "surface-tint": "#775a00",
+            "secondary-fixed-dim": "#fabb61",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#5a4300",
+            "surface-container-high": "#e9e8e4",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#f6be0a",
+            "secondary": "#825500",
+            "on-secondary-fixed": "#291800",
+            "error": "#ba1a1a",
+            "background": "#faf9f5",
+            "on-error": "#ffffff",
+            "outline": "#817660",
+            "tertiary-container": "#d5c6ff",
+            "inverse-surface": "#2f312e",
+            "on-secondary-container": "#754c00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.25rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-numeric-lg": ["JetBrains Mono"],
+            "label-numeric-md": ["JetBrains Mono"],
+            "headline-lg": ["Inter"],
+            "label-numeric-sm": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "label-badge": ["JetBrains Mono"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "label-numeric-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-numeric-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-numeric-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .sandbox-stripes {
+      background: repeating-linear-gradient(
+        -45deg,
+        #f4f4f0,
+        #f4f4f0 10px,
+        #ffffff 10px,
+        #ffffff 20px
+      );
+    }
+    .badge-test-stripes {
+      background: repeating-linear-gradient(
+        -45deg,
+        #e3e2df,
+        #e3e2df 4px,
+        #f4f4f0 4px,
+        #f4f4f0 8px
+      );
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex min-h-screen">
+<!-- LEFT SIDEBAR COMPONENT (Shared Components JSON execution) -->
+<aside class="fixed top-0 left-0 h-screen w-72 flex flex-col justify-between bg-surface border-r border-outline-variant z-50">
+<div class="p-4 flex flex-col gap-6">
+<!-- Workspace Brand Anchor -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center text-on-surface font-headline-sm font-bold shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface uppercase tracking-wider">CreatorPay Enterprise</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#146C38]"></span>
+            Ecobank Secured Corridor #4029
+          </span>
+</div>
+</div>
+<!-- Escrow Quick Trigger CTA -->
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded bg-primary-container text-on-surface font-body-md font-semibold hover:bg-primary-fixed-dim transition-colors active:scale-[0.99]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Fund Escrow Vault</span>
+</div>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- Primary Navigation Structure -->
+<nav class="flex flex-col gap-1">
+<!-- Tab 1: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-md font-body-md">Campaign Overview</span>
+</a>
+<!-- Tab 2: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-body-md font-body-md">Deliverable Proofs</span>
+</a>
+<!-- Tab 3: ACTIVE NAVIGATION TAB: Conversion Tracking -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-high text-on-surface font-semibold border-l-2 border-primary active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-primary">sync_alt</span>
+<span class="text-body-md font-body-md font-semibold">Conversion Tracking</span>
+</a>
+<!-- Tab 4: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-body-md font-body-md">Ledger Settlements</span>
+</a>
+<!-- Tab 5: Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="text-body-md font-body-md">Ecobank Escrow Pool</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Institutional Footer -->
+<div class="p-4 border-t border-outline-variant flex flex-col gap-2">
+<div class="px-2 py-1 flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Corridor Vault Limit</span>
+<span class="font-label-numeric-sm text-label-numeric-sm font-semibold text-on-surface">₦50,000,000</span>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-body-sm font-body-sm">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="text-body-sm font-body-sm">Escrow Rail Settings</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CANVAS AREA -->
+<div class="ml-72 flex-1 flex flex-col min-w-0">
+<!-- TOP NAV BAR (Shared Components JSON execution) -->
+<header class="sticky top-0 right-0 w-full z-40 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4 flex-1">
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">Campaign Command Center</span>
+<span class="px-2 py-0.5 rounded text-label-badge font-label-badge bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#146C38]"></span> LIVE ACTIVE
+          </span>
+</div>
+<div class="relative w-72 ml-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded pl-9 pr-3 py-1.5 text-body-sm font-body-sm focus:border-on-surface focus:ring-1 focus:ring-primary-container outline-none" placeholder="Search campaign axis or ledger..." type="text"/>
+</div>
+</div>
+<!-- Trailing Action Hub -->
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded border border-outline-variant bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Audit Export</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded bg-[#146C38] text-white text-body-sm font-body-sm font-semibold hover:bg-[#10562d] transition-colors active:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined text-[18px]">send_money</span>
+<span>Release Settlement</span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-1"></div>
+<button class="p-2 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-low" title="Ecobank Direct Guardian Active">
+<span class="material-symbols-outlined text-[20px] text-[#146C38]" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</button>
+<div class="flex items-center gap-2 pl-2">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A portrait photograph of a Nigerian Chief Financial Officer workspace identity in professional corporate attire, taken against a bright contemporary banking architectural background in soft high-key studio light with sand and amber tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWhmi6bnbDqbMsbLxGIoq-Z8Ymvmv65OKAp0hMvO5qU5ODljs1DOgmS8tbuHe1x8zATFmv_XpFtSF-L-3Oe25raaqXFWYO0bNh0YrZGE5DJqhNJaWK_6WxHveuPY_Y-s3dkP9K3drffNpKtfwD1xSaRuzghk7JTwk3mRSm_rMglAbGsbe86N4bbZBHKxZ_JqNtWOiY6By2Vf0L7wXUPe3hdRBul69SD6aUE6guf10"/>
+<div class="flex flex-col text-left">
+<span class="text-body-sm font-body-sm font-semibold leading-tight">Folake Adeyemi</span>
+<span class="text-label-badge font-label-badge text-on-surface-variant">Lead Treasury Auditor</span>
+</div>
+</div>
+</div>
+</header>
+<!-- CONTENT BODY CANVAS -->
+<main class="p-8 space-y-6">
+<!-- CAMPAIGN TITLE BAR & ENTITY METADATA -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<a class="hover:text-on-surface" href="#">Campaigns</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Ecobank Nigeria Commercial Corridor</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-medium">CAM-NG-2026-088</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">
+              Ecobank Campus Brand Ambassadors 2026 — Pan-Nigeria Cohort
+            </h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1 flex items-center gap-3">
+<span class="flex items-center gap-1 text-[#146C38]">
+<span class="material-symbols-outlined text-[18px]">verified</span> Institutional Escrow Verified
+              </span>
+<span>•</span>
+<span>Corridor: Ecobank Corporate Liquidity Rail (NGN)</span>
+<span>•</span>
+<span>Target: 25,000 App Registrations &amp; Verified Inflow Activations</span>
+</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="px-3 py-1.5 rounded bg-surface-container border border-outline-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">timer</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Auto-Settlement Window:</span>
+<span class="font-label-numeric-sm text-label-numeric-sm font-semibold text-on-surface">48h Verification Lock</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CAMPAIGN SUB-NAVIGATION TABS (Exact JSON & Requirements) -->
+<nav class="flex items-center border-b border-outline-variant overflow-x-auto gap-8 pt-2">
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Overview
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Terms v2
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Deliverables Matrix
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Participants (24)
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Submissions Queue (12)
+        </a>
+<!-- ACTIVE TAB WITH YELLOW-500 (#FFC61A / bg-primary-container) UNDERLINE -->
+<a class="text-on-surface font-semibold pb-3 border-b-2 border-primary-container flex items-center gap-2 text-body-md font-body-md whitespace-nowrap" href="#">
+<span>Conversion Events</span>
+<span class="px-2 py-0.5 rounded text-label-badge font-label-badge bg-primary-container text-on-surface">1,842</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Rewards Ledger
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-3 transition-colors text-body-md font-body-md whitespace-nowrap" href="#">
+          Omni Escrow Pool
+        </a>
+</nav>
+<!-- CONVERSION SUMMARY METRIC CARDS (Bento Metric Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Card 1: Total Ingested -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-body-sm font-body-sm font-medium">Total Ingested Events</span>
+<span class="material-symbols-outlined text-outline">data_exploration</span>
+</div>
+<div>
+<div class="text-label-numeric-lg font-label-numeric-lg font-bold text-on-surface">1,842 Events</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-1 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#146C38]"></span>
+              Webhook &amp; Core-Banking Webhooks
+            </div>
+</div>
+</div>
+<!-- Card 2: Verified Authentic -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-body-sm font-body-sm font-medium">Verified Authentic</span>
+<span class="material-symbols-outlined text-[#146C38]">verified</span>
+</div>
+<div>
+<div class="text-label-numeric-lg font-label-numeric-lg font-bold text-[#146C38]">1,780 <span class="text-body-sm font-body-sm font-semibold text-[#146C38]">(96.6%)</span></div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span>Cryptographic hash validated</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Eligible for Reward -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary-container/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-body-sm font-body-sm font-medium">Eligible for Reward</span>
+<span class="material-symbols-outlined text-primary-container">ads_click</span>
+</div>
+<div>
+<div class="text-label-numeric-lg font-label-numeric-lg font-bold text-on-surface">1,420 Events</div>
+<div class="text-label-numeric-sm font-label-numeric-sm font-semibold text-primary mt-1 flex items-center gap-1">
+<span>₦710,000.00 payable value</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Ineligible / Flagged -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="text-body-sm font-body-sm font-medium">Ineligible / Flagged</span>
+<span class="material-symbols-outlined text-[#B42318]">flag</span>
+</div>
+<div>
+<div class="text-label-numeric-lg font-label-numeric-lg font-bold text-[#B42318]">62 Ineligible</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span>Exceeded click window / Fraud duplicate</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FILTER & ACTION BAR -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-3 flex-1">
+<!-- Search input -->
+<div class="relative min-w-[280px] flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded pl-9 pr-3 py-2 text-body-sm font-body-sm focus:border-on-surface focus:ring-2 focus:ring-primary-container outline-none" placeholder="Search by Event UUID, Creator, or Order ID..." type="text"/>
+</div>
+<!-- Date Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant rounded pl-3 pr-8 py-2 text-body-sm font-body-sm text-on-surface font-medium focus:border-on-surface focus:ring-2 focus:ring-primary-container outline-none">
+<option>Date: Last 7 Days (WAT)</option>
+<option>Last 24 Hours (WAT)</option>
+<option>Last 30 Days (WAT)</option>
+<option>Full Cohort Lifecycle</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">calendar_month</span>
+</div>
+<!-- Event Type Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant rounded pl-3 pr-8 py-2 text-body-sm font-body-sm text-on-surface font-medium focus:border-on-surface focus:ring-2 focus:ring-primary-container outline-none">
+<option>All Types (Blaze App Signup, Account Funded, Debit Card Ordered)</option>
+<option>Blaze Account Registration</option>
+<option>First Account Deposit (₦2,000)</option>
+<option>Campus Activation Registration</option>
+<option>Physical Debit Card Issued</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">expand_more</span>
+</div>
+<!-- Verification Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant rounded pl-3 pr-8 py-2 text-body-sm font-body-sm text-on-surface font-medium focus:border-on-surface focus:ring-2 focus:ring-primary-container outline-none">
+<option>All Verification States</option>
+<option>Verified Authentic</option>
+<option>Pending Verification</option>
+<option>Recorded Manually</option>
+<option>Test Sandbox (Excluded)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">filter_list</span>
+</div>
+</div>
+<!-- Primary Action Trigger -->
+<button class="flex items-center gap-2 px-4 py-2 rounded bg-primary-container text-on-surface text-body-md font-body-md font-semibold hover:bg-[#F5BC10] transition-colors border border-[#8A5A00]/30 active:scale-[0.98] shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>+ Record Event Manually</span>
+</button>
+</section>
+<!-- STRICT TWO-STATUS AXIS MASTER CONVERSIONS TABLE -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded overflow-hidden">
+<!-- Table Context Guidance Banner -->
+<div class="px-6 py-2.5 bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">account_tree</span>
+<span><strong>Attribution Protocol:</strong> Dual-Check Axis separates technical authenticity from contractual commission eligibility.</span>
+</div>
+<div class="flex items-center gap-4 text-label-badge font-label-badge text-on-surface-variant uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#146C38]"></span> Column A: Is It Real?</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-container"></span> Column B: Does It Earn?</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-label-badge font-label-badge text-on-surface-variant uppercase tracking-wider">
+<th class="py-3.5 px-6">Event Type &amp; Timestamp (WAT)</th>
+<th class="py-3.5 px-4">Event UUID</th>
+<th class="py-3.5 px-4 text-right">Value (₦)</th>
+<th class="py-3.5 px-6">Attributed Creator &amp; Attribution Reason</th>
+<th class="py-3.5 px-4 text-center">Col A: Verification (Real?)</th>
+<th class="py-3.5 px-4 text-center">Col B: Eligibility (Earns?)</th>
+<th class="py-3.5 px-6 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- ROW 1: Standard Verified & Eligible -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-[#E6F4EA] text-[#146C38] flex items-center justify-center mt-0.5">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+</div>
+<div>
+<div class="text-body-md font-body-md font-semibold text-on-surface">Blaze Account Registration</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        28 Oct 2026, 07:12 PM WAT
+                      </div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-2 py-1 rounded border border-outline-variant">
+                    EV-88291-BLZ
+                  </span>
+</td>
+<td class="py-4 px-4 text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-semibold text-on-surface">
+                    ₦500.00
+                  </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="text-body-md font-body-md font-semibold text-on-surface">Ada Obi (@ada_creatives)</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                      Last eligible click 2 days prior <span class="text-on-surface font-medium">(7-day window)</span>
+</div>
+</div>
+</td>
+<!-- Col A: Verification -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    ✓ Verified
+                  </span>
+</td>
+<!-- Col B: Eligibility -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20">
+<span class="material-symbols-outlined text-[14px]">ads_click</span>
+                    🎯 Eligible
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3 py-1.5 rounded border border-outline-variant bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium hover:bg-surface-container transition-colors inline-flex items-center gap-1">
+<span>View Attribution Trace</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2: Verified but Ineligible due to rule window -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-surface-container text-on-surface-variant flex items-center justify-center mt-0.5">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+</div>
+<div>
+<div class="text-body-md font-body-md font-semibold text-on-surface">Blaze Account Registration</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        28 Oct 2026, 05:44 PM WAT
+                      </div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-2 py-1 rounded border border-outline-variant">
+                    EV-88280-BLZ
+                  </span>
+</td>
+<td class="py-4 px-4 text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-medium text-outline line-through">
+                    ₦0.00
+                  </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="text-body-md font-body-md font-semibold text-on-surface">Chidi Nnamdi (@chidi_tech)</div>
+<div class="text-body-sm font-body-sm text-[#B42318] mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                      Click timestamp 14 Oct (Outside 7-day window)
+                    </div>
+</div>
+</td>
+<!-- Col A: Verification -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    ✓ Verified
+                  </span>
+</td>
+<!-- Col B: Eligibility -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#FDECEA] text-[#B42318] border border-[#B42318]/20 whitespace-nowrap">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B42318]"></span>
+                    • Ineligible: Outside 7-day window
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3 py-1.5 rounded border border-outline-variant bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium hover:bg-surface-container transition-colors inline-flex items-center gap-1">
+<span>View Attribution Trace</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3: Pending Review -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 text-[#6e5400] flex items-center justify-center mt-0.5">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<div>
+<div class="text-body-md font-body-md font-semibold text-on-surface">First Account Deposit (₦2,000)</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        28 Oct 2026, 04:30 PM WAT
+                      </div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-2 py-1 rounded border border-outline-variant">
+                    EV-88241-DEP
+                  </span>
+</td>
+<td class="py-4 px-4 text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-semibold text-on-surface">
+                    ₦1,000.00
+                  </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="text-body-md font-body-md font-semibold text-on-surface">Zainab Bello (@zainab_lifestyle)</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                      Last click 4 hrs prior <span class="text-on-surface font-medium">(Within window)</span>
+</div>
+</div>
+</td>
+<!-- Col A: Verification -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#FFDF98] text-[#6e5400] border border-[#6e5400]/20">
+<span class="w-1.5 h-1.5 rounded-full bg-[#6e5400]"></span>
+                    • Pending
+                  </span>
+</td>
+<!-- Col B: Eligibility -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#FFEEDB] text-[#9C4A00] border border-[#9C4A00]/20">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9C4A00]"></span>
+                    • Under Review
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3 py-1.5 rounded bg-primary-container text-on-surface text-body-sm font-body-sm font-semibold hover:bg-primary-fixed-dim transition-colors inline-flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Verify Event</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4: STRIPED TEST SANDBOX ROW (CRITICAL REQUIREMENT) -->
+<tr class="sandbox-stripes border-y-2 border-outline/30 text-on-surface-variant opacity-85">
+<td class="py-4 px-6">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-highest text-outline flex items-center justify-center mt-0.5">
+<span class="material-symbols-outlined text-[18px]">bug_report</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-body-md font-body-md font-semibold text-outline line-through">TEST_SANDBOX_CONVERSION</span>
+<span class="badge-test-stripes px-1.5 py-0.5 rounded text-[10px] font-label-badge text-on-surface-variant font-bold border border-outline-variant">
+                          SIMULATOR
+                        </span>
+</div>
+<div class="text-body-sm font-body-sm text-outline flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        28 Oct 2026, 03:00 PM WAT
+                      </div>
+<div class="text-[11px] font-body-sm text-outline italic mt-1">
+                        Test event generated via Developer Sandbox API — excluded from rewards ledger.
+                      </div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="font-label-numeric-sm text-label-numeric-sm text-outline bg-surface-container-highest px-2 py-1 rounded border border-outline/30">
+                    TEST-SIM-00192
+                  </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-numeric-md text-label-numeric-md text-outline">
+                      ₦500.00
+                    </span>
+<span class="text-[11px] font-label-badge text-outline uppercase tracking-wider">(Exempt)</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="text-body-md font-body-md font-medium text-outline">Simulator Bot — Test Sandbox</div>
+<div class="text-body-sm font-body-sm text-outline mt-0.5">
+                      Sandbox Pipeline ping test #88492
+                    </div>
+</div>
+</td>
+<!-- Col A: Verification -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge badge-test-stripes text-outline border border-outline/30">
+<span class="material-symbols-outlined text-[14px]">science</span>
+                    TEST SANDBOX
+                  </span>
+</td>
+<!-- Col B: Eligibility -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-surface-container-highest text-outline border border-outline/30">
+<span class="material-symbols-outlined text-[14px]">block</span>
+                    Excluded (Test)
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3 py-1.5 rounded border border-outline-variant bg-surface-container-low text-outline text-body-sm font-body-sm font-medium cursor-not-allowed inline-flex items-center gap-1">
+<span>Inspect Raw Log</span>
+<span class="material-symbols-outlined text-[14px]">code</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5: Manual Event Recorded by Staff -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-[#EFEAFB] text-[#5B3FA8] flex items-center justify-center mt-0.5">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</div>
+<div>
+<div class="text-body-md font-body-md font-semibold text-on-surface">Campus Activation Registration</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        27 Oct 2026, 02:15 PM WAT
+                      </div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface bg-surface-container px-2 py-1 rounded border border-outline-variant">
+                    MAN-EV-9021
+                  </span>
+</td>
+<td class="py-4 px-4 text-right">
+<span class="font-label-numeric-md text-label-numeric-md font-semibold text-on-surface">
+                    ₦500.00
+                  </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="text-body-md font-body-md font-semibold text-on-surface">Oluwaseun Davies (@seun_vibes)</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                      Direct campus booth referral <span class="text-[#5B3FA8] font-medium">(Supervisor Verified)</span>
+</div>
+</div>
+</td>
+<!-- Col A: Verification -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#EFEAFB] text-[#5B3FA8] border border-[#5B3FA8]/20">
+<span class="material-symbols-outlined text-[14px]">fingerprint</span>
+                    Recorded Manually
+                  </span>
+</td>
+<!-- Col B: Eligibility -->
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-label-badge font-label-badge bg-[#E6F4EA] text-[#146C38] border border-[#146C38]/20">
+<span class="material-symbols-outlined text-[14px]">ads_click</span>
+                    🎯 Eligible
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3 py-1.5 rounded border border-outline-variant bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium hover:bg-surface-container transition-colors inline-flex items-center gap-1">
+<span>Audit Paper Trail</span>
+<span class="material-symbols-outlined text-[14px]">history_edu</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- STRICT INSTITUTIONAL PAGINATION & TELEMETRY FOOTER -->
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="text-body-sm font-body-sm text-on-surface-variant">
+              Showing <strong class="text-on-surface">1 to 5</strong> of <strong class="text-on-surface">1,842</strong> events
+            </span>
+<div class="h-4 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-1.5 text-label-badge font-label-badge text-[#146C38]">
+<span class="w-2 h-2 rounded-full bg-[#146C38] animate-pulse"></span>
+              DIRECT CORE-BANKING INGESTION PIPELINE ACTIVE
+            </div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded border border-outline-variant text-body-sm font-body-sm text-outline bg-surface-container-low cursor-not-allowed">
+              Previous
+            </button>
+<button class="px-3 py-1 rounded bg-on-surface text-white text-body-sm font-body-sm font-semibold">
+              1
+            </button>
+<button class="px-3 py-1 rounded hover:bg-surface-container text-body-sm font-body-sm text-on-surface">
+              2
+            </button>
+<button class="px-3 py-1 rounded hover:bg-surface-container text-body-sm font-body-sm text-on-surface">
+              3
+            </button>
+<span class="text-outline text-body-sm font-body-sm px-1">...</span>
+<button class="px-3 py-1 rounded hover:bg-surface-container text-body-sm font-body-sm text-on-surface">
+              369
+            </button>
+<button class="px-3 py-1.5 rounded border border-outline-variant text-body-sm font-body-sm text-on-surface hover:bg-surface-container">
+              Next
+            </button>
+</div>
+</div>
+</div>
+<!-- ESCROW SECURITY SEAL & REGULATORY NOTICE -->
+<footer class="mt-8 border border-outline-variant rounded p-4 bg-surface-container-low flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-lowest border border-outline-variant flex items-center justify-center text-[#146C38]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface">Ecobank Commercial Escrow Vault Rail #4029</div>
+<div>All verified conversion records are written to immutable audit ledgers prior to milestone reward release.</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-numeric-sm text-label-numeric-sm font-semibold text-on-surface">CBN REGULATED ESCROW CORRIDOR</div>
+<div class="text-[11px] text-outline">Dual-Key Multi-Signature Settlement Standard</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
